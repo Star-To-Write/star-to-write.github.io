@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>meet</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+
+    <nav class="bg-white border-bottom py-4 position-relative nav-scroll">
+      <div class="container">
+        <div
+          class="container-fluid d-flex align-items-center justify-content-between position-relative"
+        >
+          <!-- Hamburger -->
+          <button class="navbar-toggler toggleHamburger" id="menuToggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </button>
+
+          <!-- Logo / Heading -->
+          <h2 class="position-absolute top-50 start-50 translate-middle m-0">
+            STAR TO WRITE
+          </h2>
+        </div>
+        <!-- Hidden Menu -->
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul
+            class="nav-links d-flex flex-column flex-md-row align-items-start gap-2 gap-md-4 mt-4 mb-2 mb-md-0 ps-1"
+          >
+            <li class="nav-item">
+              <a class="nav-link" href="/">Star to Write</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-black" href="meet-the-team"
+                >Meet the Team</a
+              >
+            </li>
+            <li class="nav-item position-relative">
+              <a class="nav-link" href="#" id="submissionsToggle"
+                >Submissions
+                <!-- svg for down arrow-->
+                <!-- TODO: when expanding submissions tab, unhighlight star to write and highlight submissions. -->
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <polyline points="6 9 12 15 18 9" /></svg
+              ></a>
+              <div
+                class="collapse position-absolute bg-white border border-shadow mt-2 start-0 navbar-collapse px-4"
+                id="subsList"
+                style="z-index: 1000; min-width: 200px"
+              >
+                <!-- honestly i feel the word published is so redundant lmao -->
+                <ul
+                  class="nav-links d-flex flex-column flex-md-row align-items-start gap-4 mt-4 mb-2 mb-md-0"
+                >
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Published Poetry</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Published Short Stories</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"
+                      >Published Essays, Opinions, and Research Papers</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Writing to Spread Awareness</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Other Creative Works</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#">Issues</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Interviews</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- nav men -->
+    </nav>
+    <div
+      id="overlay"
+      class="d-none position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50"
+      style="z-index: 1040"
+    ></div>
+
+    <!-- Hero -->
+    <div
+      class="container-fluid align-items-center text-center justify-content-center text-center p-0 pt-5"
+    >
+      <img
+        src="images/meet-the-team-bg.png"
+        alt="Star To Write"
+        class="w-100 object-fit-cover"
+        style="height: 80px"
+      />
+      <a
+        href="https://www.startowrite.org/meet-the-team"
+        class="btn btn-outline-dark border border-dark border-2 rounded-0 px-3 py-2 mt-5 mb-5"
+      >
+        APPLY TO BE A MEMBER
+      </a>
+    </div>
+
+    <div class="container">
+      <h2 class="heading fs-2 fw-bold text-center">EXECUTIVE TEAM</h2>
+      <div class="container">
+        <div class="row justify-content-center">
+          <!-- Card 1 -->
+          <div class="col-md-4">
+            <div class="text-center mb-4">
+              <h2 class="heading fs-4"><strong>PRESIDENT</strong></h2>
+              <img
+                src="images/staff/julia-president.jpeg"
+                alt="Julia - President"
+                class="img-fluid mb-2 object-fit-contain"
+                style="max-height: 300px; width: 100%"
+              />
+              <h2 class="name fs-4"><strong>JULIA PHILIP</strong></h2>
+              <p class="desc"><strong>Instagram: </strong>@iilovejuliaa</p>
+              <p class="desc">
+                Julia Philip is the founder and president of Star to Write. When
+                creating this nonprofit, she had one thing in mind: to give
+                people a voice.<br />
+                She wanted to build a platform where anyone could come and share
+                their writing, publish their work, and express themselves for
+                free. Whether it's poetry, articles, stories, or personal
+                reflections — every voice deserves to be heard.<br />
+                At Star to Write, your words matter; your story matters. So
+                write your heart out, express yourself freely, and be a star to
+                write.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="col-md-4">
+            <div class="text-center mb-4">
+              <h2 class="heading fs-4"><strong>VICE PRESIDENT</strong></h2>
+              <img
+                src="images/staff/luisa-vice.jpeg"
+                alt="Luisa - Vice President"
+                class="img-fluid mb-2 object-fit-contain"
+                style="max-height: 300px; width: 100%"
+              />
+              <h2 class="name fs-4"><strong>LUISA RODAS</strong></h2>
+              <p class="desc"><strong>Instagram: </strong>@themonaluisa</p>
+              <p class="desc">
+                I love learning about new cultures and I'm a big foodie!
+                Luckily, being in NYC, there are so many interesting activities
+                I can do to satisfy my interests. As Vice President of Star to
+                Write, I work side by side with our president to maintain,
+                manage, and organize relationships with other organizations,
+                address pressing issues, hold meetings/discussions, and more!
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="col-md-4">
+            <div class="text-center mb-4">
+              <h2 class="heading fs-4">
+                <strong>MANAGER OF OPERATIONS</strong>
+              </h2>
+              <img
+                src="images/staff/ayesha-manager.jpeg"
+                alt="Ayesha - Manager of Operations"
+                class="img-fluid mb-2 object-fit-contain"
+                style="max-height: 300px; width: 100%"
+              />
+              <h2 class="name fs-4"><strong>AYESHA TOOR</strong></h2>
+              <p class="desc"><strong>Instagram: </strong>@ayeeesha.t</p>
+              <p class="desc">
+                Obsessed with a singer, Benson Boone, Ayesha Toor is the manager
+                of operations for Startowrite. She makes sure everyone is on
+                track and that YOUR writing is shared with the world.​
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- If you have a 4th person -->
+        <div class="row justify-content-center">
+          <div class="col-md-4">
+            <!-- Paste card content here -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <h2 class="heading fs-2 fw-bold text-center">SUBMISSION MANAGEMENT</h2>
+      <div class="container">
+        <div class="row justify-content-center">
+          <!-- Card 1 -->
+          <div class="col-md-4">
+            <div class="text-center mb-4">
+              <h2 class="heading fs-4"><strong>HEAD OF SUBMISSIONS</strong></h2>
+              <img
+                src="images/staff/ace-head.jpeg"
+                alt="Ace - Head of Submissions"
+                class="img-fluid mb-2 object-fit-contain"
+                style="max-height: 300px; width: 100%"
+              />
+              <h2 class="name fs-4"><strong>ACE ERYX</strong></h2>
+              <p class="desc"><strong>Instagram: </strong>@ace.eryx</p>
+              <p class="desc">
+                Ace Eryx, head of submissions and an editor at Startowrite, is a
+                non-binary Polish writer who enjoys deep research into all
+                things writing and law amongst their many chickens and lizard.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="col-md-4">
+            <div class="text-center mb-4">
+              <h2 class="heading fs-4"><strong>EDITOR</strong></h2>
+              <img
+                src="images/staff/elaine-editor.jpeg"
+                alt="Elaine - Editor"
+                class="img-fluid mb-2 object-fit-contain"
+                style="max-height: 300px; width: 100%"
+              />
+              <h2 class="name fs-4"><strong>ELAINE V.</strong></h2>
+              <p class="desc"><strong>Instagram: </strong>@elaine_v31</p>
+              <p class="desc">
+                I'm Elaine V., an editor at Star to Write who enjoys research
+                and reading. I plan to pursue a career in medicine, and I
+                believe that strong communication and research are essential
+                parts of all journeys. One of the biggest reasons I joined Star
+                to Write was to help give people a voice and encourage creative
+                expression. I'm passionate about supporting others by sharing
+                their stories and making meaningful connections through writing.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="col-md-4">
+            <div class="text-center mb-4">
+              <h2 class="heading fs-4"><strong>EDITOR</strong></h2>
+              <img
+                src="images/staff/kenna-editor.jpeg"
+                alt="Kenna - Editor"
+                class="img-fluid mb-2 object-fit-contain"
+                style="max-height: 300px; width: 100%"
+              />
+              <h2 class="name fs-4"><strong>KENNA H.</strong></h2>
+              <p class="desc"><strong>Instagram: </strong>@art_withsaturn</p>
+              <p class="desc">
+                Hi! I'm Kenna, and I'm an editor with Star to Write! I'm a queer
+                and neurodivergent photographer with a passion for reading,
+                writing, and the arts. I like to listen to music, yap with my
+                friends, and play video games.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- If you have a 4th person -->
+        <div class="row justify-content-center">
+          <div class="col-md-4">
+            <div class="text-center mb-4">
+              <h2 class="heading fs-4"><strong>EDITOR</strong></h2>
+              <img
+                src="images/staff/tesia-editor.jpeg"
+                alt="Tesia - Editor"
+                class="img-fluid mb-2 object-fit-contain"
+                style="max-height: 300px; width: 100%"
+              />
+              <h2 class="name fs-4"><strong>TESIA HENNESSY</strong></h2>
+              <p class="desc"><strong>Instagram: </strong>@tesiabobesia</p>
+              <p class="desc">
+                ​Hi, I’m Tesia, an editor for Star to Write! When I’m not
+                reading, writing, or editing, I’m probably playing card games
+                with family, crocheting, dancing, or acting. I’m a theatre
+                performance/psychology major at University of Evansville, and I
+                love meeting new people and reading new works!
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="text-center mb-4">
+              <h2 class="heading fs-4"><strong>EDITOR</strong></h2>
+              <img
+                src="images/staff/sumaita-editor.jpeg"
+                alt="Sumaita - Editor"
+                class="img-fluid mb-2 object-fit-contain"
+                style="max-height: 300px; width: 100%"
+              />
+              <h2 class="name fs-4"><strong>SUMAITA N.</strong></h2>
+              <p class="desc"><strong>Instagram: </strong>@sumiii.xoxo</p>
+              <p class="desc">
+                Hi, many call me Sumi! I’m a sophomore in high school based in
+                Pennsylvania. I love my cats, baking, drawing, and hanging out
+                and yapping with my friends! I’m always up for an adventure,
+                especially if it involves zip lining in the wilderness. I’m an
+                editor at Star to Write, where I help writers polish their work
+                and spark their ideas to life. I’m passionate about supporting
+                creative voices and making sure every story shines with clarity
+                and confidence, helping it grow into something that truly
+                shines.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="text-center mb-4">
+              <h2 class="heading fs-4"><strong>JADE SANCHEZ</strong></h2>
+              <img
+                src="images/staff/jade-comms-chair.jpeg"
+                alt="Jade - Communications Chair"
+                class="img-fluid mb-2 object-fit-contain"
+                style="max-height: 300px; width: 100%"
+              />
+              <h2 class="name fs-4"><strong>JADE SANCHEZ</strong></h2>
+              <p class="desc"><strong>Instagram: </strong>@29jad3</p>
+              <p class="desc">
+                Hi, I’m a communications chair for Star to Write, and my job is
+                mainly to share the ideas of our non-profit organization and
+                ensure that we attract a good audience with our work!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-md-4">
+            <div class="text-center mb-4">
+              <h2 class="heading fs-4">
+                <strong>HEAD OF COMMUNICATIONS</strong>
+              </h2>
+              <img
+                src="images/staff/sangeet-head.jpeg"
+                alt="Sangeet - Head of Communications"
+                class="img-fluid mb-2 object-fit-contain"
+                style="max-height: 300px; width: 100%"
+              />
+              <h2 class="name fs-4"><strong>SANGEET KAUR</strong></h2>
+              <p class="desc"><strong>Instagram: </strong>@sangeet.hayer</p>
+              <p class="desc">
+                Sangeet Kaur is a Punjabi Sikh poet hailing from the Boston
+                area. She’s worked with Mill City Speaks, teaching workshops to
+                middle school students during her freshman & sophomore years of
+                high school, and primarily writes freeverse. She’s currently
+                pursuing an education in Information Technology, and pursue’s
+                writing as one of her favorite hobbies.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="text-center mb-4">
+              <h2 class="heading fs-4">
+                <strong>SUBMISSIONS COORDINATOR</strong>
+              </h2>
+              <img
+                src="images/staff/maria-sub.webp"
+                alt="Maria - Submissions Coordinator"
+                class="img-fluid mb-2 object-fit-contain"
+                style="max-height: 300px; width: 100%"
+              />
+              <h2 class="name fs-4"><strong>MARIA CABRERA</strong></h2>
+              <p class="desc"><strong>Instagram: </strong>@M780931_1</p>
+              <p class="desc">
+                Maria is one of our very talented submission coordinators, she
+                reviews all submissions sent through Tiktok and Instagram, she
+                responds immediately, and is a core member to our organization.​
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="text-center mb-4">
+              <h2 class="heading fs-4">
+                <strong>SUBMISSIONS COORDINATOR</strong>
+              </h2>
+              <img
+                src="images/staff/lynn-sub.jpeg"
+                alt="Lynn - Submissions Coordinator"
+                class="img-fluid mb-2 object-fit-contain"
+                style="max-height: 300px; width: 100%"
+              />
+              <h2 class="name fs-4"><strong>LYNN D.</strong></h2>
+              <p class="desc"><strong>Instagram: </strong>@mabofart</p>
+              <p class="desc">
+                Hello! You can call me Lynn! I’m a high schooler from New York!
+                In my freetime, I enjoy doing artistic things like drawing,
+                singing and crocheting! I also consume a lot of Japanese media
+                and love yapping about them from hours on end! ​
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-md-4">
+            <div class="text-center mb-4">
+              <h2 class="heading fs-4"><strong>GRAPHIC DESIGNER</strong></h2>
+              <img
+                src="images/staff/moumita-graphic.jpeg"
+                alt="Moumita - Graphic Designer"
+                class="img-fluid mb-2 object-fit-contain"
+                style="max-height: 300px; width: 100%"
+              />
+              <h2 class="name fs-4"><strong>MOUMITA</strong></h2>
+              <p class="desc"><strong>Instagram: </strong>@moussoup</p>
+              <p class="desc">
+                Hi, I’m Mou and I am a junior in New York City. I love writing
+                short stories, drawing, doing graphic design, social media,
+                hanging out with my friends, and, importantly, my cat named
+                Boots. I’m going to work as a summer camp counselor in the
+                summer to bond with kids and understand how to work with them,
+                as I want to work as a pediatrician, doctor, or nurse. I want to
+                be able to help people, regardless of age, to show that asking
+                for support is okay, as I understand the struggle of being
+                afraid to speak up.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="text-center mb-4">
+              <h2 class="heading fs-4"><strong>GRAPHIC DESIGNER</strong></h2>
+              <img
+                src="images/staff/emily-graphic.jpeg"
+                alt="Emily - Graphic Designer"
+                class="img-fluid mb-2 object-fit-contain"
+                style="max-height: 300px; width: 100%"
+              />
+              <h2 class="name fs-4"><strong>EMILY</strong></h2>
+              <p class="desc"><strong>Instagram: </strong>@jinnie4k</p>
+              <p class="desc">
+                Hi, I’m Emily! I’m a graphic designer in Star to Write, creating
+                designs for our many pieces submitted. I love exploring art and
+                design in all forms.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="text-center mb-4">
+              <h2 class="heading fs-4"><strong>GRAPHIC DESIGNER</strong></h2>
+              <img
+                src="images/staff/ajda-graphic.webp"
+                alt="Ajda - Graphic Designer"
+                class="img-fluid mb-2 object-fit-contain"
+                style="max-height: 300px; width: 100%"
+              />
+              <h2 class="name fs-4"><strong>AJDA LABAN</strong></h2>
+              <p class="desc"><strong>Instagram: </strong>@cata.rsa</p>
+              <p class="desc">
+                My name is Ajda Laban, I'm from Slovenia, and I am graphic
+                designer at Star to Write. I like playing cello, iced vanilla
+                lattes, writing and doing designs on Canva. I spend most of my
+                free time on poetry recitals or open mics, as well as drawing
+                and designing. I wish to study literature and creating writing
+                or graphic design, I have yet to decide.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-md-4">
+            <div class="text-center mb-4">
+              <h2 class="heading fs-4"><strong>GRAPHIC DESIGNER</strong></h2>
+              <img
+                src="images/staff/fatima-graphic.png"
+                alt="Fatima - Graphic Designer"
+                class="img-fluid mb-2 object-fit-contain"
+                style="max-height: 300px; width: 100%"
+              />
+              <h2 class="name fs-4"><strong>FATIMA FARHEEN</strong></h2>
+              <p class="desc"><strong>Instagram: </strong>@f_xtimaaa.111</p>
+              <p class="desc">
+                ​Hi, my name is Fatima and, here are some things about me. I
+                love to read but not in summer because that's when I binged
+                watch Netflix. I love taking photos, especially of flowers, and
+                I love volunteering in my community. My role at Star to Write is
+                creating graphics for writing submissions. However, I am an
+                introvert, so this past year I have made a goal for myself to
+                socialize more with friends. Lastly, one of my favorite quotes
+                are: Quran 93:4 and 93:7.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2 class="heading fs-2 fw-bold text-center">MARKETING TEAM</h2>
+      <div class="container">
+        <div class="row justify-content-center">
+          <!-- Card 1 -->
+          <div class="col-md-4">
+            <div class="text-center mb-4">
+              <h2 class="heading fs-4"><strong>HEAD OF MARKETING</strong></h2>
+              <img
+                src="images/staff/adelyn-head.jpeg"
+                alt="Adelyn - Head of Marketing"
+                class="img-fluid mb-2 object-fit-contain"
+                style="max-height: 300px; width: 100%"
+              />
+              <h2 class="name fs-4"><strong>ADELYN NU</strong></h2>
+              <p class="desc"><strong>Instagram: </strong>@ad3lynyx</p>
+              <p class="desc">
+                Hi! I’m Adelyn and I’m the Head Marketing Chair for Star to
+                Write! I’m in charge of writing up reports, studying the Tiktok
+                and Instagram algorithm, creating ideas for content, and
+                studying up on the latest trends! As Head of Marketing, I try to
+                optimize our team workflow and help drive initiatives that
+                contribute to our team’s success! But, most of all, I’m just
+                here to have fun and make memories with the amazing people here
+                at Star to Write!
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="col-md-4">
+            <div class="text-center mb-4">
+              <h2 class="heading fs-4"><strong>MARKETING CHAIR</strong></h2>
+              <img
+                src="images/staff/denisse-marketing.jpeg"
+                alt="Denisse - Marketing Chair"
+                class="img-fluid mb-2 object-fit-contain"
+                style="max-height: 300px; width: 100%"
+              />
+              <h2 class="name fs-4"><strong>DENISSE HERRERA</strong></h2>
+              <p class="desc"><strong>Instagram: </strong>@dennnys222</p>
+              <p class="desc">
+                Hi, my name is Denisse, and I’m currently 16 years old! My role
+                in Startowrite is a marketing chair and I’m in charge of
+                creating ideas on how to promote Startowrite on social media and
+                how we can get the most reach!
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="col-md-4">
+            <div class="text-center mb-4">
+              <h2 class="heading fs-4">
+                <strong>MARKETING CHAIR</strong>
+              </h2>
+              <img
+                src="images/staff/madison-marketing.jpeg"
+                alt="Madison - Marketing Chair"
+                class="img-fluid mb-2 object-fit-contain"
+                style="max-height: 300px; width: 100%"
+              />
+              <h2 class="name fs-4"><strong>MADISON KAISNER</strong></h2>
+              <p class="desc"><strong>Instagram: </strong>@mads.kaisner</p>
+              <p class="desc">
+                I’m Mads and I make content as well as help alongside the
+                marketing chairs!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- If you have a 4th person -->
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="text-center mb-4">
+                  <h2 class="heading fs-4">
+                    <strong>MARKETING CHAIR</strong>
+                  </h2>
+                  <img
+                    src="images/staff/sofia-marketing.jpeg"
+                    alt="Sofia - Marketing Chair"
+                    class="img-fluid mb-2 object-fit-contain"
+                    style="max-height: 300px; width: 100%"
+                  />
+                  <h2 class="name fs-4"><strong>SOFIA FERNANDEZ</strong></h2>
+                  <p class="desc"><strong>Instagram: </strong>@sofiabyclairoxx</p>
+                  <p class="desc">
+                    Hi! My name is Sofia, and I am currently a junior in high school based in NYC. I am also one of the Marketing Chairs for Star to Write. In my free time, I enjoy listening to music, watching shows, and playing games. My favorite music artist is Kali Uchis!
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="text-center mb-4">
+                  <h2 class="heading fs-4">
+                    <strong>MARKETING CHAIR</strong>
+                  </h2>
+                  <img
+                    src="images/staff/zuhayer-marketing.jpeg"
+                    alt="Zuhayer - Marketing Chair"
+                    class="img-fluid mb-2 object-fit-contain"
+                    style="max-height: 300px; width: 100%"
+                  />
+                  <h2 class="name fs-4"><strong>ZUHAYER TARAFDER</strong></h2>
+                  <p class="desc"><strong>Instagram: </strong>@zuhayer.st</p>
+                  <p class="desc">
+                    Hi, I’m Zuhayer and a current junior in NYC. I’m one of the marketing chairs at Star to Write. I work on ideas and content to promote the brand and social media presence. ​​
+                  </p>
+                </div>
+              </div>
+
+
+              <div class="col-md-4">
+                <div class="text-center mb-4">
+                  <h2 class="heading fs-4">
+                    <strong>MARKETING CHAIR</strong>
+                  </h2>
+                  <img
+                    src="images/staff/haley-marketing.jpeg"
+                    alt="Haley - Marketing Chair"
+                    class="img-fluid mb-2 object-fit-contain"
+                    style="max-height: 300px; width: 100%"
+                  />
+                  <h2 class="name fs-4"><strong>HALEY DULEAU</strong></h2>
+                  <p class="desc"><strong>Instagram: </strong>@haley.duleau</p>
+                  <p class="desc">
+                    Hi, my name is Haley, and I’m a rising senior in high-school! I'm a marketing chair, and my roles are trend watching, content creating, campaign strategizing, and communications!
+                  </p>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Bootstrap + Toggle Script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>

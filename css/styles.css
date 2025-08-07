@@ -1,0 +1,149 @@
+/* Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@200..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"); /* honestly dont get why we're using so many fonts */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* NAVBAR */
+
+nav {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* the big star to write on top */
+nav h2 {
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  letter-spacing: 0.1rem;
+  line-height: 1.5rem;
+  text-align: center;
+}
+
+.nav-links .nav-link:hover {
+  color: black;
+}
+
+.nav-item {
+  list-style: none;
+  font-family: "Montserrat", sans-serif;
+  color: gray;
+}
+
+/* For the scrolling part that makes the navbar hide */
+.nav-scroll {
+  position: fixed !important; /* fix it on top */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1050; /* higher than Bootstrap modals/navs */
+  transition: transform 0.4s ease-in-out !important; /* faster transition */
+}
+
+.nav-hidden {
+  transform: translateY(-100%);
+}
+
+/* 🍔 menu */
+.toggleHamburger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 14px; /* height of the total hamburger stack */
+  width: 20px;
+  padding: 0;
+}
+
+.bar {
+  height: 2px;
+  width: 100%;
+  background-color: black;
+  border-radius: 2px;
+  transition: all 0.2s ease;
+  transform-origin: center;
+}
+
+/* Active state transformations */
+.toggleHamburger.active .bar:nth-of-type(1) {
+  transform: rotate(45deg) translate(1px, 6px); /* I honestly have no clue why it's not aligned unless i do it manually */
+}
+
+.toggleHamburger.active .bar:nth-of-type(2) {
+  opacity: 0;
+}
+
+.toggleHamburger.active .bar:nth-of-type(3) {
+  color: red;
+  transform: rotate(-45deg) translate(2px, -8px);
+}
+
+/* Submissions menu dropdown arrow */
+
+.nav-link svg {
+  margin-left: 4px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  width: 12px;
+  height: 12px;
+  transition: all 0.2 ease;
+}
+
+/* Text styles */
+.heading {
+  font-family: "Yanone Kaffeesatz", sans-serif;
+  letter-spacing: 0.15rem;
+  font-weight: normal;
+  text-align: center;
+}
+
+.name {
+  font-family: "Yanone Kaffeesatz", sans-serif;
+  letter-spacing: 0.1rem; /* yes... */
+  font-weight: normal;
+  text-align: center;
+}
+
+.desc {
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.btn {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 2px;
+  font-style: normal;
+}
+
+/* This Does Not Have To Be A Media Query (there are bootstrap util classes we can use i just forgot it at the time and cba to search it up) */
+
+/* TODO: this does not have to be a media query */
+@media (max-width: 768px) {
+  #subsList.position-absolute {
+    position: static !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding-left: 0 !important;
+    min-width: auto !important;
+  }
+}
+
+/* TODO: this does not have to be a media query */
+@media (max-width: 768px) {
+  .nav-links {
+    font-size: 20px;
+  }
+}
