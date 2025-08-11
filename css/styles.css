@@ -3,6 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@200..700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"); /* honestly dont get why we're using so many fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap'); /* Literally */
 
 * {
   margin: 0;
@@ -145,4 +146,23 @@ nav h2 {
   .nav-links {
     font-size: 20px;
   }
+}
+
+
+#subs-list span,
+#subs-list a {
+  font-family: "Montserrat", serif;
+  color: gray;
+  text-decoration: none;
+}
+
+#subs-list h2 a {
+  font-size: 1.8rem;
+  letter-spacing: 0.1rem;
+  font-weight:lighter;
+  font-family: "Lora", serif;
+  font-style: italic;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #333
 }
