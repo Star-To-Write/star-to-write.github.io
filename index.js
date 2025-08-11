@@ -66,3 +66,27 @@ window.addEventListener('scroll', () => {
   // Update last scroll position
   lastScroll = currentScroll;
 });
+
+
+// I dont't believe there will be a situation where we need to agg. all the posts
+// TODO: feel free to refactor it, this is the best i can think of
+async function getSubmissionsByType(type) {
+  const res = await fetch(`/api/getSubmissionsByType?type=${type}`)
+  console.log(res)
+  const data =  await res.json();
+  // console.log(data)
+  return data
+}
+
+// subType = submission type (listed in the api index if you wish to know)
+async function renderSubmissions(subType) {
+  console.log(subType)
+  // fetch the submissions
+  const postData = await getSubmissionsByType(subType)
+  console.log(postData)
+
+  const list = document.getElementById('subs-list')
+  list.innerHTML = ''; // Clear existing list
+}
+
+window.renderSubmissions = renderSubmissions; // Expose function globally for testing

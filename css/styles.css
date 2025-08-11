@@ -103,7 +103,6 @@ nav h2 {
   font-family: "Yanone Kaffeesatz", sans-serif;
   letter-spacing: 0.15rem;
   font-weight: normal;
-  text-align: center;
 }
 
 .name {
@@ -116,7 +115,7 @@ nav h2 {
 .desc {
   font-family: "Open Sans", sans-serif;
   font-size: 0.875rem;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .btn {
