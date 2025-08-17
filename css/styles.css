@@ -3,7 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@200..700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"); /* honestly dont get why we're using so many fonts */
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap'); /* Literally */
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap"); /* Literally */
 
 * {
   margin: 0;
@@ -148,7 +148,6 @@ nav h2 {
   }
 }
 
-
 #subs-list span,
 #subs-list a {
   font-family: "Montserrat", serif;
@@ -159,10 +158,44 @@ nav h2 {
 #subs-list h2 a {
   font-size: 1.8rem;
   letter-spacing: 0.1rem;
-  font-weight:lighter;
+  font-weight: lighter;
   font-family: "Lora", serif;
   font-style: italic;
   text-transform: uppercase;
   text-decoration: none;
-  color: #333
+  color: #333;
+}
+
+/* category.html styles */
+.comment-header {
+  position: relative;
+  font-family: "Helvatica Neue", Helvetica, Arial, sans-serif;
+}
+
+.comment-header::after {
+  content: "";
+  position: absolute;
+  left: 1rem;
+  bottom: -8px;
+  border-width: 8px 8px 0 8px;
+  border-style: solid;
+  border-color: #f8f9fa transparent transparent transparent;
+}
+
+.reply-btn,
+.reply-submit {
+  background-color: #bbbbbb;
+  color: #666666;
+  border: 2px solid #bbbbbb;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+}
+
+.reply-form {
+  transition: all 0.3s ease-out;
+  transform: translateY(-10px);
+}
+
+.reply-form.show {
+  transform: translateY(0);
 }

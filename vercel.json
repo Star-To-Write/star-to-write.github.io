@@ -1,6 +1,10 @@
 {
     "rewrites": [
-      { "source": "/:category/:slug", "destination": "/[category].html" }
+      { "source": "/meet-the-team", "destination": "/meet-the-team.html" },
+      { "source": "/issues", "destination": "/issues.html" },
+  
+      { "source": "/(poetry|short-stories|essays-opinions-research-papers|writing-to-spread-awareness|other-creative-works|interviews)", "destination": "/category.html" },
+      { "source": "/(poetry|short-stories|essays-opinions-research-papers|writing-to-spread-awareness|other-creative-works|interviews)/:slug", "destination": "/category.html" }
     ]
   }
   

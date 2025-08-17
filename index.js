@@ -68,202 +68,202 @@ window.addEventListener('scroll', () => {
 });
 
 
-// Helper: slugify title to create URL-friendly string
-function slugify(text) {
-  return text.toLowerCase()
-    .replace(/\s+/g, '-')         // spaces to dash
-    .replace(/[^\w-]/g, '')       // remove special chars except dash
-    .replace(/--+/g, '-')         // collapse multiple dashes
-    .replace(/^-+|-+$/g, '');     // trim dashes from start/end
-}
+// // Helper: slugify title to create URL-friendly string
+// function slugify(text) {
+//   return text.toLowerCase()
+//     .replace(/\s+/g, '-')         // spaces to dash
+//     .replace(/[^\w-]/g, '')       // remove special chars except dash
+//     .replace(/--+/g, '-')         // collapse multiple dashes
+//     .replace(/^-+|-+$/g, '');     // trim dashes from start/end
+// }
 
-// I dont't believe there will be a situation where we need to agg. all the posts
-// TODO: feel free to refactor it, this is the best i can think of
-async function getSubmissionsByType(type) {
-  // const res = await fetch(`/api/getSubmissionsByType?type=${type}`)
-  // console.log(res)
-  // const data =  await res.json();
-  // console.log(data)
-  return [
-    {
-      "id": 4,
-      "title": "Test Submission",
-      "content": "This is a test submission content.",
-      "submission_type": "poetry",
-      "disclaimer": "This is a test disclaimer.",
-      "author": "John Doe",
-      "author_instagram": null,
-      "author_bio": null,
-      "created_at": "2025-08-11T07:52:17.314Z",
-      "comments": []
-    },
-    {
-      "id": 1,
-      "title": "The Dawn of Spring",
-      "content": "<p>This is a beautiful poem about spring.</p>",
-      "submission_type": "poetry",
-      "disclaimer": null,
-      "author": "Jane Doe",
-      "author_instagram": "@jane_doe",
-      "author_bio": "Jane Doe is a writer.",
-      "created_at": "2025-08-01T07:44:43.266Z",
-      "comments": [
-        {
-          "id": 1,
-          "subs_id": 1,
-          "parent_id": null,
-          "author": "Alice",
-          "content": "Beautiful poem! Really loved the imagery.",
-          "created_at": "2025-08-02T07:44:43.569Z"
-        },
-        {
-          "id": 2,
-          "subs_id": 1,
-          "parent_id": null,
-          "author": "Bob",
-          "content": "Makes me feel hopeful.",
-          "created_at": "2025-08-03T07:44:43.569Z"
-        },
-        {
-          "id": 3,
-          "subs_id": 1,
-          "parent_id": 1,
-          "author": "Jane Doe",
-          "content": "Thank you so much, Alice!",
-          "created_at": "2025-08-04T07:44:43.877Z"
-        },
-        {
-          "id": 4,
-          "subs_id": 1,
-          "parent_id": 1,
-          "author": "Charlie",
-          "content": "I agree with Alice.",
-          "created_at": "2025-08-04T07:44:43.877Z"
-        }
-      ]
-    }
-  ]
-}
+// // I dont't believe there will be a situation where we need to agg. all the posts
+// // TODO: feel free to refactor it, this is the best i can think of
+// async function getSubmissionsByType(type) {
+//   // const res = await fetch(`/api/getSubmissionsByType?type=${type}`)
+//   // console.log(res)
+//   // const data =  await res.json();
+//   // console.log(data)
+//   return [
+//     {
+//       "id": 4,
+//       "title": "Test Submission",
+//       "content": "This is a test submission content.",
+//       "submission_type": "poetry",
+//       "disclaimer": "This is a test disclaimer.",
+//       "author": "John Doe",
+//       "author_instagram": null,
+//       "author_bio": null,
+//       "created_at": "2025-08-11T07:52:17.314Z",
+//       "comments": []
+//     },
+//     {
+//       "id": 1,
+//       "title": "The Dawn of Spring",
+//       "content": "<p>This is a beautiful poem about spring.</p>",
+//       "submission_type": "poetry",
+//       "disclaimer": null,
+//       "author": "Jane Doe",
+//       "author_instagram": "@jane_doe",
+//       "author_bio": "Jane Doe is a writer.",
+//       "created_at": "2025-08-01T07:44:43.266Z",
+//       "comments": [
+//         {
+//           "id": 1,
+//           "subs_id": 1,
+//           "parent_id": null,
+//           "author": "Alice",
+//           "content": "Beautiful poem! Really loved the imagery.",
+//           "created_at": "2025-08-02T07:44:43.569Z"
+//         },
+//         {
+//           "id": 2,
+//           "subs_id": 1,
+//           "parent_id": null,
+//           "author": "Bob",
+//           "content": "Makes me feel hopeful.",
+//           "created_at": "2025-08-03T07:44:43.569Z"
+//         },
+//         {
+//           "id": 3,
+//           "subs_id": 1,
+//           "parent_id": 1,
+//           "author": "Jane Doe",
+//           "content": "Thank you so much, Alice!",
+//           "created_at": "2025-08-04T07:44:43.877Z"
+//         },
+//         {
+//           "id": 4,
+//           "subs_id": 1,
+//           "parent_id": 1,
+//           "author": "Charlie",
+//           "content": "I agree with Alice.",
+//           "created_at": "2025-08-04T07:44:43.877Z"
+//         }
+//       ]
+//     }
+//   ]
+// }
 
-function parsePath() {
-  const parts = window.location.pathname.split('/').filter(Boolean);
-  return {
-    subType: parts[0] || null,
-    slug: parts[1] || null
-  };
-}
+// function parsePath() {
+//   const parts = window.location.pathname.split('/').filter(Boolean);
+//   return {
+//     subType: parts[0] || null,
+//     slug: parts[1] || null
+//   };
+// }
 
-// subType = submission type (listed in the api index if you wish to know)
-async function renderSubmissions() {
-  const { subType, slug } = parsePath();
-  // fetch the submissions
-  const postData = await getSubmissionsByType(subType)
+// // subType = submission type (listed in the api index if you wish to know)
+// async function renderSubmissions() {
+//   const { subType, slug } = parsePath();
+//   // fetch the submissions
+//   const postData = await getSubmissionsByType(subType)
 
-  const list = document.getElementById('subs-list')
-  console.log(list)
-  list.innerHTML = ''; // Clear existing list
-  // TODO: add the middle link then slug /poetry/slug
-  postData.forEach(post => {
-    const slug = slugify(post.title);
-    console.log("Generating post for slug:", slug, "with data:", post)
-    const postDiv = document.createElement('div')
-    postDiv.innerHTML= `
-            <span class="pe-3">${new Date(post.created_at).toLocaleDateString()}</span><span><a href="/${subType}/${slug}" class="post-link">${post.comments.length} COMMENTS</a></span>
-        <h2 class="fs-4"><a href="/${subType}/${slug}" class="post-link">${post.title}</a></h2>
-        <div class="text-center desc">
-          <p>
-            ${post.content}
-          </p>
-        </div>
-        <div>
-          <h3 class="heading fs-4 mt-3">AUTHOR</h3>
-          <p class="fw-bold desc">
-            ${post.author}<br />${post.author_instagram} on Instagram
-          </p>
-          <h3 class="heading fs-4 mt-3">AUTHOR BIO</h3>
-          <p class="desc">
-            ${post.author_bio || 'No bio available.'}
-          </p>
-        </div>
-        <div class="fs-6 pb-4">
-          <span class="pe-3"><a href="/${subType}/${slug}" class="post-link">${post.comments.length} COMMENTS</a></span><i class="bi bi-share"></i
-          ><span class="ps-2">SHARE</span>
-        </div>
+//   const list = document.getElementById('subs-list')
+//   console.log(list)
+//   list.innerHTML = ''; // Clear existing list
+//   // TODO: add the middle link then slug /poetry/slug
+//   postData.forEach(post => {
+//     const slug = slugify(post.title);
+//     console.log("Generating post for slug:", slug, "with data:", post)
+//     const postDiv = document.createElement('div')
+//     postDiv.innerHTML= `
+//             <span class="pe-3">${new Date(post.created_at).toLocaleDateString()}</span><span><a href="/${subType}/${slug}" class="post-link">${post.comments.length} COMMENTS</a></span>
+//         <h2 class="fs-4"><a href="/${subType}/${slug}" class="post-link">${post.title}</a></h2>
+//         <div class="text-center desc">
+//           <p>
+//             ${post.content}
+//           </p>
+//         </div>
+//         <div>
+//           <h3 class="heading fs-4 mt-3">AUTHOR</h3>
+//           <p class="fw-bold desc">
+//             ${post.author}<br />${post.author_instagram} on Instagram
+//           </p>
+//           <h3 class="heading fs-4 mt-3">AUTHOR BIO</h3>
+//           <p class="desc">
+//             ${post.author_bio || 'No bio available.'}
+//           </p>
+//         </div>
+//         <div class="fs-6 pb-4">
+//           <span class="pe-3"><a href="/${subType}/${slug}" class="post-link">${post.comments.length} COMMENTS</a></span><i class="bi bi-share"></i
+//           ><span class="ps-2">SHARE</span>
+//         </div>
     
-    `;
-    list.appendChild(postDiv)
-  });
+//     `;
+//     list.appendChild(postDiv)
+//   });
 
-  document.querySelectorAll('.post-link').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault()
-      history.pushState({}, '', link.getAttribute('href'))
-      renderView();
-    })
-  })
-}
+//   document.querySelectorAll('.post-link').forEach(link => {
+//     link.addEventListener('click', e => {
+//       e.preventDefault()
+//       history.pushState({}, '', link.getAttribute('href'))
+//       renderView();
+//     })
+//   })
+// }
 
-async function renderOnePost() {
-  const { subType, slug } = parsePath();
-  const postData = await getSubmissionsByType(subType)
+// async function renderOnePost() {
+//   const { subType, slug } = parsePath();
+//   const postData = await getSubmissionsByType(subType)
 
-  const post = postData.find(p => slugify(p.title) === slug)
+//   const post = postData.find(p => slugify(p.title) === slug)
 
-  if (!post) {
-    document.getElementById('sub-view').innerHTML = "<p>Post not found.</p>"
-    return
-  }
+//   if (!post) {
+//     document.getElementById('sub-view').innerHTML = "<p>Post not found.</p>"
+//     return
+//   }
 
-  document.getElementById('sub-view').innerHTML = `
-            <span class="pe-3">${new Date(post.created_at).toLocaleDateString()}</span><span>${post.comments.length} COMMENTS</span>
-        <h2 class="fs-4"><a href="/${subType}/${slug}" class="post-link">${post.title}</a></h2>
-        <div class="text-center desc">
-          <p>
-            ${post.content}
-          </p>
-        </div>
-        <div>
-          <h3 class="heading fs-4 mt-3">AUTHOR</h3>
-          <p class="fw-bold desc">
-            ${post.author}<br />${post.author_instagram} on Instagram
-          </p>
-          <h3 class="heading fs-4 mt-3">AUTHOR BIO</h3>
-          <p class="desc">
-            ${post.author_bio || 'No bio available.'}
-          </p>
-        </div>
-        <div class="fs-6">
-          <span class="pe-3"><a href="/${subType}/${slug}" class="post-link">${post.comments.length} COMMENTS</a></span><i class="bi bi-share"></i
-          ><span class="ps-2">SHARE</span>
-        </div>
+//   document.getElementById('sub-view').innerHTML = `
+//             <span class="pe-3">${new Date(post.created_at).toLocaleDateString()}</span><span>${post.comments.length} COMMENTS</span>
+//         <h2 class="fs-4"><a href="/${subType}/${slug}" class="post-link">${post.title}</a></h2>
+//         <div class="text-center desc">
+//           <p>
+//             ${post.content}
+//           </p>
+//         </div>
+//         <div>
+//           <h3 class="heading fs-4 mt-3">AUTHOR</h3>
+//           <p class="fw-bold desc">
+//             ${post.author}<br />${post.author_instagram} on Instagram
+//           </p>
+//           <h3 class="heading fs-4 mt-3">AUTHOR BIO</h3>
+//           <p class="desc">
+//             ${post.author_bio || 'No bio available.'}
+//           </p>
+//         </div>
+//         <div class="fs-6">
+//           <span class="pe-3"><a href="/${subType}/${slug}" class="post-link">${post.comments.length} COMMENTS</a></span><i class="bi bi-share"></i
+//           ><span class="ps-2">SHARE</span>
+//         </div>
 
-  `
-
-
-}
-
-async function renderView() {
-  const { subType, slug } = parsePath();
-
-  const postData = await getSubmissionsByType(subType)
+//   `
 
 
+// }
 
-  if (slug && postData.some(post => slugify(post.title) === slug)) {
-    document.getElementById('subs-list').style.display = 'none';
-    document.getElementById('sub-view').style.display = 'block';
-    renderOnePost(slug);
-  } else {
-    document.getElementById('subs-list').style.display = 'block';
-    document.getElementById('sub-view').style.display = 'none';
-    renderSubmissions();
-  }
-}
+// async function renderView() {
+//   const { subType, slug } = parsePath();
 
-// Handle back/forward
-window.addEventListener('popstate', renderView);
+//   const postData = await getSubmissionsByType(subType)
 
-// Initial load
-renderView();
 
-window.renderSubmissions = renderSubmissions; // Expose function globally for testing
+
+//   if (slug && postData.some(post => slugify(post.title) === slug)) {
+//     document.getElementById('subs-list').style.display = 'none';
+//     document.getElementById('sub-view').style.display = 'block';
+//     renderOnePost(slug);
+//   } else {
+//     document.getElementById('subs-list').style.display = 'block';
+//     document.getElementById('sub-view').style.display = 'none';
+//     renderSubmissions();
+//   }
+// }
+
+// // Handle back/forward
+// window.addEventListener('popstate', renderView);
+
+// // Initial load
+// renderView();
+
+// window.renderSubmissions = renderSubmissions; // Expose function globally for testing
