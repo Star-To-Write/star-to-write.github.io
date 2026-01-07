@@ -9,7 +9,9 @@ export function SubscribeCard() {
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("poo poo");
+    alert(
+      "Mailing is currently not available, please follow our socials @startowrite and turn on notifications for updates!"
+    );
     // if (email) {
     //   setIsSubscribed(true);
     //   setEmail("");
