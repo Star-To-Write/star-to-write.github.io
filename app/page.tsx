@@ -9,16 +9,37 @@ import { DontGo } from "@/components/DontGo";
 import { FeaturedArticle } from "@/components/FeaturedArticle";
 import { RecentPosts } from "@/components/RecentPosts";
 import { SubscribeCard } from "@/components/SubscribeCard";
+import { type SanityDocument } from "next-sanity";
+import { client } from "@/sanity/lib/client";
 
-export default function Home() {
-  return (
-    <div>
-      <SubscribeCard />
-      <FeaturedArticle />
-      <CategoryShowcase />
-      <AboutUs />
-      <RecentPosts />
-      <DontGo />
-    </div>
-  );
+const query = `
+*[_type == "submission"]{
+  title,
+  "slug": slug.current,
+  status,
+  excerpt,
+  submittedDate,
+  author->{
+    name,
+    anonymous
+  },
+  tags[]->{
+    name
+  },
+  featured
+}
+
+`;
+
+export default async function Home() {
+    return (
+        <div>
+            <SubscribeCard />
+            <FeaturedArticle />
+            <CategoryShowcase />
+            <AboutUs />
+            <RecentPosts />
+            <DontGo />
+        </div>
+    );
 }
