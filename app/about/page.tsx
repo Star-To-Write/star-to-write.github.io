@@ -113,6 +113,7 @@ export default function AboutUs() {
                                     <div className="relative w-64 h-64 mx-auto lg:mx-0 rounded-full overflow-hidden shadow-2xl ring-4 ring-[#d4af37]/20 hover:ring-[#d4af37]/40 transition-all duration-500 hover:scale-105 group">
                                         <Image
                                             src="/staff/julia-president.jpeg"
+                                            width={64}
                                             fill
                                             alt="Julia Philip, Founder of Star to Write"
                                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"

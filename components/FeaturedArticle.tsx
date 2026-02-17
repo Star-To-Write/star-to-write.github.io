@@ -3,6 +3,7 @@ import { client } from "@/sanity/lib/client";
 import Link from "next/link";
 
 import { type FeaturedSubmission } from "@/lib/types";
+import Image from "next/image";
 
 export async function FeaturedArticle() {
     // TODO: Find featured article and make dynamic
@@ -12,7 +13,7 @@ export async function FeaturedArticle() {
   title,
   "slug": slug.current,
   excerpt,
-  coverImage{
+  images[]{
     asset->{
       url
     },
@@ -92,9 +93,10 @@ export async function FeaturedArticle() {
 
                     <div className="relative">
                         <div className="aspect-[3/4] rounded-xl overflow-hidden bg-gradient-to-br from-[#d4af37]/20 to-transparent">
-                            <img
-                                src={featuredSubmission.coverImage?.asset.url}
-                                alt={featuredSubmission.coverImage?.alt}
+                            <Image
+                                src={featuredSubmission.images[0].asset.url}
+                                alt={featuredSubmission.images[0].alt}
+                                fill
                                 className="w-full h-full object-cover opacity-80"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-[#0b132b]/60 to-transparent" />

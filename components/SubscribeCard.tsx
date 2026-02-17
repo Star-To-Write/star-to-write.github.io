@@ -5,9 +5,7 @@ import { Button } from "./ui/Button";
 
 export function SubscribeCard() {
     const [email, setEmail] = useState("");
-    const [isSubscribed, setIsSubscribed] = useState(false);
-
-    setIsSubscribed(false); // BUG: eslint shut up
+    // const [isSubscribed, setIsSubscribed] = useState(false);
 
     const handleSubscribe = (e: React.FormEvent) => {
         e.preventDefault();
@@ -47,7 +45,7 @@ export function SubscribeCard() {
                         and creative works.
                     </p>
 
-                    {isSubscribed ? (
+                    {false ? (
                         <div className="bg-[#d4af37]/20 border border-[#d4af37]/50 rounded-lg p-4 max-w-md mx-auto">
                             <p
                                 className="text-primary"

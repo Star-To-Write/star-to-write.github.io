@@ -37,7 +37,7 @@ export interface Submission {
     submittedDate: string;
 
     author: Author;
-    coverImage?: SanityImage;
+    images: SanityImage[];
     tags?: Tag[];
     category: Category;
 }
@@ -50,7 +50,7 @@ export interface SubmissionMeta {
 // NOTE: add tags later if we want to show the tags but rn no
 export type FeaturedSubmission = Pick<
     Submission,
-    "title" | "excerpt" | "slug" | "coverImage" | "author" | "category"
+    "title" | "excerpt" | "slug" | "images" | "author" | "category"
 >;
 
 export type LatestSubmissions = Pick<
@@ -58,7 +58,7 @@ export type LatestSubmissions = Pick<
     | "title"
     | "excerpt"
     | "slug"
-    | "coverImage"
+    | "images"
     | "author"
     | "category"
     | "submittedDate"

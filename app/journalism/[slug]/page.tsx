@@ -94,7 +94,7 @@ export default async function Page({
             </div>
             <h1>{}</h1>
             <div
-                key={submission.slug}
+            key={submission.slug}
                 className="group grid md:grid-cols-3 gap-8 bg-card/30 backdrop-blur-sm border border-border rounded-xl p-8 hover:border-[#d4af37]/50 transition-all duration-300"
             >
                 <div className="relative">

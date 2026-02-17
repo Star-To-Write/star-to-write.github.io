@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Heart, MessageCircle, Share2, Eye } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import Image from "next/image";
 
 interface SubmissionCardProps {
     id: number;
@@ -51,9 +52,10 @@ export function SubmissionCard({
         <div className="group bg-card/40 backdrop-blur-sm border border-border rounded-xl overflow-hidden hover:border-[#d4af37]/50 transition-all duration-300">
             {/* Image */}
             <div className="aspect-[16/10] relative overflow-hidden">
-                <img
+                <Image
                     src={image}
                     alt={title}
+                    fill
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0b132b]/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

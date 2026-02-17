@@ -1,6 +1,7 @@
 import { client } from "@/sanity/lib/client";
 import { Button } from "./ui/Button";
 import { LatestSubmissions } from "@/lib/types";
+import Image from "next/image";
 
 export async function RecentPosts() {
     const newPublishedPiecesQuery = `
@@ -9,7 +10,7 @@ export async function RecentPosts() {
   "slug": slug.current,
   excerpt,
   submittedDate,
-  coverImage{
+  images[]{
     asset->{
       url
     },
@@ -113,9 +114,10 @@ export async function RecentPosts() {
 
                         <div className="relative">
                             <div className="aspect-[4/5] rounded-lg overflow-hidden bg-gradient-to-br from-[#d4af37]/10 to-transparent">
-                                <img
-                                    src={submission.coverImage?.asset.url}
+                                <Image
+                                    src={submission.images[0].asset.url}
                                     alt={submission.title}
+                                    fill
                                     className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300"
                                 />
                             </div>

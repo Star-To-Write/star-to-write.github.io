@@ -6,6 +6,7 @@ import { DontGo } from "@/components/DontGo";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { Input } from "@/components/ui/Input";
+import Image from "next/image";
 
 interface ArtPiece {
     id: number;
@@ -418,9 +419,10 @@ export default function ArtDesignPage() {
                                         </div>
                                     )}
 
-                                    <img
+                                    <Image
                                         src={piece.image}
                                         alt={piece.title}
+                                        fill
                                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 cursor-pointer"
                                         onClick={() => handleView(piece)}
                                     />
@@ -583,9 +585,10 @@ export default function ArtDesignPage() {
 
                         <div className="grid lg:grid-cols-2 max-h-[calc(90vh-100px)] overflow-y-auto">
                             <div className="relative bg-[#0b132b]/50 flex items-center justify-center p-8">
-                                <img
+                                <Image
                                     src={selectedPiece.image}
                                     alt={selectedPiece.title}
+                                    fill
                                     className="max-w-full max-h-96 object-contain select-none"
                                     style={{
                                         userSelect: "none",

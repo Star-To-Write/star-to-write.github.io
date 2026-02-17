@@ -1,6 +1,7 @@
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import { urlFor } from "@/lib/utils";
 import type { RichText } from "@/lib/types";
+import Image from "next/image";
 
 const components: PortableTextComponents = {
     block: {
@@ -14,8 +15,11 @@ const components: PortableTextComponents = {
         image: ({ value }) => {
             return (
                 <figure className={`my-10 max-w-2xl mx-auto`}>
-                    <img
+                    <Image
                         src={urlFor(value).width(1600).url()}
+                        alt={value.alt}
+                        width={1600}
+                        height={1600}
                         className="w-full h-auto rounded-xl object-contain"
                     />
 

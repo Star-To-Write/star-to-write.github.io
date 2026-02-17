@@ -3,7 +3,7 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 import react from "eslint-plugin-react";
 import { defineConfig } from "eslint/config";
-
+import nextPlugin from "@next/eslint-plugin-next";
 export default defineConfig([
     js.configs.recommended,
     ...tseslint.configs.recommended,
@@ -35,13 +35,17 @@ export default defineConfig([
                 1,
                 { extensions: [".js", ".jsx", ".ts", ".tsx"] },
             ], //should add ".ts" if typescript project
-            "react/no-unescaped-entities": "off", // SO SORRY!
+            "react/no-unescaped-entities": "off", // SO SORRY!,
+            ...nextPlugin.configs.recommended.rules,
         },
 
         settings: {
             react: {
                 version: "detect",
             },
+        },
+        plugins: {
+            "@next/next": nextPlugin,
         },
     },
 ]);

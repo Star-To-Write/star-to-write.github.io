@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const categories = [
@@ -35,9 +36,10 @@ export function CategoryShowcase() {
                         className="group cursor-pointer relative overflow-hidden rounded-xl bg-card/30 backdrop-blur-sm border border-border transition-all duration-300 hover:border-[#d4af37]/50 hover:bg-card/50"
                     >
                         <div className="aspect-[4/3] relative overflow-hidden">
-                            <img
+                            <Image
                                 src={category.image}
                                 alt={category.title}
+                                fill
                                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-[#0b132b]/80 via-[#0b132b]/40 to-transparent" />
