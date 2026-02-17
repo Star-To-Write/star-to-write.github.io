@@ -1,6 +1,5 @@
 import { client } from "@/sanity/lib/client";
-import { Button } from "./ui/Button";
-import { type SanityDocument } from "next-sanity";
+// import { Button } from "./ui/Button";
 import Link from "next/link";
 
 import { type FeaturedSubmission } from "@/lib/types";

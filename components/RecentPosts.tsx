@@ -2,39 +2,6 @@ import { client } from "@/sanity/lib/client";
 import { Button } from "./ui/Button";
 import { LatestSubmissions } from "@/lib/types";
 
-const archiveItems = [
-    {
-        id: 1,
-        title: "The Stranger",
-        author: "Alex Rodriguez",
-        category: "Short Fiction",
-        excerpt:
-            "A stranger gave you this mask and told you to take care of it. It is grotesque and looks ancient, but you notice...",
-        image: "https://images.unsplash.com/photo-1567988122319-039d80fafc34?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx2aW50YWdlJTIwYm9va3MlMjBsaWJyYXJ5fGVufDF8fHx8MTc1NTYyNTgzOXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-        date: "December 2024",
-    },
-    {
-        id: 2,
-        title: "Digital Echoes",
-        author: "Jordan Kim",
-        category: "Poetry",
-        excerpt:
-            "In the silence between keystrokes, I find fragments of myself scattered across digital landscapes...",
-        image: "https://images.unsplash.com/photo-1500381457785-20c97a29c78e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBwb2V0cnklMjBib29rfGVufDF8fHx8MTc1NTcyODAyNXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-        date: "November 2024",
-    },
-    {
-        id: 3,
-        title: "The Last Letter",
-        author: "Sam Chen",
-        category: "Creative Nonfiction",
-        excerpt:
-            "I found my grandmother's letters hidden in her typewriter case, each word a bridge across decades...",
-        image: "https://images.unsplash.com/photo-1727302788687-0c1fc737bd4d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0eXBlNXJpdGVyJTIwd3JpdGluZyUyMHBhcGVyfGVufDF8fHx8MTc1NTcyODAyOHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-        date: "October 2024",
-    },
-];
-
 export async function RecentPosts() {
     const newPublishedPiecesQuery = `
 *[_type == "submission" && status == "Published"]{

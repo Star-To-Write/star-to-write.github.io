@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/Button";
+// import { Button } from "@/components/ui/Button";
 import { RichTextRenderer } from "@/components/ui/RichText";
 import { Submission } from "@/lib/types";
 import { client } from "@/sanity/lib/client";

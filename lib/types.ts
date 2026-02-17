@@ -1,4 +1,10 @@
 import { PortableTextBlock } from "next-sanity";
+import type {
+    SanityAsset,
+    SanityReference,
+    SanityImageObject,
+    SanityImageWithAssetStub,
+} from "@sanity/image-url/lib/types/types";
 
 export type Tag = {
     name: string;
@@ -57,3 +63,10 @@ export type LatestSubmissions = Pick<
     | "category"
     | "submittedDate"
 >;
+
+export type SanityImageSource =
+    | string
+    | SanityReference
+    | SanityAsset
+    | SanityImageObject
+    | SanityImageWithAssetStub;
