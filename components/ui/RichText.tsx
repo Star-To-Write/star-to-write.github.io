@@ -7,29 +7,42 @@ const components: PortableTextComponents = {
         normal: ({ children }) => (
             <p className="mb-4 leading-relaxed">{children}</p>
         ),
-        h2: ({ children }) => (
-            <h2 className="mt-8 mb-4 text-2xl font-semibold">{children}</h2>
-        ),
+        right: ({ children }) => <p className="mb-4 text-right">{children}</p>,
     },
 
     types: {
-        image: ({ value }) => (
-            <figure className="my-8 max-h-xl max-w-xl">
-                <img
-                    src={urlFor(value).width(1200).url()}
-                    alt={value.alt || ""}
-                    className="rounded-xl"
-                />
-                {value.caption && (
-                    <figcaption className="mt-2 text-sm text-gray-500">
-                        {value.caption}
-                    </figcaption>
-                )}
-            </figure>
+        image: ({ value }) => {
+            return (
+                <figure className={`my-10 max-w-2xl mx-auto`}>
+                    <img
+                        src={urlFor(value).width(1600).url()}
+                        className="w-full h-auto rounded-xl object-contain"
+                    />
+
+                    {value.caption && (
+                        <figcaption className="mt-3 text-sm text-gray-500 text-center">
+                            {value.caption}
+                        </figcaption>
+                    )}
+                </figure>
+            );
+        },
+    },
+
+    list: {
+        bullet: ({ children }) => (
+            <ul className="list-disc ml-6 mb-4 space-y-2">{children}</ul>
+        ),
+        number: ({ children }) => (
+            <ol className="list-decimal ml-6 mb-4 space-y-2">{children}</ol>
         ),
     },
 };
 
 export function RichTextRenderer({ value }: { value: RichText }) {
-    return <PortableText value={value} components={components} />;
+    return (
+        <div className="max-w-3xl mx-auto">
+            <PortableText value={value} components={components} />
+        </div>
+    );
 }

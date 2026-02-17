@@ -14,37 +14,37 @@ export const submissionType = defineType({
             type: "string",
             validation: (Rule) => Rule.required(),
         }),
-        defineField({
-            name: "coverImage",
-            title: "Cover Image",
-            type: "image",
-            options: {
-                hotspot: true, // 🔑 enables smart cropping
-            },
-            fields: [
-                defineField({
-                    name: "alt",
-                    title: "Alt text",
-                    type: "string",
-                    validation: (Rule) =>
-                        Rule.required().error(
-                            "Alt text is required for accessibility",
-                        ),
-                }),
 
-                defineField({
-                    name: "caption",
-                    title: "Caption",
-                    type: "string",
-                }),
+        //     name: "coverImage",
+        //     title: "Cover Image",
+        //     type: "image",
+        //     options: {
+        //         hotspot: true, // enables smart cropping
+        //     },
+        //     fields: [
+        //         defineField({
+        //             name: "alt",
+        //             title: "Alt text",
+        //             type: "string",
+        //             validation: (Rule) =>
+        //                 Rule.required().error(
+        //                     "Alt text is required for accessibility",
+        //                 ),
+        //         }),
 
-                defineField({
-                    name: "credit",
-                    title: "Image credit",
-                    type: "string",
-                }),
-            ],
-        }),
+        //         defineField({
+        //             name: "caption",
+        //             title: "Caption",
+        //             type: "string",
+        //         }),
+
+        //         defineField({
+        //             name: "credit",
+        //             title: "Image credit",
+        //             type: "string",
+        //         }),
+        //     ],
+        // }),
 
         // slug
         defineField({
@@ -77,13 +77,35 @@ export const submissionType = defineType({
             validation: (Rule) => Rule.required(),
         }),
 
+        // image posted on ig essentially
+        defineField({
+            name: "images",
+            title: "Image Version",
+            type: "array",
+            of: [
+                {
+                    type: "image",
+                    options: {
+                        hotspot: true,
+                    },
+                },
+            ],
+        }),
+
         // content
         defineField({
             name: "content",
             title: "Content",
             type: "array",
             of: [
-                { type: "block" },
+                {
+                    type: "block",
+                    styles: [
+                        { title: "Normal", value: "normal" },
+                        { title: "Center", value: "center" },
+                        { title: "Right Align", value: "right" },
+                    ],
+                },
                 {
                     type: "image",
                     options: {
