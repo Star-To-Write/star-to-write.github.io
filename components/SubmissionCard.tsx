@@ -2,44 +2,19 @@ import { useState } from "react";
 import { Heart, MessageCircle, Share2, Eye } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import Image from "next/image";
-
-interface SubmissionCardProps {
-    id: number;
-    title: string;
-    author: string;
-    category: string;
-    excerpt: string;
-    image: string;
-    date: string;
-    likes: number;
-    comments: number;
-    views: number;
-}
+import { Submission } from "@/lib/types";
+import Link from "next/link";
 
 export function SubmissionCard({
     // id,
     title,
     author,
     category,
+    slug,
     excerpt,
-    image,
-    date,
-    likes: initialLikes,
-    comments,
-    views,
-}: SubmissionCardProps) {
-    const [likes, setLikes] = useState(initialLikes);
-    const [isLiked, setIsLiked] = useState(false);
-
-    const handleLike = () => {
-        if (isLiked) {
-            setLikes(likes - 1);
-        } else {
-            setLikes(likes + 1);
-        }
-        setIsLiked(!isLiked);
-    };
-
+    images,
+    submittedDate,
+}: Submission) {
     const handleShare = () => {
         // Mock share functionality
         navigator.clipboard.writeText(
@@ -53,7 +28,7 @@ export function SubmissionCard({
             {/* Image */}
             <div className="aspect-[16/10] relative overflow-hidden">
                 <Image
-                    src={image}
+                    src={images[0].asset.url}
                     alt={title}
                     fill
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
@@ -66,7 +41,7 @@ export function SubmissionCard({
                         className="bg-[#d4af37]/90 text-primary-foreground px-3 py-1 rounded-full text-xs uppercase tracking-wider"
                         style={{ fontFamily: "Inter, sans-serif" }}
                     >
-                        {category}
+                        {category.title}
                     </span>
                 </div>
             </div>
@@ -78,11 +53,11 @@ export function SubmissionCard({
                         className="text-xs text-muted-foreground"
                         style={{ fontFamily: "Inter, sans-serif" }}
                     >
-                        {date}
+                        {new Date(submittedDate).toLocaleDateString()}
                     </span>
                     <div className="flex items-center gap-1 text-xs text-muted-foreground">
                         <Eye size={12} />
-                        <span>{views}</span>
+                        <span>67</span>
                     </div>
                 </div>
 
@@ -97,7 +72,7 @@ export function SubmissionCard({
                     className="text-sm text-muted-foreground mb-3"
                     style={{ fontFamily: "Inter, sans-serif" }}
                 >
-                    By {author}
+                    By {author.anonymous ? "An Anonymous Writer" : author.name}
                 </p>
 
                 <p
@@ -110,7 +85,7 @@ export function SubmissionCard({
                 {/* Actions */}
                 <div className="flex items-center justify-between pt-4 border-t border-border">
                     <div className="flex items-center gap-4">
-                        <button
+                        {/* <button
                             onClick={handleLike}
                             className={`flex items-center gap-2 text-sm transition-colors ${
                                 isLiked
@@ -123,12 +98,12 @@ export function SubmissionCard({
                                 className={isLiked ? "fill-current" : ""}
                             />
                             <span>{likes}</span>
-                        </button>
-
+                        </button> */}
+                        {/* 
                         <button className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
                             <MessageCircle size={16} />
                             <span>{comments}</span>
-                        </button>
+                        </button> */}
 
                         <button
                             onClick={handleShare}
@@ -143,8 +118,9 @@ export function SubmissionCard({
                         size="sm"
                         className="text-primary hover:text-primary-foreground hover:bg-primary"
                         style={{ fontFamily: "Inter, sans-serif" }}
+                        asChild
                     >
-                        Read More
+                        <Link href={`${category.slug}/${slug}`}>Read More</Link>
                     </Button>
                 </div>
             </div>

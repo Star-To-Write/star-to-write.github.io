@@ -2,6 +2,7 @@ import { client } from "@/sanity/lib/client";
 import { Button } from "./ui/Button";
 import { LatestSubmissions } from "@/lib/types";
 import Image from "next/image";
+import Link from "next/link";
 
 export async function RecentPosts() {
     const newPublishedPiecesQuery = `
@@ -107,8 +108,13 @@ export async function RecentPosts() {
                                 variant="outline"
                                 className="border-[#d4af37]/50 text-primary hover:bg-primary hover:text-primary-foreground"
                                 style={{ fontFamily: "Inter, sans-serif" }}
+                                asChild
                             >
-                                READ MORE →
+                                <Link
+                                    href={`/${submission.category.slug}/${submission.slug}`}
+                                >
+                                    READ MORE →
+                                </Link>
                             </Button>
                         </div>
 

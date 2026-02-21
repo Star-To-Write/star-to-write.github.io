@@ -4,21 +4,33 @@ import { useState } from "react";
 import { Button } from "./ui/Button";
 
 export function SubscribeCard() {
+    // ✅ remove 'async'
     const [email, setEmail] = useState("");
-    const isSubscribed = false;
-    // const [isSubscribed, setIsSubscribed] = useState(false);
+    const [isSubscribed, setIsSubscribed] = useState(false);
 
-    const handleSubscribe = (e: React.FormEvent) => {
+    const handleSubscribe = async (e: React.FormEvent) => {
         e.preventDefault();
-        alert(
-            "Mailing is currently not available, please follow our socials @startowrite and turn on notifications for updates!",
-        );
-        // if (email) {
-        //   setIsSubscribed(true);
-        //   setEmail("");
-        //   setTimeout(() => setIsSubscribed(false), 3000);
-        // }
+        if (email) {
+            try {
+                const res = await fetch("/api/subscribe", {
+                    method: "POST",
+                    body: JSON.stringify({ email }),
+                    headers: { "Content-Type": "application/json" },
+                });
+
+                if (!res.ok) {
+                    console.error("Subscription failed");
+                    return;
+                }
+
+                setIsSubscribed(true);
+                setEmail("");
+            } catch (err) {
+                console.error("Server error:", err);
+            }
+        }
     };
+
     return (
         <div className="relative">
             <div className="max-w-7xl mx-auto px-6 lg:px-12 py-8">
