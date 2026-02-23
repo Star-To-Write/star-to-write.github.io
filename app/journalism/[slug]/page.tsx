@@ -1,5 +1,5 @@
 // import { Button } from "@/components/ui/Button";
-import SubmissionCarousel from "@/components/SubmissionCarousel";
+import SubmissionCarousel from "./components/SubmissionCarousel";
 import { RichTextRenderer } from "@/components/ui/RichText";
 import { Submission } from "@/lib/types";
 import { client } from "@/sanity/lib/client";
@@ -114,7 +114,6 @@ export default async function Page({
                     </div>
                 </div>
             </div> */}
-            
         </div>
     );
 }
