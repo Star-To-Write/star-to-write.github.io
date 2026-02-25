@@ -3,6 +3,10 @@
 import { useState } from "react"
 import Image from "next/image"
 
+// ✅ IMPORT YOUR BUTTON IMAGES
+import previousButton from "./previous.png"
+import nextButton from "./next.png"
+
 type ImageType = {
   asset: {
     url: string
@@ -39,28 +43,28 @@ export default function SubmissionCarousel({
         />
       </div>
 
-      {/* LEFT FIGMA BUTTON */}
+      {/* LEFT BUTTON */}
       <button
         onClick={prev}
         className="absolute left-4 top-1/2 -translate-y-1/2 z-10 hover:scale-110 transition-transform duration-200"
       >
         <Image
-          src="app/journalism/[slug]/components/previous.png"
+          src={previousButton}
           alt="Previous"
-          width={80}   // adjust to match your design
+          width={80}
           height={80}
         />
       </button>
 
-      {/* RIGHT FIGMA BUTTON */}
+      {/* RIGHT BUTTON */}
       <button
         onClick={next}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-10 hover:scale-110 transition-transform duration-200"
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-10 hover:scale-110 transition-transform duration-200"
       >
         <Image
-          src="app/journalism/[slug]/components/next.png"
+          src={nextButton}
           alt="Next"
-          width={80}   // adjust to match your design
+          width={80}
           height={80}
         />
       </button>
