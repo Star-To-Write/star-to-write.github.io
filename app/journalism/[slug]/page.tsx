@@ -1,55 +1,47 @@
-// import { Button } from "@/components/ui/Button";
-import SubmissionCarousel from "./components/SubmissionCarousel";
-import { RichTextRenderer } from "@/components/ui/RichText";
-import { Submission } from "@/lib/types";
-import { client } from "@/sanity/lib/client";
+import SubmissionCarousel from "./components/SubmissionCarousel"
+import { RichTextRenderer } from "@/components/ui/RichText"
+import { Submission } from "@/lib/types"
+import { client } from "@/sanity/lib/client"
 
 export default async function Page({
-    params,
+  params,
 }: {
-    params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string }>
 }) {
-    const { slug } = await params;
-    const query = `
-*[_type == "submission" && status == "Published" && slug.current == $slug]{
-    author->{
-        name,
-        anonymous
-    },
+  const { slug } = await params
+
+  const query = `
+  *[_type == "submission" && status == "Published" && slug.current == $slug]{
+    author->{ name, anonymous },
     title,
     content,
-    category->{
-        title,
-        "slug": slug.current
-    },
-    tags->{
-        name
-    },
+    category->{ title, "slug": slug.current },
+    tags->{ name },
     featured,
     submittedDate,
     images[]{
-      asset->{
-        url
-      }
+      asset->{ url }
     }
-}[0]`;
-    const submission = await client.fetch<Submission>(query, {
-        slug: slug,
-    });
+  }[0]
+  `
 
-    console.log(submission);
-    return (
-        <div>
-<article className="prose mx-auto">
-    <h1>{submission.title}</h1>
+  const submission = await client.fetch<Submission>(query, {
+    slug: slug,
+  })
 
-    <div className="mx-5 text-foreground">
-        <RichTextRenderer value={submission.content} />
-    </div>
+  return (
+    <div>
+      <article className="prose mx-auto">
+        <h1>{submission.title}</h1>
 
-    <SubmissionCarousel images={submission.images} />
-</article>
-            {}
+        <div className="mx-5 text-foreground">
+          <RichTextRenderer value={submission.content} />
         </div>
-    );
+
+        {submission.images && (
+          <SubmissionCarousel images={submission.images} />
+        )}
+      </article>
+    </div>
+  )
 }
