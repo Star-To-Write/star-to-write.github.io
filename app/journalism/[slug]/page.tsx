@@ -35,7 +35,7 @@ export default async function Page({
       <article className="prose mx-auto">
         <h1>{submission.title}</h1>
 
-       	<SubmissionCarousel />
+       	<SubmissionCarousel images={submission.images} />
 
         <div className="mx-5 text-foreground">
           <RichTextRenderer value={submission.content} />
