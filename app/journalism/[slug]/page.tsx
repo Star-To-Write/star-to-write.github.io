@@ -1,4 +1,4 @@
-import SubmissionCarousel from "./components/SubmissionCarousel"
+import SubmissionCarousel from "@/components/SubmissionCarousel"
 import { RichTextRenderer } from "@/components/ui/RichText"
 import { Submission } from "@/lib/types"
 import { client } from "@/sanity/lib/client"
@@ -28,19 +28,19 @@ export default async function Page({
   const submission = await client.fetch<Submission>(query, {
     slug: slug,
   })
-
+  
+  
   return (
     <div>
       <article className="prose mx-auto">
         <h1>{submission.title}</h1>
 
+       	<SubmissionCarousel />
+
         <div className="mx-5 text-foreground">
           <RichTextRenderer value={submission.content} />
         </div>
 
-        {submission.images && (
-          <SubmissionCarousel images={submission.images} />
-        )}
       </article>
     </div>
   )

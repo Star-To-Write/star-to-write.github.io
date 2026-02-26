@@ -9,6 +9,7 @@ const components: PortableTextComponents = {
             <p className="mb-4 leading-relaxed">{children}</p>
         ),
         right: ({ children }) => <p className="mb-4 text-right">{children}</p>,
+	center: ({ children }) => <p className="mb-4 text-center">{children}</p>,
     },
 
     types: {
