@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Heart, MessageCircle, Share2, Eye } from "lucide-react";
+// import { useState } from "react";
+import { Share2, Eye } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import Image from "next/image";
 import { Submission } from "@/lib/types";
