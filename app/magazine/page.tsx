@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 import {
-    ShoppingCart,
-    Heart,
-    MessageCircle,
-    Share2,
+//    ShoppingCart,
+//    Heart,
+//    MessageCircle,
+//    Share2,
     ExternalLink,
-    Users,
+//    Users,
     Star,
 } from "lucide-react";
 import { DontGo } from "@/components/DontGo";
@@ -234,7 +234,7 @@ export default function MagazinePage() {
                                         Read Now - Free
                                     </Button>
 
-                                    {/* <div className="flex gap-2">
+                                    <div className="flex gap-2">
                                         <Button
                                             variant="outline"
                                             size="icon"
@@ -251,7 +251,7 @@ export default function MagazinePage() {
                                         >
                                             <Share2 size={16} />
                                         </Button>
-                                    </div> */}
+                                    </div>
                                 </div>
 
                                 {/* Social Stats

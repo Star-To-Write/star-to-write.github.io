@@ -10,19 +10,25 @@ export function SubscribeNews() {
 
     const handleSubscribe = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!email) return;
+        if (email) {
+            try {
+                const res = await fetch("/api/subscribe", {
+                    method: "POST",
+                    body: JSON.stringify({ email }),
+                    headers: { "Content-Type": "application/json" },
+                });
 
-        setIsLoading(true);
+                if (!res.ok) {
+                    console.error("Subscription failed");
+                    return;
+                }
 
-        // Simulate API call
-        const res = await fetch("/api/subscribe", {
-            method: "POST",
-            body: JSON.stringify({ email: email }),
-            headers: { "Content-Type": "application/json" },
-        });
-        setIsSubscribed(true);
-        setIsLoading(false);
-        setEmail("");
+                setIsSubscribed(true);
+                setEmail("");
+            } catch (err) {
+                console.error("Server error:", err);
+            }
+        }
     };
 
     if (isSubscribed) {
