@@ -1,25 +1,25 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/ui/NavBar"
-import Footer from "@/components/ui/Footer"
+import Navbar from "@/components/ui/NavBar";
+import Footer from "@/components/ui/Footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Star to Write",
-  description: "sexy",
+    title: "Star to Write",
+    description: "sexy",
 };
 
 export default function RootLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode;
+    children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body className={`antialiased`}>
-        <Navbar />
-        {children}
-        <Footer />
-      </body>
-    </html>
-  );
+    return (
+        <html lang="en">
+            <body className={`antialiased font-inter`}>
+                <Navbar />
+                {children}
+                <Footer />
+            </body>
+        </html>
+    );
 }

@@ -3,6 +3,7 @@ import { Button } from "./ui/Button";
 import { LatestSubmissions } from "@/lib/types";
 import Image from "next/image";
 import Link from "next/link";
+import Tags from "./ui/Tags";
 
 export async function RecentPosts() {
     const newPublishedPiecesQuery = `
@@ -79,7 +80,12 @@ export async function RecentPosts() {
                                     ).toLocaleDateString()}
                                 </span>
                             </div>
-
+                            {submission.tags && (
+                                <Tags
+                                    tags={submission.tags}
+                                    className="mb-3 mt-2"
+                                />
+                            )}
                             <h3
                                 className="text-2xl mb-3 text-foreground group-hover:text-primary transition-colors"
                                 style={{ fontFamily: "Georgia, serif" }}

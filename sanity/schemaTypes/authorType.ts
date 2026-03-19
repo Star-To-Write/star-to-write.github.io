@@ -21,6 +21,49 @@ export const authorType = defineType({
         }),
 
         defineField({
+            name: "socials",
+            title: "Social Media",
+            type: "array",
+            of: [
+                {
+                    type: "object",
+                    fields: [
+                        {
+                            name: "platform",
+                            title: "Platform",
+                            type: "string",
+                            options: {
+                                list: [
+                                    { title: "Twitter / X", value: "twitter" },
+                                    { title: "Instagram", value: "instagram" },
+                                    { title: "TikTok", value: "tiktok" },
+                                    { title: "YouTube", value: "youtube" },
+                                ],
+                            },
+                        },
+                        {
+                            name: "username",
+                            title: "Username (without @)",
+                            type: "string",
+                        },
+                    ],
+                    preview: {
+                        select: {
+                            platform: "platform",
+                            username: "username",
+                        },
+                        prepare({ platform, username }) {
+                            return {
+                                title: username,
+                                subtitle: platform,
+                            };
+                        },
+                    },
+                },
+            ],
+        }),
+
+        defineField({
             name: "anonymous",
             type: "boolean",
             title: "Publish Anonymously",

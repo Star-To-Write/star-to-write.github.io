@@ -2,6 +2,7 @@ import { DontGo } from "@/components/DontGo";
 import { Button } from "@/components/ui/Button";
 import Image from "next/image";
 import Link from "next/link";
+import team from "@/team_information.json";
 
 export default function AboutUs() {
     return (
@@ -17,7 +18,6 @@ export default function AboutUs() {
                     <div className="w-24 h-1 bg-[#d4af37] mx-auto mb-8"></div>
                 </div>
 
-                {/* Main Organization Description */}
                 <div className="bg-card/40 backdrop-blur-sm border border-border rounded-xl p-8 lg:p-12 mb-12">
                     <div className="prose prose-lg max-w-none">
                         <p
@@ -56,7 +56,7 @@ export default function AboutUs() {
                     </div>
                 </div>
 
-                {/* Founder Section */}
+                {/* Founder Section — unchanged from your original */}
                 <div className="relative bg-gradient-to-br from-card/40 via-card/50 to-card/30 backdrop-blur-sm border border-border rounded-3xl p-8 lg:p-12 mb-12 overflow-hidden">
                     {/* Decorative background elements */}
                     <div className="absolute top-4 left-6 w-2 h-2 bg-[#d4af37]/30 rounded-full animate-pulse"></div>
@@ -93,10 +93,8 @@ export default function AboutUs() {
                         </div>
 
                         <div className="grid lg:grid-cols-2 gap-8 items-center">
-                            {/* Julia's Photo */}
                             <div className="text-center lg:text-left">
                                 <div className="relative inline-block">
-                                    {/* Decorative rings around photo */}
                                     <div
                                         className="absolute -inset-4 bg-gradient-to-r from-[#d4af37]/20 via-transparent to-[#d4af37]/20 rounded-full animate-spin"
                                         style={{ animationDuration: "20s" }}
@@ -112,10 +110,9 @@ export default function AboutUs() {
                                     {/* Main photo container */}
                                     <div className="relative w-64 h-64 mx-auto lg:mx-0 rounded-full overflow-hidden shadow-2xl ring-4 ring-[#d4af37]/20 hover:ring-[#d4af37]/40 transition-all duration-500 hover:scale-105 group">
                                         <Image
-                                            src="/staff/julia-president.jpeg"
-                                            width={64}
+                                            src={team.founder.image_url}
                                             fill
-                                            alt="Julia Philip, Founder of Star to Write"
+                                            alt={`${team.founder.name}, ${team.founder.role} of Star To Write`}
                                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                         />
 
@@ -241,7 +238,7 @@ export default function AboutUs() {
                                         className="text-2xl mb-2 text-[#d4af37] bg-gradient-to-r from-[#d4af37] to-[#d4af37]/80 bg-clip-text"
                                         style={{ fontFamily: "Georgia, serif" }}
                                     >
-                                        Julia Philip
+                                        {team.founder.name}
                                     </h4>
                                     <div className="flex items-center gap-2 mb-4">
                                         <div className="px-3 py-1 bg-[#d4af37]/10 rounded-full border border-[#d4af37]/20">
@@ -253,7 +250,7 @@ export default function AboutUs() {
                                                     fontSize: "0.875rem",
                                                 }}
                                             >
-                                                💖 Passionate Founder
+                                                💖 {team.founder.caption}
                                             </span>
                                         </div>
                                     </div>
@@ -269,24 +266,7 @@ export default function AboutUs() {
                                         <span className="text-[#d4af37]/40 text-2xl absolute -left-2 -top-1">
                                             &quot;
                                         </span>
-                                        Founded by Julia Philip, a young student
-                                        whose passion for helping others
-                                        inspired her to create a space where
-                                        youth could be heard, Star to Write
-                                        reflects both her vision and values.
-                                    </p>
-                                    <p
-                                        className="text-muted-foreground leading-relaxed relative"
-                                        style={{
-                                            fontFamily: "Inter, sans-serif",
-                                            fontSize: "1.125rem",
-                                            lineHeight: "1.7",
-                                        }}
-                                    >
-                                        Through the organization, she has found
-                                        comfort and friendship in her team,
-                                        while leading with dedication and a
-                                        commitment to amplifying diverse voices.
+                                        {team.founder.intro}
                                         <span className="text-[#d4af37]/40 text-2xl absolute -right-1 -bottom-2">
                                             &quot;
                                         </span>
@@ -319,7 +299,6 @@ export default function AboutUs() {
                     </div>
                 </div>
 
-                {/* Team Members Section */}
                 <div className="bg-card/40 backdrop-blur-sm border border-border rounded-xl p-8 lg:p-12 mb-12">
                     <div className="text-center mb-8">
                         <h3
@@ -348,111 +327,65 @@ export default function AboutUs() {
                         </p>
                     </div>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {/* Team Member 1 */}
-                        <div className="bg-gradient-to-br from-[#d4af37]/5 to-transparent rounded-xl p-6 border border-[#d4af37]/10 text-center hover:bg-[#d4af37]/10 transition-all duration-300">
-                            <div className="w-20 h-20 bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/10 rounded-full mx-auto mb-4 flex items-center justify-center">
-                                <span className="text-2xl">✨</span>
-                            </div>
-                            <h4
-                                className="text-lg mb-1 text-[#d4af37]"
+                    {team.departments.map((department, deptIndex) => (
+                        <div
+                            key={deptIndex}
+                            className="mb-12 last:mb-0 text-center"
+                        >
+                            <h3
+                                className="text-2xl mb-6 text-[#d4af37]"
                                 style={{ fontFamily: "Georgia, serif" }}
                             >
-                                Sarah Martinez
-                            </h4>
-                            <p
-                                className="text-sm text-[#d4af37]/80 mb-2"
-                                style={{ fontFamily: "Inter, sans-serif" }}
-                            >
-                                Content Editor
-                            </p>
-                            <p
-                                className="text-xs text-muted-foreground"
-                                style={{ fontFamily: "Inter, sans-serif" }}
-                            >
-                                Passionate about refining voices and bringing
-                                stories to life
-                            </p>
-                        </div>
+                                {department.name}
+                            </h3>
 
-                        {/* Team Member 2 */}
-                        <div className="bg-gradient-to-br from-[#d4af37]/5 to-transparent rounded-xl p-6 border border-[#d4af37]/10 text-center hover:bg-[#d4af37]/10 transition-all duration-300">
-                            <div className="w-20 h-20 bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/10 rounded-full mx-auto mb-4 flex items-center justify-center">
-                                <span className="text-2xl">🎨</span>
-                            </div>
-                            <h4
-                                className="text-lg mb-1 text-[#d4af37]"
-                                style={{ fontFamily: "Georgia, serif" }}
-                            >
-                                Alex Chen
-                            </h4>
-                            <p
-                                className="text-sm text-[#d4af37]/80 mb-2"
-                                style={{ fontFamily: "Inter, sans-serif" }}
-                            >
-                                Visual Designer
-                            </p>
-                            <p
-                                className="text-xs text-muted-foreground"
-                                style={{ fontFamily: "Inter, sans-serif" }}
-                            >
-                                Creating beautiful layouts and engaging visual
-                                experiences
-                            </p>
-                        </div>
+                            <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
+                                {department.members.map((member, index) => (
+                                    <div
+                                        key={index}
+                                        className="bg-gradient-to-br from-[#d4af37]/5 to-transparent rounded-xl p-6 border border-[#d4af37]/10 text-center hover:bg-[#d4af37]/10 transition-all duration-300 max-w-xs w-full"
+                                    >
+                                        <div className="w-20 h-20 rounded-full mx-auto mb-4 overflow-hidden border border-[#d4af37]/20">
+                                            <Image
+                                                src={member.image_url}
+                                                alt={`${member.name}, ${member.role}`}
+                                                width={80}
+                                                height={80}
+                                                className="w-full h-full object-cover"
+                                            />
+                                        </div>
 
-                        {/* Team Member 3 */}
-                        <div className="bg-gradient-to-br from-[#d4af37]/5 to-transparent rounded-xl p-6 border border-[#d4af37]/10 text-center hover:bg-[#d4af37]/10 transition-all duration-300">
-                            <div className="w-20 h-20 bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/10 rounded-full mx-auto mb-4 flex items-center justify-center">
-                                <span className="text-2xl">📝</span>
-                            </div>
-                            <h4
-                                className="text-lg mb-1 text-[#d4af37]"
-                                style={{ fontFamily: "Georgia, serif" }}
-                            >
-                                Jordan Kim
-                            </h4>
-                            <p
-                                className="text-sm text-[#d4af37]/80 mb-2"
-                                style={{ fontFamily: "Inter, sans-serif" }}
-                            >
-                                Social Media Manager
-                            </p>
-                            <p
-                                className="text-xs text-muted-foreground"
-                                style={{ fontFamily: "Inter, sans-serif" }}
-                            >
-                                Connecting our community and spreading literary
-                                love
-                            </p>
-                        </div>
+                                        <h4
+                                            className="text-lg mb-1 text-[#d4af37]"
+                                            style={{
+                                                fontFamily: "Georgia, serif",
+                                            }}
+                                        >
+                                            {member.name}
+                                        </h4>
 
-                        {/* Team Member 4 */}
-                        <div className="bg-gradient-to-br from-[#d4af37]/5 to-transparent rounded-xl p-6 border border-[#d4af37]/10 text-center hover:bg-[#d4af37]/10 transition-all duration-300">
-                            <div className="w-20 h-20 bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/10 rounded-full mx-auto mb-4 flex items-center justify-center">
-                                <span className="text-2xl">🌟</span>
+                                        <p
+                                            className="text-sm text-[#d4af37]/80 mb-2"
+                                            style={{
+                                                fontFamily: "Inter, sans-serif",
+                                            }}
+                                        >
+                                            {member.role}
+                                        </p>
+
+                                        <p
+                                            className="text-xs text-muted-foreground"
+                                            style={{
+                                                fontFamily: "Inter, sans-serif",
+                                            }}
+                                        >
+                                            {member.description}
+                                        </p>
+                                    </div>
+                                ))}
                             </div>
-                            <h4
-                                className="text-lg mb-1 text-[#d4af37]"
-                                style={{ fontFamily: "Georgia, serif" }}
-                            >
-                                Riley Thompson
-                            </h4>
-                            <p
-                                className="text-sm text-[#d4af37]/80 mb-2"
-                                style={{ fontFamily: "Inter, sans-serif" }}
-                            >
-                                Community Outreach
-                            </p>
-                            <p
-                                className="text-xs text-muted-foreground"
-                                style={{ fontFamily: "Inter, sans-serif" }}
-                            >
-                                Building bridges and fostering connections
-                                worldwide
-                            </p>
                         </div>
-                    </div>
+                    ))}
 
                     <div className="text-center mt-8">
                         <p
@@ -460,44 +393,8 @@ export default function AboutUs() {
                             style={{ fontFamily: "Inter, sans-serif" }}
                         >
                             Together, we&apos;re building a global community of
-                            creative voices
+                            creative voices ✨
                         </p>
-                    </div>
-                </div>
-
-                {/* Mission Statement */}
-                <div className="bg-card/40 backdrop-blur-sm border border-border rounded-xl p-8 lg:p-12 mb-12">
-                    <div className="prose prose-lg max-w-none">
-                        <p
-                            className="text-muted-foreground leading-relaxed mb-6"
-                            style={{
-                                fontFamily: "Inter, sans-serif",
-                                fontSize: "1.125rem",
-                                lineHeight: "1.7",
-                            }}
-                        >
-                            At Star to Write, we believe in the power of
-                            storytelling to inspire change, cultivate empathy,
-                            and strengthen communities. Our mission is to equip
-                            the next generation of creators with the
-                            opportunities and visibility they deserve, while
-                            building a global network dedicated to the
-                            advancement of youth voices.
-                        </p>
-
-                        <div className="text-center mt-8 p-6 bg-[#d4af37]/10 border border-[#d4af37]/30 rounded-lg">
-                            <p
-                                className="text-[#d4af37] leading-relaxed"
-                                style={{
-                                    fontFamily: "Georgia, serif",
-                                    fontSize: "1.25rem",
-                                    fontStyle: "italic",
-                                }}
-                            >
-                                Empowering young voices through writing, art,
-                                and creative expression across the globe.
-                            </p>
-                        </div>
                     </div>
                 </div>
 

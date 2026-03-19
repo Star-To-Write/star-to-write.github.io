@@ -30,12 +30,12 @@ export interface SanityImage {
 export type RichText = PortableTextBlock[];
 
 export interface Submission {
+    _id: string; // Sanity assigned id
     title: string;
     slug: string;
     excerpt: string;
     content: RichText;
     submittedDate: string;
-
     author: Author;
     images: SanityImage[];
     tags?: Tag[];
@@ -50,7 +50,7 @@ export interface SubmissionMeta {
 // NOTE: add tags later if we want to show the tags but rn no
 export type FeaturedSubmission = Pick<
     Submission,
-    "title" | "excerpt" | "slug" | "images" | "author" | "category"
+    "title" | "excerpt" | "slug" | "images" | "author" | "category" | "tags"
 >;
 
 export type LatestSubmissions = Pick<
@@ -62,6 +62,7 @@ export type LatestSubmissions = Pick<
     | "author"
     | "category"
     | "submittedDate"
+    | "tags"
 >;
 
 export type SanityImageSource =
@@ -70,3 +71,18 @@ export type SanityImageSource =
     | SanityAsset
     | SanityImageObject
     | SanityImageWithAssetStub;
+
+export interface Comment {
+    _id: string;
+    email: string;
+    name: string;
+    content: string;
+    createdAt: string;
+    parent: { _ref: string; _type: "reference" } | null;
+    submission: { _ref: string; _type: "reference" };
+}
+
+export interface NestedComment extends Omit<Comment, "parent"> {
+    parentId: string | null; // easier to work with
+    children: NestedComment[];
+}

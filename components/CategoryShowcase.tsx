@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import team_information from "@/team_information.json";
 
 const categories = [
     {
@@ -18,7 +19,7 @@ const categories = [
     },
     {
         id: "/gallery",
-        title: "Gallery",
+        title: "GALLERY",
         description:
             "Visual storytelling, digital art, and creative multimedia projects",
         image: "https://images.unsplash.com/photo-1613563967994-faa3a4e08455?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcnQlMjBkZXNpZ24lMjBjcmVhdGl2ZSUyMHN0dWRpb3xlbnwxfHx8fDE3NTU2OTIyNDl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",

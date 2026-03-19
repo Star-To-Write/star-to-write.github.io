@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/Button";
 import Image from "next/image";
 import { Submission } from "@/lib/types";
 import Link from "next/link";
+import Tags from "./ui/Tags";
 
 export function SubmissionCard({
     // id,
@@ -74,6 +75,7 @@ export function SubmissionCard({
                 >
                     By {author.anonymous ? "An Anonymous Writer" : author.name}
                 </p>
+                <Tags tags={[{ name: "abc" }, { name: "def" }]} />
 
                 <p
                     className="text-sm text-muted-foreground leading-relaxed line-clamp-3 mb-4"

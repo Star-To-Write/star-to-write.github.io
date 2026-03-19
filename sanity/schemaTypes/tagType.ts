@@ -12,5 +12,10 @@ export const tagType = defineType({
             type: "string",
             validation: (Rule) => Rule.required(),
         }),
+        defineField({
+            name: "category",
+            type: "reference",
+            to: [{ type: "category" }],
+        }),
     ],
 });

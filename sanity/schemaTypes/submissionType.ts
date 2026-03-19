@@ -133,9 +133,32 @@ export const submissionType = defineType({
         defineField({
             name: "tags",
             type: "array",
-            of: [{ type: "reference", to: [{ type: "tag" }] }],
-        }),
+            of: [
+                {
+                    type: "reference",
+                    to: [{ type: "tag" }],
+                    options: {
+                        filter: ({ document }) => {
+                            const categoryRef = (document as any)?.category
+                                ?._ref;
 
+                            if (!categoryRef) {
+                                return {
+                                    filter: "_type == 'tag' && false",
+                                };
+                            }
+
+                            return {
+                                filter: "category._ref == $categoryId",
+                                params: {
+                                    categoryId: categoryRef,
+                                },
+                            };
+                        },
+                    },
+                },
+            ],
+        }),
         // submission date
         defineField({
             name: "submittedDate",
