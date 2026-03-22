@@ -1,19 +1,26 @@
+"use client";
+
 // components/SubmissionComments.tsx
-import React from "react";
+import { useState } from "react";
 import { NestedComment } from "@/lib/types";
+import LeaveAComment from "@/components/LeaveAComment";
 
 interface SubmissionCommentsProps {
     comments: NestedComment[];
+    submissionId: string;
 }
 
-const CommentCard: React.FC<{ comment: NestedComment; level?: number }> = ({
-    comment,
-    level = 0,
-}) => {
+const CommentCard: React.FC<{
+    comment: NestedComment;
+    level?: number;
+    submissionId: string;
+}> = ({ comment, level = 0, submissionId }) => {
+    const [replying, setReplying] = useState(false);
+
     return (
         <div
-            style={{ marginLeft: level * 20 }}
-            className="pl-12 text-md text-primary mb-2"
+            style={{ marginLeft: level * 16 }}
+            className="text-md text-primary mb-1.5"
         >
             <div className="">
                 <span className="font-semibold font-inter">{comment.name}</span>
@@ -30,7 +37,29 @@ const CommentCard: React.FC<{ comment: NestedComment; level?: number }> = ({
                     })}
                 </span>
             </div>
-            <p className="ml-2">{comment.content ?? "[No content]"}</p>
+            <p className="ml-2 text-foreground">
+                {comment.content ?? "[No content]"}
+            </p>
+
+            <div className="ml-2 mt-1">
+                <button
+                    type="button"
+                    className="text-xs text-primary hover:underline"
+                    onClick={() => setReplying(!replying)}
+                >
+                    {replying ? "Cancel" : "Reply"}
+                </button>
+            </div>
+
+            {replying && (
+                <div className="mt-1 ml-3">
+                    <LeaveAComment
+                        submissionId={submissionId}
+                        parentId={comment._id}
+                        onCommentSent={() => setReplying(false)}
+                    />
+                </div>
+            )}
 
             {comment.children.length > 0 &&
                 comment.children.map((child) => (
@@ -38,6 +67,7 @@ const CommentCard: React.FC<{ comment: NestedComment; level?: number }> = ({
                         key={child._id}
                         comment={child}
                         level={level + 1}
+                        submissionId={submissionId}
                     />
                 ))}
         </div>
@@ -46,15 +76,24 @@ const CommentCard: React.FC<{ comment: NestedComment; level?: number }> = ({
 
 export default function SubmissionComments({
     comments,
+    submissionId,
 }: SubmissionCommentsProps) {
     if (!comments || comments.length === 0) {
-        return <p className="text-gray-500">No comments yet.</p>;
+        return (
+            <p className="text-gray-500 text-center mb-2">
+                No comments yet. How about you be a Star to Comment?
+            </p>
+        );
     }
 
     return (
-        <div className="space-y-2">
+        <div className="space-y-0.5 mb-2">
             {comments.map((comment) => (
-                <CommentCard key={comment._id} comment={comment} />
+                <CommentCard
+                    key={comment._id}
+                    comment={comment}
+                    submissionId={submissionId}
+                />
             ))}
         </div>
     );

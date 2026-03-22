@@ -1,5 +1,5 @@
 // import { useState } from "react";
-import { Share2, Eye } from "lucide-react";
+import { Share2, Eye, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import Image from "next/image";
 import { Submission } from "@/lib/types";
@@ -7,7 +7,6 @@ import Link from "next/link";
 import Tags from "./ui/Tags";
 
 export function SubmissionCard({
-    // id,
     title,
     author,
     category,
@@ -15,6 +14,8 @@ export function SubmissionCard({
     excerpt,
     images,
     submittedDate,
+    stats,
+    tags,
 }: Submission) {
     const handleShare = () => {
         // Mock share functionality
@@ -58,14 +59,21 @@ export function SubmissionCard({
                     </span>
                     <div className="flex items-center gap-1 text-xs text-muted-foreground">
                         <Eye size={12} />
-                        <span>67</span>
+                        <span>{stats?.views ?? 0}</span>
+                        <MessageCircle size={12} className="ml-2" />
+                        <span>{stats?.comments ?? 0}</span>
                     </div>
+                </div>
+
+                <div className="mb-3">
+                    {tags && tags.length > 0 && <Tags tags={tags} />}
                 </div>
 
                 <h3
                     className="text-lg mb-2 text-foreground group-hover:text-primary transition-colors line-clamp-2"
                     style={{ fontFamily: "Georgia, serif" }}
                 >
+                    ``
                     {title}
                 </h3>
 
@@ -75,10 +83,9 @@ export function SubmissionCard({
                 >
                     By {author.anonymous ? "An Anonymous Writer" : author.name}
                 </p>
-                <Tags tags={[{ name: "abc" }, { name: "def" }]} />
 
                 <p
-                    className="text-sm text-muted-foreground leading-relaxed line-clamp-3 mb-4"
+                    className="text-sm text-muted-foreground leading-relaxed line-clamp-3 my-4"
                     style={{ fontFamily: "Inter, sans-serif" }}
                 >
                     {excerpt}
@@ -122,7 +129,9 @@ export function SubmissionCard({
                         style={{ fontFamily: "Inter, sans-serif" }}
                         asChild
                     >
-                        <Link href={`${category.slug}/${slug}`}>Read More</Link>
+                        <Link href={`/${category.slug}/${slug}`}>
+                            Read More
+                        </Link>
                     </Button>
                 </div>
             </div>

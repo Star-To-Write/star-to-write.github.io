@@ -3,12 +3,17 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
     images: {
         remotePatterns: [
-            new URL("https://cdn.sanity.io/images/0oal6j98/production/**"),
             {
                 protocol: "https",
                 hostname: "images.unsplash.com",
                 port: "",
                 pathname: "/**",
+            },
+            {
+                protocol: "https",
+                hostname: "cdn.sanity.io",
+                port: "",
+                pathname: "/images/0oal6j98/production/**",
             },
         ],
     },

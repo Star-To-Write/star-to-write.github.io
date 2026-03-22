@@ -139,6 +139,7 @@ export const submissionType = defineType({
                     to: [{ type: "tag" }],
                     options: {
                         filter: ({ document }) => {
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
                             const categoryRef = (document as any)?.category
                                 ?._ref;
 

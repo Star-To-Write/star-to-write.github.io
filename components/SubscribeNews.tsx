@@ -5,11 +5,12 @@ import { Input } from "@/components/ui/Input";
 
 export function SubscribeNews() {
     const [email, setEmail] = useState("");
-    const [isSubscribed, setIsSubscribed] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [isSubscribed, setIsSubscribed] = useState(false);
 
     const handleSubscribe = async (e: React.FormEvent) => {
         e.preventDefault();
+        setIsLoading(true);
         if (email) {
             try {
                 const res = await fetch("/api/subscribe", {
@@ -29,6 +30,7 @@ export function SubscribeNews() {
                 console.error("Server error:", err);
             }
         }
+        setIsLoading(false);
     };
 
     if (isSubscribed) {

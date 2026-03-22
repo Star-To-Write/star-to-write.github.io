@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 import {
-//    ShoppingCart,
-//    Heart,
-//    MessageCircle,
-//    Share2,
+    //    ShoppingCart,
+    //    Heart,
+    MessageCircle,
+    Share2,
     ExternalLink,
-//    Users,
+    //    Users,
     Star,
 } from "lucide-react";
 import { DontGo } from "@/components/DontGo";

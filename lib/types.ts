@@ -17,7 +17,15 @@ export type Category = {
 
 export type Author = {
     name?: string;
+    bio: string;
+    socials: SocialMedia[];
     anonymous: boolean;
+};
+
+export type SocialMedia = {
+    _key: string;
+    platform: "instagram" | "twitter" | "tiktok" | "youtube";
+    username: string;
 };
 
 export interface SanityImage {
@@ -40,12 +48,39 @@ export interface Submission {
     images: SanityImage[];
     tags?: Tag[];
     category: Category;
+    stats?: {
+        likes?: number;
+        views?: number;
+        shares?: number;
+        comments?: number;
+    };
 }
 
 export interface SubmissionMeta {
     status: "Draft" | "Submitted" | "Published";
     featured: boolean;
 }
+
+export type Member = {
+    emoji: string;
+    name: string;
+    role: string;
+    bio: string;
+};
+
+export type Department = {
+    name: string;
+    description: string;
+    members: Member[];
+};
+
+export type Founder = {
+    image_url: string;
+    name: string;
+    role: string;
+    caption: string;
+    intro: string;
+};
 
 // NOTE: add tags later if we want to show the tags but rn no
 export type FeaturedSubmission = Pick<

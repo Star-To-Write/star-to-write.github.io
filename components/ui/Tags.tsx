@@ -10,7 +10,7 @@ export default function Tags({
     className?: string;
 }) {
     return (
-        <div className={`${className} flex gap-1` || "flex gap-1"}>
+        <div className={`${className || ""} flex gap-1`}>
             {tags.map((tag) => (
                 <div
                     className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-[#d4af37]/30 text-primary border border-primary/30 font-georgia`}

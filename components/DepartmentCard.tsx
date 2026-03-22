@@ -1,4 +1,6 @@
-export function DepartmentCard({ department }: any) {
+import { Department } from "@/lib/types";
+
+export function DepartmentCard({ department }: { department: Department }) {
     return (
         <div className="bg-card/40 backdrop-blur-sm border border-border rounded-xl p-8 lg:p-12 mb-12">
             <div className="text-center mb-8">
@@ -15,7 +17,7 @@ export function DepartmentCard({ department }: any) {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {department.members.map((member: any, index: number) => (
+                {department.members.map((member, index: number) => (
                     <div
                         key={index}
                         className="bg-gradient-to-br from-[#d4af37]/5 to-transparent rounded-xl p-6 border border-[#d4af37]/10 text-center hover:bg-[#d4af37]/10 transition-all duration-300"

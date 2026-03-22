@@ -36,6 +36,7 @@ export default defineConfig([
                 { extensions: [".js", ".jsx", ".ts", ".tsx"] },
             ], //should add ".ts" if typescript project
             "react/no-unescaped-entities": "off", // SO SORRY!,
+            "react/prop-types": "off", // TypeScript handles prop validation
             ...nextPlugin.configs.recommended.rules,
         },
 

@@ -1,6 +1,7 @@
 import Image from "next/image";
+import { Founder } from "@/lib/types";
 
-export function FounderCard({ founder }: any) {
+export function FounderCard({ founder }: { founder: Founder }) {
     return (
         <div className="relative bg-gradient-to-br from-card/40 via-card/50 to-card/30 backdrop-blur-sm border border-border rounded-3xl p-8 lg:p-12 mb-12 overflow-hidden">
             {/* Floating celestial elements */}

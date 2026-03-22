@@ -21,6 +21,12 @@ export const authorType = defineType({
         }),
 
         defineField({
+            name: "bio",
+            type: "string",
+            title: "Author Bio",
+        }),
+
+        defineField({
             name: "socials",
             title: "Social Media",
             type: "array",

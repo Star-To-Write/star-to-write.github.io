@@ -1,5 +1,5 @@
 import { client } from "@/sanity/lib/client";
-// import Link from "next/link";
+import Link from "next/link";
 import Image from "next/image";
 import { type FeaturedSubmission } from "@/lib/types";
 import Tags from "./ui/Tags";

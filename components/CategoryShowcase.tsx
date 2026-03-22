@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import team_information from "@/team_information.json";
 
 const categories = [
     {
