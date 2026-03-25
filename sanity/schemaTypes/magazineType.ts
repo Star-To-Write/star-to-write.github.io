@@ -15,6 +15,14 @@ export const magazineType = defineType({
             validation: (Rule) => Rule.required(),
         }),
 
+                // slug
+        defineField({
+            name: "slug",
+            type: "slug",
+            options: { source: "title" },
+            validation: (Rule) => Rule.required(),
+        }),
+
         defineField({
             title: "Issue No.",
             name: "issue",
@@ -71,6 +79,13 @@ export const magazineType = defineType({
         // link on substack or heyzine or whatever
         defineField({
             name: "link",
+            type: "string",
+            validation: (Rule) => Rule.required(),
+        }),
+
+        defineField({
+            title: "Description",
+            name: "description",
             type: "text",
             validation: (Rule) => Rule.required(),
         }),

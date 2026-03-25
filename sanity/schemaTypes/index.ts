@@ -5,6 +5,7 @@ import { categoryType } from "./categoryType";
 import { commentType } from "./commentType";
 import { submissionType } from "./submissionType";
 import { tagType } from "./tagType";
+import { magazineType } from "./magazineType"
 
 export const schema: { types: SchemaTypeDefinition[] } = {
     types: [
@@ -14,5 +15,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         authorType,
         tagType,
         commentType,
+        magazineType
     ],
 };
