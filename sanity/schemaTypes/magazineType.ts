@@ -1,11 +1,11 @@
-import { DocumentTextIcon } from "@sanity/icons";
+import { BookIcon } from "@sanity/icons";
 import { defineType, defineField } from "sanity";
 
 export const magazineType = defineType({
     name: "magazine",
     title: "Magazine",
     type: "document",
-    icon: DocumentTextIcon,
+    icon: BookIcon,
 
     fields: [
         // title
@@ -15,7 +15,7 @@ export const magazineType = defineType({
             validation: (Rule) => Rule.required(),
         }),
 
-                // slug
+        // slug
         defineField({
             name: "slug",
             type: "slug",
@@ -40,10 +40,11 @@ export const magazineType = defineType({
                         const client = getClient({ apiVersion: "2024-01-01" });
                         const id = document._id.replace(/^drafts\./, "");
 
-                        const query = `count(*[_type == $type && issue == $issue && !(_id in [$id, $draftId])])`;
+                        const query = `count(*[_type == $type && issue == $issue && issueType == $issueType && !(_id in [$id, $draftId])])`;
                         const params = {
                             type: document._type,
                             issue,
+                            issueType: document.issueType,
                             id,
                             draftId: `drafts.${id}`,
                         };
@@ -54,6 +55,20 @@ export const magazineType = defineType({
                             ? true
                             : "This issue number already exists!";
                     }),
+        }),
+
+        defineField({
+            name: "issueType",
+            title: "Issue Type",
+            type: "string",
+            options: {
+                list: [
+                    { title: "Regular Issue", value: "regular" },
+                    { title: "Mini Issue", value: "mini" },
+                ],
+            },
+            initialValue: "regular",
+            validation: (Rule) => Rule.required(),
         }),
 
         defineField({

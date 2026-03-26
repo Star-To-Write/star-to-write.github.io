@@ -73,7 +73,6 @@ export function SubmissionCard({
                     className="text-lg mb-2 text-foreground group-hover:text-primary transition-colors line-clamp-2"
                     style={{ fontFamily: "Georgia, serif" }}
                 >
-                    ``
                     {title}
                 </h3>
 

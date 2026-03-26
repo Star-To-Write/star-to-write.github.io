@@ -41,7 +41,7 @@ export async function FeaturedArticle() {
                     UNLOCKED:
                 </div>
                 <div className="grid lg:grid-cols-2 gap-12 items-stretch">
-                    <div>
+                    <div className="h-full flex flex-col lg:flex-row">
                         {featuredSubmission.tags && (
                             <Tags
                                 tags={featuredSubmission.tags}
@@ -95,17 +95,17 @@ export async function FeaturedArticle() {
                             </Button>
                         </div>
                     </div>
-                    <div className="relative">
-                        <div className="aspect-[3/4] rounded-xl overflow-hidden bg-gradient-to-br from-[#d4af37]/20 to-transparent">
+                    <div className="h-full relative">
+                        <div className="h-full rounded-[40px] overflow-hidden">
                             {imageUrl && (
                                 <Image
                                     src={imageUrl}
                                     alt={imageAlt}
                                     fill
-                                    className="w-full h-full object-cover opacity-80"
+                                    className="w-full h-full object-contain opacity-80"
                                 />
                             )}
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#0b132b]/60 to-transparent" />
+                            {/* <div className="absolute inset-0 bg-gradient-to-t from-[#0b132b]/60 to-transparent" /> */}
                         </div>
                     </div>
                 </div>

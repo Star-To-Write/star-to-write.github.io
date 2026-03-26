@@ -7,6 +7,7 @@ import { SubscribeNews } from "@/components/SubscribeNews";
 import { DontGo } from "@/components/DontGo";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
+import Link from "next/link";
 import type { Submission } from "@/lib/types";
 
 type SubmissionWithStats = Submission & {
@@ -22,6 +23,7 @@ type Props = {
     articles: SubmissionWithStats[];
     categoryTitle?: string;
     categoryDescription?: string;
+    breadcrumbPath?: string;
 };
 
 export default function JournalismClient({
@@ -29,6 +31,7 @@ export default function JournalismClient({
     articles,
     categoryTitle = "Star to Write Journalistic Media",
     categoryDescription = "In-depth reporting and analysis from young international journalists covering the stories that matter to our generation.",
+    breadcrumbPath,
 }: Props) {
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("All");
@@ -51,6 +54,44 @@ export default function JournalismClient({
     return (
         <>
             <div className="text-foreground max-w-7xl mx-auto px-6 lg:px-12 py-12">
+                {/* Breadcrumbs */}
+                {breadcrumbPath && (
+                    <div className="mb-6">
+                        <nav className="flex items-center space-x-2 text-sm text-muted-foreground">
+                            <Link href="/" className="hover:text-primary">
+                                Home
+                            </Link>
+                            <span>/</span>
+                            <Link
+                                href="/category"
+                                className="hover:text-primary"
+                            >
+                                Categories
+                            </Link>
+                            {breadcrumbPath.split("/").map((segment, index) => {
+                                const path = breadcrumbPath
+                                    .split("/")
+                                    .slice(0, index + 1)
+                                    .join("/");
+                                return (
+                                    <span
+                                        key={path}
+                                        className="flex items-center space-x-2"
+                                    >
+                                        <span>/</span>
+                                        <Link
+                                            href={`/category/${path}`}
+                                            className="hover:text-primary capitalize"
+                                        >
+                                            {segment.replace(/-/g, " ")}
+                                        </Link>
+                                    </span>
+                                );
+                            })}
+                        </nav>
+                    </div>
+                )}
+
                 {/* Header */}
                 <div className="text-center mb-8">
                     <h1 className="text-4xl mb-4 text-primary">

@@ -10,7 +10,7 @@ export default function Navbar() {
 
     const navItems = [
         { name: "Home", href: "/" },
-        { name: "Submissions", href: "/submissions" },
+        { name: "All Submissions", href: "/submissions" },
         { name: "Magazine", href: "/magazine" },
         { name: "Gallery", href: "/gallery" },
         { name: "Journalism", href: "/journalism" },
