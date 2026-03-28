@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -16,6 +16,19 @@ export default function SubmissionCarousel({
     images: ImageType[];
 }) {
     const [current, setCurrent] = useState(0);
+
+    useEffect(() => {
+        if (!images || images.length === 0) return;
+
+        images.forEach((image) => {
+            const optimizedUrl =
+                "/_next/image?url=" +
+                encodeURIComponent(image.asset.url) +
+                "&w=1920&q=75";
+            const img = new window.Image();
+            img.src = optimizedUrl;
+        });
+    }, [images]);
 
     if (!images || images.length === 0) return null;
 
