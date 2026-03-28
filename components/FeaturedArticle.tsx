@@ -40,8 +40,9 @@ export async function FeaturedArticle() {
                 >
                     UNLOCKED:
                 </div>
+                {/* BUG: This card does not show the image on mobile or tablet. */}
                 <div className="grid lg:grid-cols-2 gap-12 items-stretch">
-                    <div className="h-full flex flex-col lg:flex-row">
+                    <div className="h-full flex flex-col">
                         {featuredSubmission.tags && (
                             <Tags
                                 tags={featuredSubmission.tags}
@@ -102,7 +103,7 @@ export async function FeaturedArticle() {
                                     src={imageUrl}
                                     alt={imageAlt}
                                     fill
-                                    className="w-full h-full object-contain opacity-80"
+                                    className="h-full object-contain opacity-80"
                                 />
                             )}
                             {/* <div className="absolute inset-0 bg-gradient-to-t from-[#0b132b]/60 to-transparent" /> */}

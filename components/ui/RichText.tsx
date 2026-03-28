@@ -1,5 +1,5 @@
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
-import { urlFor } from "@/lib/utils";
+import { urlFor } from "@/lib/sanityUtils";
 import type { RichText } from "@/lib/types";
 import Image from "next/image";
 
@@ -9,7 +9,9 @@ const components: PortableTextComponents = {
             <p className="mb-4 leading-relaxed">{children}</p>
         ),
         right: ({ children }) => <p className="mb-4 text-right">{children}</p>,
-	center: ({ children }) => <p className="mb-4 text-center">{children}</p>,
+        center: ({ children }) => (
+            <p className="mb-4 text-center">{children}</p>
+        ),
     },
 
     types: {

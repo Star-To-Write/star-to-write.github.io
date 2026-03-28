@@ -56,6 +56,21 @@ export interface Submission {
     };
 }
 
+export interface GalleryItem {
+    id: string;
+    slug: string;
+    title: string;
+    author: Author;
+    description: string;
+    images: SanityImage[];
+    category: string;
+    likes: number;
+    comments: number;
+    views: number;
+    featured: boolean;
+    isLiked: boolean;
+}
+
 export interface SubmissionMeta {
     status: "Draft" | "Submitted" | "Published";
     featured: boolean;
@@ -109,12 +124,13 @@ export type SanityImageSource =
 
 export interface Comment {
     _id: string;
-    email: string;
+    email?: string;
     name: string;
     content: string;
     createdAt: string;
-    parent: { _ref: string; _type: "reference" } | null;
-    submission: { _ref: string; _type: "reference" };
+    parent?: { _ref: string; _type: "reference" } | null;
+    submission?: { _ref: string; _type: "reference" };
+    gallery?: { _ref: string; _type: "reference" };
 }
 
 export interface NestedComment extends Omit<Comment, "parent"> {

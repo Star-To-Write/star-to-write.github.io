@@ -7,14 +7,18 @@ import LeaveAComment from "@/components/LeaveAComment";
 
 interface SubmissionCommentsProps {
     comments: NestedComment[];
-    submissionId: string;
+    submissionId?: string;
+    galleryId?: string;
+    onCommentSent?: () => void;
 }
 
 const CommentCard: React.FC<{
     comment: NestedComment;
     level?: number;
-    submissionId: string;
-}> = ({ comment, level = 0, submissionId }) => {
+    submissionId?: string;
+    galleryId?: string;
+    onCommentSent?: () => void;
+}> = ({ comment, level = 0, submissionId, galleryId, onCommentSent }) => {
     const [replying, setReplying] = useState(false);
 
     return (
@@ -37,7 +41,7 @@ const CommentCard: React.FC<{
                     })}
                 </span>
             </div>
-            <p className="ml-2 text-foreground">
+            <p className="ml-2 text-foreground break-words whitespace-pre-wrap">
                 {comment.content ?? "[No content]"}
             </p>
 
@@ -55,8 +59,14 @@ const CommentCard: React.FC<{
                 <div className="mt-1 ml-3">
                     <LeaveAComment
                         submissionId={submissionId}
+                        galleryId={galleryId}
                         parentId={comment._id}
-                        onCommentSent={() => setReplying(false)}
+                        onCommentSent={() => {
+                            setReplying(false);
+                            if (onCommentSent) {
+                                onCommentSent();
+                            }
+                        }}
                     />
                 </div>
             )}
@@ -68,6 +78,8 @@ const CommentCard: React.FC<{
                         comment={child}
                         level={level + 1}
                         submissionId={submissionId}
+                        galleryId={galleryId}
+                        onCommentSent={onCommentSent}
                     />
                 ))}
         </div>

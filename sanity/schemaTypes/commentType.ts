@@ -14,7 +14,26 @@ export const commentType = defineType({
             title: "Submission",
             type: "reference",
             to: [{ type: "submission" }],
-            validation: (Rule) => Rule.required(),
+            validation: (Rule) =>
+                Rule.custom((value, context) =>
+                    value || context.document?.gallery
+                        ? true
+                        : "Submission or gallery is required",
+                ),
+        }),
+
+        // Gallery item this comment belongs to
+        defineField({
+            name: "gallery",
+            title: "Gallery",
+            type: "reference",
+            to: [{ type: "gallery" }],
+            validation: (Rule) =>
+                Rule.custom((value, context) =>
+                    value || context.document?.submission
+                        ? true
+                        : "Submission or gallery is required",
+                ),
         }),
 
         // Parent comment (null = top-level comment)

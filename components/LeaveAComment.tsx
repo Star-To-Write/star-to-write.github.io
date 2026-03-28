@@ -5,13 +5,15 @@ import { useRouter } from "next/navigation";
 import { Button } from "./ui/Button";
 
 interface LeaveACommentProps {
-    submissionId: string;
+    submissionId?: string;
+    galleryId?: string;
     parentId?: string;
     onCommentSent?: () => void;
 }
 
 export default function LeaveAComment({
     submissionId,
+    galleryId,
     parentId,
     onCommentSent,
 }: LeaveACommentProps) {
@@ -21,13 +23,13 @@ export default function LeaveAComment({
     const [comment, setComment] = useState("");
     const [isCommentSent, setIsCommentSent] = useState(false);
 
-    // add some parent stuff
+    const targetId = submissionId ?? galleryId;
 
     const handleComment = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!submissionId) {
-            console.error("No submissionId to attach comment");
+        if (!targetId) {
+            console.error("No submissionId or galleryId to attach comment");
             return;
         }
 
@@ -37,6 +39,7 @@ export default function LeaveAComment({
                     method: "POST",
                     body: JSON.stringify({
                         submissionId,
+                        galleryId,
                         parentId,
                         name: name.trim(),
                         email: email.trim() || null,
@@ -59,10 +62,9 @@ export default function LeaveAComment({
 
                 if (onCommentSent) {
                     onCommentSent();
+                } else {
+                    router.refresh();
                 }
-
-                // refresh comments on page
-                router.refresh();
             } catch (err) {
                 console.error("Server error:", err);
             }
