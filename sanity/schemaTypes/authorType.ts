@@ -29,10 +29,10 @@ export const authorType = defineType({
         defineField({
             name: "socials",
             title: "Social Media",
-            type: "array",
+            type: "array" as const,
             of: [
                 {
-                    type: "object",
+                    type: "object" as const,
                     fields: [
                         {
                             name: "platform",
@@ -71,7 +71,7 @@ export const authorType = defineType({
 
         defineField({
             name: "anonymous",
-            type: "boolean",
+            type: "boolean" as const,
             title: "Publish Anonymously",
             initialValue: false,
         }),

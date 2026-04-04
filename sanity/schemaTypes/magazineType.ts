@@ -12,49 +12,70 @@ export const magazineType = defineType({
         defineField({
             name: "title",
             type: "string",
-            validation: (Rule) => Rule.required(),
+            validation: (Rule) =>
+                Rule.custom((title, context) => {
+                    const { document } = context;
+                    if (document?.status === "Published" && !title) {
+                        return "Title is required for published magazines";
+                    }
+                    return true;
+                }),
         }),
 
         // slug
         defineField({
             name: "slug",
-            type: "slug",
+            type: "slug" as const,
             options: { source: "title" },
-            validation: (Rule) => Rule.required(),
+            validation: (Rule) =>
+                Rule.custom((slug, context) => {
+                    const { document } = context;
+                    if (document?.status === "Published" && !slug) {
+                        return "Slug is required for published magazines";
+                    }
+                    return true;
+                }),
         }),
 
         defineField({
             title: "Issue No.",
             name: "issue",
-            type: "number",
+            type: "number" as const,
             validation: (Rule) =>
-                Rule.required()
-                    .min(1)
-                    .integer()
-                    .custom(async (issue, context) => {
-                        if (!issue) return true; // Allow empty values (use .required() separately if needed)
+                Rule.custom(async (issue, context) => {
+                    const { document } = context;
 
-                        const { document, getClient } = context;
+                    // If coming soon, no validation required
+                    if (document?.status === "Coming Soon") {
+                        return true;
+                    }
 
-                        if (!document) return "Unable to get document";
-                        const client = getClient({ apiVersion: "2024-01-01" });
-                        const id = document._id.replace(/^drafts\./, "");
+                    // For published magazines, issue is required
+                    if (!issue) {
+                        return "Issue number is required for published magazines";
+                    }
 
-                        const query = `count(*[_type == $type && issue == $issue && issueType == $issueType && !(_id in [$id, $draftId])])`;
-                        const params = {
-                            type: document._type,
-                            issue,
-                            issueType: document.issueType,
-                            id,
-                            draftId: `drafts.${id}`,
-                        };
+                    // Check for uniqueness
+                    const { getClient } = context;
+                    if (!document) return "Unable to get document";
+                    const client = getClient({ apiVersion: "2024-01-01" });
+                    const id = document._id.replace(/^drafts\./, "");
 
-                        const count = await client.fetch(query, params);
+                    const query = `count(*[_type == $type && issue == $issue && issueType == $issueType && !(_id in [$id, $draftId])])`;
+                    const params = {
+                        type: document._type,
+                        issue,
+                        issueType: document.issueType,
+                        id,
+                        draftId: `drafts.${id}`,
+                    };
 
-                        return count === 0
-                            ? true
-                            : "This issue number already exists!";
-                    }),
+                    const count = await client.fetch(query, params);
+
+                    return count === 0
+                        ? true
+                        : "This issue number already exists!";
+                }),
         }),
 
         defineField({
@@ -68,13 +89,20 @@ export const magazineType = defineType({
                 ],
             },
             initialValue: "regular",
-            validation: (Rule) => Rule.required(),
+            validation: (Rule) =>
+                Rule.custom((issueType, context) => {
+                    const { document } = context;
+                    if (document?.status === "Published" && !issueType) {
+                        return "Issue type is required for published magazines";
+                    }
+                    return true;
+                }),
         }),
 
         defineField({
             name: "coverImage",
             title: "Cover Image",
-            type: "image",
+            type: "image" as const,
             options: {
                 hotspot: true, // enables smart cropping
             },
@@ -95,21 +123,35 @@ export const magazineType = defineType({
         defineField({
             name: "link",
             type: "string",
-            validation: (Rule) => Rule.required(),
+            validation: (Rule) =>
+                Rule.custom((link, context) => {
+                    const { document } = context;
+                    if (document?.status === "Published" && !link) {
+                        return "Link is required for published magazines";
+                    }
+                    return true;
+                }),
         }),
 
         defineField({
             title: "Description",
             name: "description",
-            type: "text",
-            validation: (Rule) => Rule.required(),
+            type: "text" as const,
+            validation: (Rule) =>
+                Rule.custom((description, context) => {
+                    const { document } = context;
+                    if (document?.status === "Published" && !description) {
+                        return "Description is required for published magazines";
+                    }
+                    return true;
+                }),
         }),
 
         // tags
         defineField({
             title: "Tags",
             name: "tags",
-            type: "array",
+            type: "array" as const,
             of: [{ type: "string" }],
         }),
 
@@ -125,7 +167,7 @@ export const magazineType = defineType({
 
         // defineField({
         //     name: "featured",
-        //     type: "boolean",
+        //     type: "boolean" as const,
         //     title: "Feature on homepage",
         //     initialValue: false,
         // }),

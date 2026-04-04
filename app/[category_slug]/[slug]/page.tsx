@@ -8,6 +8,7 @@ import { client } from "@/sanity/lib/client";
 import LeaveAComment from "@/components/LeaveAComment";
 import SubmissionLike from "@/components/submission/SubmissionLike";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 export default async function Page({
     params,
@@ -38,7 +39,7 @@ export default async function Page({
     });
 
     if (!submission) {
-        return <div>Submission not found</div>;
+        notFound();
     }
 
     const commentQuery = `

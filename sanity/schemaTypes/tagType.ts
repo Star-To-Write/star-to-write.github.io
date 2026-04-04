@@ -14,8 +14,8 @@ export const tagType = defineType({
         }),
         defineField({
             name: "category",
-            type: "reference",
-            to: [{ type: "category" }],
+            type: "reference" as const,
+            to: [{ type: "category" as const }],
         }),
     ],
 });

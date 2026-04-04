@@ -12,8 +12,8 @@ export const commentType = defineType({
         defineField({
             name: "submission",
             title: "Submission",
-            type: "reference",
-            to: [{ type: "submission" }],
+            type: "reference" as const,
+            to: [{ type: "submission" as const }],
             validation: (Rule) =>
                 Rule.custom((value, context) =>
                     value || context.document?.gallery
@@ -26,8 +26,8 @@ export const commentType = defineType({
         defineField({
             name: "gallery",
             title: "Gallery",
-            type: "reference",
-            to: [{ type: "gallery" }],
+            type: "reference" as const,
+            to: [{ type: "gallery" as const }],
             validation: (Rule) =>
                 Rule.custom((value, context) =>
                     value || context.document?.submission
@@ -40,8 +40,8 @@ export const commentType = defineType({
         defineField({
             name: "parent",
             title: "Parent Comment",
-            type: "reference",
-            to: [{ type: "comment" }],
+            type: "reference" as const,
+            to: [{ type: "comment" as const }],
         }),
 
         // Public display name
@@ -63,7 +63,7 @@ export const commentType = defineType({
         defineField({
             name: "content",
             title: "Comment",
-            type: "text",
+            type: "text" as const,
             rows: 4,
             validation: (Rule) => Rule.required().min(5),
         }),
@@ -71,7 +71,7 @@ export const commentType = defineType({
         defineField({
             name: "createdAt",
             title: "Created At",
-            type: "datetime",
+            type: "datetime" as const,
             initialValue: () => new Date().toISOString(),
         }),
     ],

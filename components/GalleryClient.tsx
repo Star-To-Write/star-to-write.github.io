@@ -240,7 +240,7 @@ export default function GalleryClient({
 
     return (
         <>
-            <div className="text-center mb-6">
+            <div className="text-center my-6">
                 <h1
                     className="text-5xl mb-6 text-primary"
                     style={{ fontFamily: "Georgia, serif" }}

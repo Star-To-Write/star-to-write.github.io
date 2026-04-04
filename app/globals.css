@@ -123,6 +123,7 @@ body {
             transparent 50%
         );
 
+    font-family: var(--font-inter);
     font-size: var(--font-size);
     position: relative;
     min-height: 100vh;

@@ -17,7 +17,7 @@ export const submissionType = defineType({
 
         //     name: "coverImage",
         //     title: "Cover Image",
-        //     type: "image",
+        //     type: "image" as const,
         //     options: {
         //         hotspot: true, // enables smart cropping
         //     },
@@ -49,7 +49,7 @@ export const submissionType = defineType({
         // slug
         defineField({
             name: "slug",
-            type: "slug",
+            type: "slug" as const,
             options: { source: "title" },
             validation: (Rule) => Rule.required(),
         }),
@@ -57,23 +57,23 @@ export const submissionType = defineType({
         // author
         defineField({
             name: "author",
-            type: "reference",
-            to: [{ type: "author" }],
+            type: "reference" as const,
+            to: [{ type: "author" as const }],
             validation: (Rule) => Rule.required(),
         }),
 
         // excerpt
         defineField({
             name: "excerpt",
-            type: "text",
+            type: "text" as const,
             rows: 3,
         }),
 
         // category
         defineField({
             name: "category",
-            type: "reference",
-            to: [{ type: "category" }],
+            type: "reference" as const,
+            to: [{ type: "category" as const }],
             validation: (Rule) => Rule.required(),
         }),
 
@@ -81,10 +81,10 @@ export const submissionType = defineType({
         defineField({
             name: "images",
             title: "Image Version",
-            type: "array",
+            type: "array" as const,
             of: [
                 {
-                    type: "image",
+                    type: "image" as const,
                     options: {
                         hotspot: true,
                     },
@@ -96,10 +96,10 @@ export const submissionType = defineType({
         defineField({
             name: "content",
             title: "Content",
-            type: "array",
+            type: "array" as const,
             of: [
                 {
-                    type: "block",
+                    type: "block" as const,
                     styles: [
                         { title: "Normal", value: "normal" },
                         { title: "Center", value: "center" },
@@ -107,7 +107,7 @@ export const submissionType = defineType({
                     ],
                 },
                 {
-                    type: "image",
+                    type: "image" as const,
                     options: {
                         hotspot: true,
                     },
@@ -132,11 +132,11 @@ export const submissionType = defineType({
         // tags (replaces article_tags table)
         defineField({
             name: "tags",
-            type: "array",
+            type: "array" as const,
             of: [
                 {
-                    type: "reference",
-                    to: [{ type: "tag" }],
+                    type: "reference" as const,
+                    to: [{ type: "tag" as const }],
                     options: {
                         filter: ({ document }) => {
                             // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -163,7 +163,7 @@ export const submissionType = defineType({
         // submission date
         defineField({
             name: "submittedDate",
-            type: "datetime",
+            type: "datetime" as const,
             initialValue: () => new Date().toISOString(),
         }),
 
@@ -185,7 +185,7 @@ export const submissionType = defineType({
 
         defineField({
             name: "featured",
-            type: "boolean",
+            type: "boolean" as const,
             title: "Feature on homepage",
             initialValue: false,
         }),

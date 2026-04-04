@@ -1,4 +1,5 @@
 import JournalismClient from "@/components/JournalismClient";
+import { notFound } from "next/navigation";
 import { sql } from "@/lib/db";
 import { Submission } from "@/lib/types";
 import { client } from "@/sanity/lib/client";
@@ -22,7 +23,7 @@ export default async function Page({
     );
 
     if (!category) {
-        return <div>Category not found</div>;
+        notFound();
     }
 
     // 🔹 Fetch Sanity data in parallel

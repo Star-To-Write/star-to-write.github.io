@@ -16,21 +16,21 @@ export const galleryType = defineType({
         defineField({
             name: "slug",
             title: "Slug",
-            type: "slug",
+            type: "slug" as const,
             options: { source: "title" },
             validation: (Rule) => Rule.required(),
         }),
         defineField({
             name: "author",
             title: "Author",
-            type: "reference",
-            to: [{ type: "author" }],
+            type: "reference" as const,
+            to: [{ type: "author" as const }],
             validation: (Rule) => Rule.required(),
         }),
         defineField({
             name: "description",
             title: "Description",
-            type: "text",
+            type: "text" as const,
             rows: 3,
         }),
         defineField({
@@ -56,10 +56,10 @@ export const galleryType = defineType({
         defineField({
             name: "images",
             title: "Images",
-            type: "array",
+            type: "array" as const,
             of: [
                 {
-                    type: "image",
+                    type: "image" as const,
                     options: {
                         hotspot: true,
                     },
@@ -81,7 +81,7 @@ export const galleryType = defineType({
         defineField({
             name: "featured",
             title: "Featured",
-            type: "boolean",
+            type: "boolean" as const,
             initialValue: false,
         }),
     ],

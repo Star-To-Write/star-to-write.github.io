@@ -1,6 +1,6 @@
 // scripts/trimLocationData.ts
 import fs from "fs";
-import data from "./data.ts";
+import data from "./data";
 
 console.log(data);
 const trimmed = data.map((country) => ({

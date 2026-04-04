@@ -9,6 +9,7 @@ import { client } from "@/sanity/lib/client";
 import LeaveAComment from "@/components/LeaveAComment";
 import SubmissionLike from "@/components/submission/SubmissionLike";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { sql } from "@/lib/db";
 
 export const revalidate = 60; // ⏱ cache for 1 min
@@ -31,7 +32,7 @@ export default async function Page({
     const { path = [] } = await params;
 
     if (path.length === 0) {
-        return <div>Category not found</div>;
+        notFound();
     }
 
     // Try to find the deepest category by traversing the path
@@ -66,7 +67,7 @@ export default async function Page({
                     fullCategoryPath,
                 );
             }
-            return <div>Category not found</div>;
+            notFound();
         }
 
         currentCategory = category;
@@ -148,6 +149,9 @@ async function renderCategory(category: Category, categoryPath: Category[]) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const statsMap = new Map(statsRows.map((row: any) => [row.sub_id, row]));
 
+    // Build breadcrumb path
+    const breadcrumbPath = categoryPath.map((cat) => cat.slug).join("/");
+
     // 🔹 Merge stats into articles
     const enrichedArticles = articles.map((article) => {
         const stats = statsMap.get(article._id);
@@ -163,9 +167,6 @@ async function renderCategory(category: Category, categoryPath: Category[]) {
             },
         };
     });
-
-    // Build breadcrumb path
-    const breadcrumbPath = categoryPath.map((cat) => cat.slug).join("/");
 
     // 🔹 Pass enriched data to client
     return (

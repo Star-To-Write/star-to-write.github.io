@@ -7,6 +7,7 @@ import { submissionType } from "./submissionType";
 import { tagType } from "./tagType";
 import { magazineType } from "./magazineType";
 import { galleryType } from "./galleryType";
+import { organizationType } from "./organizationType";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
     types: [
@@ -18,5 +19,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         commentType,
         magazineType,
         galleryType,
+        organizationType,
     ],
 };

@@ -24,7 +24,7 @@ export type Author = {
 
 export type SocialMedia = {
     _key: string;
-    platform: "instagram" | "twitter" | "tiktok" | "youtube";
+    platform: "instagram" | "twitter" | "tiktok" | "youtube" | "linkedin";
     username: string;
 };
 
@@ -136,4 +136,47 @@ export interface Comment {
 export interface NestedComment extends Omit<Comment, "parent"> {
     parentId: string | null; // easier to work with
     children: NestedComment[];
+}
+
+type Location = {
+    country: string;
+    state?: string;
+};
+
+type subjectArea =
+    | "Business/Entrepreneurship"
+    | "Economics/Finance"
+    | "Science and STEM"
+    | "Public Speaking/Debate"
+    | "Environment/Sustainability"
+    | "Community Service/Volunteering/Advocacy"
+    | "Literature"
+    | "Psychology"
+    | "Law/Politics/Current Affairs"
+    | "Journalism/Writing"
+    | "Graphic Design/Visual Arts"
+    | "Music/Performing Arts"
+    | "Content Creation/Digital Marketing"
+    | "Education/Mentorship"
+    | "Mental Health/Well-being"
+    | "Coding/App Development"
+    | "Robotics/AI"
+    | "Public Health Awareness/Medical Research"
+    | "Model United Nations (MUN)"
+    | "Visual Art, Writing & Photography"
+    | "Research & Publication";
+
+export interface Organization {
+    name: string;
+    slug: string;
+    logo: string;
+    location: Location;
+    subject: subjectArea;
+    description: string;
+    involvement?: string;
+    goal?: string;
+    scope: "city" | "country" | "worldwide";
+    openRoles: string;
+    applicationLink: string;
+    socials: SocialMedia[];
 }

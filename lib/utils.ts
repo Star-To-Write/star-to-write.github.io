@@ -39,3 +39,15 @@ export function buildNestedComments(comments: Comment[]): NestedComment[] {
 
     return roots;
 }
+
+export const slugify = (str: string): string => {
+    return str
+        .toLowerCase()
+        .replace(/&/g, "and")
+        .replace(/[^a-z0-9]+/g, "_")
+        .replace(/^_+|_+$/g, "");
+};
+
+export const normalizeSubjectArea = (title: string) => {
+    return slugify(title);
+};

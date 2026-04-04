@@ -15,7 +15,7 @@ export const categoryType = defineType({
 
         defineField({
             name: "slug",
-            type: "slug",
+            type: "slug" as const,
             options: {
                 source: "title",
             },
@@ -24,14 +24,14 @@ export const categoryType = defineType({
 
         defineField({
             name: "description",
-            type: "text",
+            type: "text" as const,
         }),
 
         defineField({
             name: "parent",
             title: "Parent Category",
-            type: "reference",
-            to: [{ type: "category" }],
+            type: "reference" as const,
+            to: [{ type: "category" as const }],
             description: "Leave empty if this is a main category",
             options: {
                 filter: ({ document }) => {

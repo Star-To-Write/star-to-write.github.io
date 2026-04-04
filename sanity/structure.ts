@@ -14,6 +14,9 @@ export const structure: StructureResolver = (S) =>
             S.divider(),
             S.documentTypeListItem("magazine").title("Magazine Management"),
             S.documentTypeListItem("gallery").title("Gallery Management"),
+            S.documentTypeListItem("organization").title(
+                "Organizations Management",
+            ),
 
             ...S.documentTypeListItems().filter(
                 (item) =>
@@ -26,6 +29,7 @@ export const structure: StructureResolver = (S) =>
                         "comment",
                         "magazine",
                         "gallery",
+                        "organization",
                     ].includes(item.getId()!),
             ),
         ]);
