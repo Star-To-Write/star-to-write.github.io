@@ -85,12 +85,12 @@ export default function SubmissionsClient({
                     </div>
 
                     {/* Category Filter */}
-                    <div className="flex gap-4">
+                    <div className="flex flex-col md:flex-row gap-4">
                         <Select
                             value={selectedCategory}
                             onValueChange={setSelectedCategory}
                         >
-                            <SelectTrigger className="w-48 bg-input-background border-border">
+                            <SelectTrigger className="bg-input-background border-border">
                                 <div className="flex items-center gap-2">
                                     <Filter size={16} />
                                     <SelectValue />
@@ -110,7 +110,7 @@ export default function SubmissionsClient({
 
                         {/* Sort */}
                         <Select value={sortBy} onValueChange={setSortBy}>
-                            <SelectTrigger className="w-40 bg-input-background border-border">
+                            <SelectTrigger className="bg-input-background border-border">
                                 <div className="flex items-center gap-2">
                                     <SortAsc size={16} />
                                     <SelectValue />

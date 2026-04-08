@@ -1,4 +1,3 @@
-// scripts/trimLocationData.ts
 import fs from "fs";
 import data from "./data";
 

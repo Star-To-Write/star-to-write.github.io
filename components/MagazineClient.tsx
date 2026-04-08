@@ -70,7 +70,7 @@ export default function MagazineClient({
             <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12">
                 {/* Header */}
                 <div className="text-center mb-12">
-                    <div className="inline-flex items-center gap-2 mb-4">
+                    <div className="flex flex-col items-center gap-2 mb-4">
                         <BookOpen className="text-primary" size={32} />
                         <h1
                             className="text-5xl text-primary"

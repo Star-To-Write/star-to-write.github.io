@@ -20,9 +20,10 @@ export function SubmissionCard({
     const handleShare = () => {
         // Mock share functionality
         navigator.clipboard.writeText(
-            `Check out "${title}" by ${author} on Star to Write!`,
+            `Check out "${title}" by ${author.name} on Star to Write!\nhttps://startowrite.vercel.dev/${category.slug}/${slug}`,
         );
         // You could add a toast notification here
+        // NOTE: also you can add google and facebook and stuff like that, personally not a fan of it.
     };
 
     return (

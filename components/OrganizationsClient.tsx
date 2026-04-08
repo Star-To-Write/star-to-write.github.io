@@ -130,7 +130,7 @@ export default function OrganizationsClient({
                             placeholder="Search organizations by name, location, description..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="pl-10 bg-input-background border-border"
+                            className="pl-10 bg-input-background border-border text-sm"
                             style={{ fontFamily: "Inter, sans-serif" }}
                         />
                     </div>

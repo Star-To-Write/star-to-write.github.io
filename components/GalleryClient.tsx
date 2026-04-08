@@ -367,13 +367,13 @@ export default function GalleryClient({
                     </div>
                 </div>
             ) : (
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 mb-6">
                     {filteredPieces.map((piece) => (
                         <div
                             key={piece.id}
                             className="group bg-card/40 backdrop-blur-sm border border-border rounded-xl overflow-hidden hover:border-[#d4af37]/50 transition-all duration-300"
                         >
-                            <div className="relative aspect-square overflow-hidden">
+                            <div className="relative aspect-[4/5] min-h-[250px] overflow-hidden">
                                 {piece.featured && (
                                     <div className="absolute top-4 left-4 z-10">
                                         <Badge
@@ -506,8 +506,8 @@ export default function GalleryClient({
             )}
 
             {selectedPiece && (
-                <div className="fixed inset-0 bg-[#0b132b]/90 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-                    <div className="max-w-6xl w-full max-h-[90vh] bg-card border border-border rounded-xl overflow-hidden">
+                <div className="fixed inset-0 bg-[#0b132b]/90 backdrop-blur-sm z-50 overflow-y-auto">
+                    <div className="max-w-6xl max-h-[90vh] my-6 bg-card border border-border rounded-xl mx-4">
                         <div className="flex items-center justify-between p-6 border-b border-border">
                             <div>
                                 <h3
@@ -537,8 +537,8 @@ export default function GalleryClient({
                             </Button>
                         </div>
 
-                        <div className="grid lg:grid-cols-[minmax(320px,1fr)_minmax(360px,1fr)] max-h-[calc(90vh-100px)] overflow-hidden">
-                            <div className="relative bg-[#0b132b]/50 flex items-center justify-center p-6 min-h-0">
+                        <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(320px,1fr)_minmax(360px,1fr)] min-h-0">
+                            <div className="relative bg-[#0b132b]/50 flex items-center justify-center p-6 min-h-[320px] sm:min-h-[360px] lg:min-h-0">
                                 {selectedPiece.images.length > 1 ? (
                                     <SubmissionCarousel
                                         images={selectedPiece.images}
@@ -548,12 +548,12 @@ export default function GalleryClient({
                                         src={selectedPiece.images[0].asset.url}
                                         alt={selectedPiece.title}
                                         fill
-                                        className="object-contain"
+                                        className="object-contain min-h-[150px] w-auto"
                                     />
                                 )}
                             </div>
 
-                            <div className="p-6 overflow-hidden min-h-0 flex flex-col">
+                            <div className="p-6 overflow-y-auto min-h-0 flex flex-col max-h-[calc(90vh-180px)]">
                                 <div className="mb-6">
                                     <div className="flex items-center gap-2 mb-3">
                                         <Badge

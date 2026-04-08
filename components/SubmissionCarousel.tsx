@@ -44,7 +44,7 @@ export default function SubmissionCarousel({
         // NOTE: i think this would look better if it had like the next images on the left and right, like a cycle type stuff. this was made by brince so ill put that at a later date. ()
         <div className="relative w-full max-w-5xl mx-auto mb-3">
             {/* Main Image */}
-            <div className="relative w-auto h-[400px]">
+            <div className="relative w-full h-full min-h-[280px] flex items-center justify-center">
                 <Image
                     src={images[current].asset.url}
                     alt="Submission image"

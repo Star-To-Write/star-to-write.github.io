@@ -78,7 +78,10 @@ export function SubscribeNews() {
                 </div>
             </div>
 
-            <form onSubmit={handleSubscribe} className="flex gap-3">
+            <form
+                onSubmit={handleSubscribe}
+                className="flex flex-col md:flex-row gap-3"
+            >
                 <div className="flex-1 relative">
                     <Mail
                         className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"

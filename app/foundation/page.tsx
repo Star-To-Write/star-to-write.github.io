@@ -76,58 +76,9 @@ export default async function FoundationPage() {
                 </div>
             </div>
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-12 justify-center">
-                {/* <div className="relative">
-                    <Button
-                        onClick={() =>
-                            setShowResourceDropdown(!showResourceDropdown)
-                        }
-                        className="bg-[#d4af37]/20 text-primary border border-[#d4af37]/30 hover:bg-[#d4af37]/30 px-6 py-3"
-                        style={{ fontFamily: "Inter, sans-serif" }}
-                    >
-                        <Mail size={16} className="mr-2" />
-                        Tell us what you're looking for
-                    </Button>
-
-                    {showResourceDropdown && (
-                        <div className="absolute top-full left-0 mt-2 w-80 bg-[#0f172a]/95 backdrop-blur-sm border border-border rounded-xl p-4 shadow-2xl z-50">
-                            <h4
-                                className="text-lg mb-3 text-primary"
-                                style={{ fontFamily: "Georgia, serif" }}
-                            >
-                                What are you looking for?
-                            </h4>
-                            <div className="space-y-2">
-                                {resourceRequests.map((request) => (
-                                    <button
-                                        key={request.value}
-                                        onClick={() =>
-                                            handleResourceRequest(request.value)
-                                        }
-                                        className="w-full text-left px-3 py-2 text-foreground hover:bg-[#d4af37]/10 rounded-lg transition-colors"
-                                        style={{
-                                            fontFamily: "Inter, sans-serif",
-                                        }}
-                                    >
-                                        {request.label}
-                                    </button>
-                                ))}
-                                <button
-                                    onClick={handleOtherRequest}
-                                    className="w-full text-left px-3 py-2 text-primary hover:bg-[#d4af37]/10 rounded-lg transition-colors"
-                                    style={{
-                                        fontFamily: "Inter, sans-serif",
-                                    }}
-                                >
-                                    Other (specify in email)
-                                </button>
-                            </div>
-                        </div>
-                    )}
-                </div> */}
-
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mx-12 lg:mx-0">
                 <Button
-                    className="bg-primary text-primary-foreground hover:bg-[#d4af37]/90 px-6 py-3"
+                    className="bg-primary text-primary-foreground hover:bg-[#d4af37]/90"
                     style={{ fontFamily: "Inter, sans-serif" }}
                     asChild
                 >

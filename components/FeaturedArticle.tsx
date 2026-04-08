@@ -97,7 +97,7 @@ export async function FeaturedArticle() {
                         </div>
                     </div>
                     <div className="h-full relative">
-                        <div className="h-full rounded-[40px] overflow-hidden">
+                        <div className="aspect-[4/5] rounded-[40px] overflow-hidden">
                             {imageUrl && (
                                 <Image
                                     src={imageUrl}
