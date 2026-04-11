@@ -5,7 +5,10 @@ import "./globals.css";
 
 export const metadata: Metadata = {
     title: "Star to Write",
-    description: "sexy",
+    description: "Star To Write, a publishing organization.",
+    openGraph: {
+        images: "https://startowrite.org/logo.png",
+    },
 };
 
 export default function RootLayout({

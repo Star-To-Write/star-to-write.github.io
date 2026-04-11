@@ -1,140 +1,52 @@
 {
-    "founder": {
-        "name": "Julia Philip",
-        "role": "Founder",
-        "image_url": "/staff/julia-president.jpeg",
-        "caption": "Founder & Visionary",
-        "intro": "Founded by Julia Philip, a young student whose passion for helping others inspired her to create a space where youth could be heard, Star to Write reflects both her vision and values.\n\nThrough the organization, she has found comfort and friendship in her team, while leading with dedication and a commitment to amplifying diverse voices."
-    },
-    "departments": [
+  "founder": {
+    "name": "Julia Philip",
+    "role": "Founder",
+    "image_url": "/staff/julia.jpeg",
+    "caption": "Founder & Visionary",
+    "intro": "Founded by Julia Philip, a young student whose passion for helping others inspired her to create a space where youth could be heard, Star to Write reflects both her vision and values.\n\nThrough the organization, she has found comfort and friendship in her team, while leading with dedication and a commitment to amplifying diverse voices."
+  },
+  "departments": [
+    {
+      "name": "Leadership",
+      "members": [
         {
-            "name": "Executive Team",
-            "members": [
-                {
-                    "name": "Julia Philip",
-                    "role": "President",
-                    "description": "Julia Philip is the founder and president of Star to Write. When creating this nonprofit, she had one thing in mind: to give people a voice.\n\nShe wanted to build a platform where anyone could come and share their writing, publish their work, and express themselves for free. Whether it's poetry, articles, stories, or personal reflections — every voice deserves to be heard.\n\nAt Star to Write, your words matter; your story matters. So write your heart out, express yourself freely, and be a star to write.",
-                    "image_url": "/staff/julia-president.jpeg"
-                },
-                {
-                    "name": "Luisa Rodas",
-                    "role": "Vice President",
-                    "description": "I love learning about new cultures and I'm a big foodie! Luckily, being in NYC, there are so many interesting activities I can do to satisfy my interests. As Vice President of Star to Write, I work side by side with our president to maintain, manage, and organize relationships with other organizations, address pressing issues, hold meetings/discussions, and more!",
-                    "image_url": "/staff/luisa-vice.jpeg"
-                },
-                {
-                    "name": "Ayesha Toor",
-                    "role": "Manager of Operations",
-                    "description": "Obsessed with a singer, Benson Boone, Ayesha Toor is the manager of operations for Startowrite. She makes sure everyone is on track and that YOUR writing is shared with the world.​",
-                    "image_url": "/staff/ayesha-manager.jpeg"
-                }
-            ]
+          "name": "Ace",
+          "role": "Managerial Advisor",
+          "description": "Ace Eryx is a non-binary Polish writer who has worked at magazines such as The Odyssey Youth, The Third Eye Literary, and The Eyre Magazine. One day they hope to pursue law, though until then they will be observing nature and the changing of the seasons.\n",
+          "image_url": "/staff/ace.jpeg"
         },
         {
-            "name": "Submission Management",
-            "members": [
-                {
-                    "name": "Ace Eryx",
-                    "role": "Head of Submissions",
-                    "description": "Ace Eryx, head of submissions and an editor at Startowrite, is a non-binary Polish writer who enjoys deep research into all things writing and law amongst their many chickens and lizard.",
-                    "image_url": "/staff/ace-head.jpeg"
-                },
-                {
-                    "name": "Elaine V.",
-                    "role": "Editor",
-                    "description": "I’m Elaine V., an editor at Star to Write who enjoys research and reading. I plan to pursue a career in medicine, and I believe that strong communication and research are essential parts of all journeys. One of the biggest reasons I joined Star to Write was to help give people a voice and encourage creative expression. I’m passionate about supporting others by sharing their stories and making meaningful connections through writing.",
-                    "image_url": "/staff/elaine-editor.jpeg"
-                },
-                {
-                    "name": "Kenna H.",
-                    "role": "Editor",
-                    "description": "Hi! I'm Kenna, and I'm an editor with Star to Write! I'm a queer and neurodivergent photographer with a passion for reading, writing, and the arts. I like to listen to music, yap with my friends, and play video games.",
-                    "image_url": "/staff/kenna-editor.jpeg"
-                },
-                {
-                    "name": "Tesia Hennessy",
-                    "role": "Editor",
-                    "description": "​Hi, I’m Tesia, an editor for Star to Write! When I’m not reading, writing, or editing, I’m probably playing card games with family, crocheting, dancing, or acting. I’m a theatre performance/psychology major at University of Evansville, and I love meeting new people and reading new works!",
-                    "image_url": "/staff/tesia-editor.jpeg"
-                },
-                {
-                    "name": "Sangeet Kaur",
-                    "role": "Head of Communications",
-                    "description": "Sangeet Kaur is a Punjabi Sikh poet hailing from the Boston area. She’s worked with Mill City Speaks, teaching workshops to middle school students during her freshman & sophomore years of high school, and primarily writes freeverse. She’s currently pursuing an education in Information Technology, and pursue’s writing as one of her favorite hobbies.",
-                    "image_url": "/staff/sangeet-head.jpeg"
-                },
-                {
-                    "name": "Jade Sanchez",
-                    "role": "Communications Chair",
-                    "description": "Hi, I’m a communications chair for Star to Write, and my job is mainly to share the ideas of our non-profit organization and ensure that we attract a good audience with our work!",
-                    "image_url": "/staff/jade-comms-chair.jpeg"
-                },
-                {
-                    "name": "Lynn D.",
-                    "role": "Submissions Coordinator",
-                    "description": "Hello! You can call me Lynn! I’m a high schooler from New York! In my freetime, I enjoy doing artistic things like drawing, singing and crocheting! I also consume a lot of Japanese media and love yapping about them from hours on end! ​",
-                    "image_url": "/staff/lynn-sub.jpeg"
-                },
-                {
-                    "name": "Moumita",
-                    "role": "Graphic Designer",
-                    "description": "Hi, I’m Mou and I am a junior in New York City. I love writing short stories, drawing, doing graphic design, social media, hanging out with my friends, and, importantly, my cat named Boots. I’m going to work as a summer camp counselor in the summer to bond with kids and understand how to work with them, as I want to work as a pediatrician, doctor, or nurse. I want to be able to help people, regardless of age, to show that asking for support is okay, as I understand the struggle of being afraid to speak up.​",
-                    "image_url": "/staff/moumita-graphic.jpeg"
-                },
-                {
-                    "name": "Rachel Fuentes",
-                    "role": "Graphic Designer",
-                    "description": "Hi, I’m Rachel! I’m a graphic designer for Star to Write. I’m 15 and am excited to be here!​",
-                    "image_url": "/staff/rachel-graphic.jpeg"
-                },
-                {
-                    "name": "Phoebe",
-                    "role": "Graphic Designer",
-                    "description": "Hi, I am one of the graphic designers of Star to Write! At Star to Write, I make graphic designs for any writing that is submitted to the organization. Other than designing, I love listening to music, hanging out with friends, and playing card games.​",
-                    "image_url": "/staff/phoebe-graphic.jpeg"
-                },
-                {
-                    "name": "Fatima Farheen",
-                    "role": "Graphic Designer",
-                    "description": "​Hi, my name is Fatima and, here are some things about me. I love to read, but not in summer because that's when I binge watch Netflix. I love taking photos, especially of flowers, and I love volunteering in my community. My role at Star to Write is creating graphics for writing submissions. I am an introvert, however, this past year I have made a goal for myself to socialize more with friends. Lastly, one of my favorite quotes are: Quran 93:4 and 93:7. ",
-                    "image_url": "/staff/fatima-graphic.png"
-                }
-            ]
+          "name": "Lynn",
+          "role": "Head of Art Department",
+          "description": "Hallo!! Call me Lynn! I’m a current senior in high school and I draw and sing during my freetime! I’m VERY normal about Japanese music projects.. (totally…) as I love yapping about those for hours.",
+          "image_url": "/staff/lynn.jpeg"
         },
         {
-            "name": "Marketing Team",
-            "members": [
-                {
-                    "name": "Adelyn Nu",
-                    "role": "Head of Marketing",
-                    "description": "Hi! I’m Adelyn and I’m the Head Marketing Chair for Star to Write! I’m in charge of writing up reports, studying the Tiktok and Instagram algorithm, creating ideas for content, and studying up on the latest trends! As Head of Marketing, I try to optimize our team workflow and help drive initiatives that contribute to our team’s success! But, most of all, I’m just here to have fun and make memories with the amazing people here at Star to Write!",
-                    "image_url": "/staff/adelyn-head.jpeg"
-                },
-                {
-                    "name": "Denisse Herrera",
-                    "role": "Marketing Chair",
-                    "description": "Hi, my name is Denisse, and I’m currently 16 years old! My role in Startowrite is a marketing chair and I’m in charge of creating ideas on how to promote Startowrite on social media and how we can get the most reach!",
-                    "image_url": "/staff/denisse-marketing.jpeg"
-                },
-                {
-                    "name": "Madison Kaisner",
-                    "role": "Marketing Chair",
-                    "description": "I’m Mads and I make content as well as help alongside the marketing chairs!",
-                    "image_url": "/staff/madison-marketing.jpeg"
-                },
-                {
-                    "name": "Zuhayer Tarafder",
-                    "role": "Marketing Chair",
-                    "description": "Hi, I’m Zuhayer and a current junior in NYC. I’m one of the marketing chairs at Star to Write. I work on ideas and content to promote the brand and social media presence.​",
-                    "image_url": "/staff/zuhayer-marketing.jpeg"
-                },
-                {
-                    "name": "Haley Duleau",
-                    "role": "Marketing Chair",
-                    "description": "Hi, my name is Haley, and I’m a rising senior in high-school! I'm a marketing chair, and my roles are trend watching, content creating, campaign strategizing, and communications!",
-                    "image_url": "/staff/haley-marketing.jpeg"
-                }
-            ]
+          "name": "Eli",
+          "role": "Head of Journalism",
+          "description": "Hello, I’m head of journalism and a content creator. I have 16 years on this earth and I love my friends and exploring new things. ",
+          "image_url": "/staff/staff.jpeg"
+        },
+        {
+          "name": "Ayesha",
+          "role": "Manager of Operations",
+          "description": "Obsessed with a singer, Benson Boone, Ayesha Toor is the manager of operations for Startowrite. She makes sure everyone is on track and that YOUR writing is shared with the world.​",
+          "image_url": "/staff/ayesha.jpeg"
+        },
+        {
+          "name": "Mads Kaisner",
+          "role": "Manager of Operations",
+          "description": "Hi! I’m Mads, Manager and Marketing Head in Star to Write! I’m so happy your reading this! Submit and publish to Star to Write today!\n",
+          "image_url": "/staff/mads-kaisner.jpeg"
+        },
+        {
+          "name": "Karin",
+          "role": "Head of Website Management",
+          "description": "i like cheese",
+          "image_url": "/staff/staff.jpeg"
         }
-    ]
+      ]
+    }
+  ]
 }

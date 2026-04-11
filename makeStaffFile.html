@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Members Editor</title>
+
+        <!-- Makes / paths behave like local folder -->
+        <base href="./" />
+
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+                background: #f5f5f5;
+            }
+            h2 {
+                margin-top: 30px;
+            }
+            .section {
+                background: white;
+                padding: 15px;
+                margin-bottom: 15px;
+                border-radius: 8px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+            input,
+            textarea {
+                width: 100%;
+                margin: 5px 0 10px;
+                padding: 6px;
+            }
+            button {
+                margin: 5px 5px 5px 0;
+                padding: 6px 10px;
+                cursor: pointer;
+            }
+            .member,
+            .department {
+                border: 1px solid #ddd;
+                padding: 10px;
+                margin-top: 10px;
+                border-radius: 6px;
+            }
+            textarea {
+                height: 80px;
+            }
+
+            img.preview {
+                max-width: 120px;
+                max-height: 120px;
+                display: block;
+                margin-bottom: 10px;
+                border-radius: 6px;
+                border: 1px solid #ccc;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Members JSON Editor</h1>
+
+        <div class="section">
+            <h2>Load JSON File</h2>
+            <input type="file" id="fileInput" accept=".json" />
+
+            <label>Base Path for Images (preview only):</label>
+            <input type="text" id="basePath" placeholder="./public" />
+        </div>
+
+        <div id="editor"></div>
+
+        <div class="section">
+            <h2>Export JSON</h2>
+            <button onclick="exportJSON()">Download JSON</button>
+            <pre id="output"></pre>
+        </div>
+
+        <script>
+            let data = { founder: {}, departments: [] };
+
+            // Load file
+            document
+                .getElementById("fileInput")
+                .addEventListener("change", function (event) {
+                    const file = event.target.files[0];
+                    if (!file) return;
+
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        try {
+                            data = JSON.parse(e.target.result);
+                            renderEditor();
+                        } catch {
+                            alert("Invalid JSON file");
+                        }
+                    };
+                    reader.readAsText(file);
+                });
+
+            // Re-render when base path changes
+            document
+                .getElementById("basePath")
+                .addEventListener("input", renderEditor);
+
+            // Resolve image path with base
+            function resolvePath(path) {
+                const base =
+                    document.getElementById("basePath").value || "./public";
+                if (!path) return "";
+
+                if (path.startsWith("http") || path.startsWith("data:")) {
+                    return path;
+                }
+
+                return base.replace(/\/$/, "") + "/" + path.replace(/^\//, "");
+            }
+
+            // Create image preview
+            function createImagePreview(url) {
+                const img = document.createElement("img");
+                img.className = "preview";
+                img.src = resolvePath(url);
+                img.alt = "Image preview";
+                img.onerror = () => (img.style.display = "none");
+                return img;
+            }
+
+            // Render UI
+            function renderEditor() {
+                const editor = document.getElementById("editor");
+                editor.innerHTML = "";
+
+                // Founder
+                const founder = data.founder || {};
+                const founderDiv = document.createElement("div");
+                founderDiv.className = "section";
+
+                const founderImg = createImagePreview(founder.image_url);
+                founderDiv.appendChild(founderImg);
+
+                founderDiv.innerHTML += `
+        <h2>Founder</h2>
+        Name: <input value="${founder.name || ""}" onchange="data.founder.name=this.value">
+        Role: <input value="${founder.role || ""}" onchange="data.founder.role=this.value">
+        Image URL: <input value="${founder.image_url || ""}" 
+onchange="data.founder.image_url=this.value; renderEditor();"        Caption: <input value="${founder.caption || ""}" onchange="data.founder.caption=this.value">
+        Intro: <textarea onchange="data.founder.intro=this.value">${founder.intro || ""}</textarea>
+    `;
+                editor.appendChild(founderDiv);
+
+                // Departments
+                const deptSection = document.createElement("div");
+                deptSection.className = "section";
+                deptSection.innerHTML = "<h2>Departments</h2>";
+
+                data.departments.forEach((dept, dIndex) => {
+                    const deptDiv = document.createElement("div");
+                    deptDiv.className = "department";
+
+                    deptDiv.innerHTML = `
+            <strong>Department Name:</strong>
+            <input value="${dept.name}" onchange="data.departments[${dIndex}].name=this.value">
+            <button onclick="removeDepartment(${dIndex})">Delete Department</button>
+        `;
+
+                    // Members
+                    dept.members.forEach((member, mIndex) => {
+                        const memDiv = document.createElement("div");
+                        memDiv.className = "member";
+
+                        const img = createImagePreview(member.image_url);
+                        memDiv.appendChild(img);
+
+                        const content = document.createElement("div");
+                        content.innerHTML = `
+                <strong>Member</strong><br>
+                Name: <input value="${member.name}" onchange="data.departments[${dIndex}].members[${mIndex}].name=this.value">
+                Role: <input value="${member.role}" onchange="data.departments[${dIndex}].members[${mIndex}].role=this.value">
+                Description: <textarea onchange="data.departments[${dIndex}].members[${mIndex}].description=this.value">${member.description}</textarea>
+                Image URL: <input value="${member.image_url}" 
+                    onchange="data.departments[${dIndex}].members[${mIndex}].image_url=this.value; renderEditor();">
+                <button onclick="removeMember(${dIndex}, ${mIndex})">Delete Member</button>
+            `;
+
+                        memDiv.appendChild(content);
+                        deptDiv.appendChild(memDiv);
+                    });
+
+                    const addMemberBtn = document.createElement("button");
+                    addMemberBtn.textContent = "Add Member";
+                    addMemberBtn.onclick = () => addMember(dIndex);
+
+                    deptDiv.appendChild(addMemberBtn);
+                    deptSection.appendChild(deptDiv);
+                });
+
+                const addDeptBtn = document.createElement("button");
+                addDeptBtn.textContent = "Add Department";
+                addDeptBtn.onclick = addDepartment;
+
+                deptSection.appendChild(addDeptBtn);
+                editor.appendChild(deptSection);
+            }
+
+            // Actions
+            function addDepartment() {
+                data.departments.push({ name: "New Department", members: [] });
+                renderEditor();
+            }
+
+            function removeDepartment(index) {
+                data.departments.splice(index, 1);
+                renderEditor();
+            }
+
+            function addMember(dIndex) {
+                data.departments[dIndex].members.push({
+                    name: "",
+                    role: "",
+                    description: "",
+                    image_url: "",
+                });
+                renderEditor();
+            }
+
+            function removeMember(dIndex, mIndex) {
+                data.departments[dIndex].members.splice(mIndex, 1);
+                renderEditor();
+            }
+
+            // Export
+            function exportJSON() {
+                const output = JSON.stringify(data, null, 2);
+                document.getElementById("output").textContent = output;
+
+                const blob = new Blob([output], { type: "application/json" });
+                const link = document.createElement("a");
+                link.href = URL.createObjectURL(blob);
+                link.download = "team_information.json";
+                link.click();
+            }
+        </script>
+    </body>
+</html>
