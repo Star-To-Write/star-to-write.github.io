@@ -12,11 +12,14 @@ import { structureTool } from "sanity/structure";
 import { apiVersion, dataset, projectId } from "./sanity/env";
 import { schema } from "./sanity/schemaTypes";
 import { structure } from "./sanity/structure";
+import { SanityLogo } from "./components/cms/SanityLogo";
 
 export default defineConfig({
     basePath: "/studio",
+    title: "Star To Write",
     projectId,
     dataset,
+    icon: SanityLogo,
     // Add and edit the content schema in the './sanity/schemaTypes' folder
     schema,
     plugins: [
