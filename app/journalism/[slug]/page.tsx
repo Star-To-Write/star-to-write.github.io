@@ -17,7 +17,7 @@ export default async function Page({
     const { slug } = await params;
 
     const query = `
-  *[_type == "submission" && status == "Published" && slug.current == $slug]{
+  *[_type == "submission" && slug.current == $slug]{
     _id,
     author->{ name, bio, socials, anonymous },
     title,
@@ -32,9 +32,13 @@ export default async function Page({
   }[0]
   `;
 
-    const submission = await client.fetch<Submission>(query, {
-        slug: slug,
-    });
+    const submission = await client.fetch<Submission>(
+        query,
+        {
+            slug: slug,
+        },
+        { perspective: "published" },
+    );
     const commentQuery = `
     *[_type == "comment" && submission._ref == $submissionId]{
     _id,

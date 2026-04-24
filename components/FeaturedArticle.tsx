@@ -6,7 +6,7 @@ import Tags from "./ui/Tags";
 import { Button } from "./ui/Button";
 
 export async function FeaturedArticle() {
-    const featuredArticleQuery = `*[_type == "submission" && status == "Published" && featured]{
+    const featuredArticleQuery = `*[_type == "submission" && featured]{
     title,
     "slug": slug.current,
     excerpt,
@@ -16,8 +16,13 @@ export async function FeaturedArticle() {
     category->{ "slug": slug.current, title }
   } | order(submittedDate asc)[0]`;
 
-    const featuredSubmission =
-        await client.fetch<FeaturedSubmission>(featuredArticleQuery);
+    const featuredSubmission = await client.fetch<FeaturedSubmission>(
+        featuredArticleQuery,
+        {},
+        { perspective: "published" },
+    );
+
+    console.log(featuredSubmission);
 
     // SAFETY: if nothing is returned, render fallback
     if (!featuredSubmission) {

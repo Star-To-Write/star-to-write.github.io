@@ -25,7 +25,7 @@ export default async function Page() {
             { category: categoryTitle },
         ),
         client.fetch<Submission[]>(
-            `*[_type == "submission" && status == "Published" && category->title == $category]{
+            `*[_type == "submission" && category->title == $category]{
         _id,
         title,
         "slug": slug.current,
@@ -50,6 +50,7 @@ export default async function Page() {
         }
       } | order(submittedDate desc)[0..10]`,
             { category: categoryTitle },
+            { perspective: "published" },
         ),
     ]);
 

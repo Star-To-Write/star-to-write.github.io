@@ -18,7 +18,7 @@ export default async function Page({
     const { category_slug, slug } = await params;
 
     const query = `
-  *[_type == "submission" && status == "Published" && slug.current == $slug && category->slug.current == $categorySlug]{
+  *[_type == "submission" && slug.current == $slug && category->slug.current == $categorySlug]{
     _id,
     author->{ name, bio, socials, anonymous },
     title,
@@ -33,10 +33,14 @@ export default async function Page({
   }[0]
   `;
 
-    const submission = await client.fetch<Submission>(query, {
-        slug: slug,
-        categorySlug: category_slug,
-    });
+    const submission = await client.fetch<Submission>(
+        query,
+        {
+            slug: slug,
+            categorySlug: category_slug,
+        },
+        { perspective: "published" },
+    );
 
     if (!submission) {
         notFound();

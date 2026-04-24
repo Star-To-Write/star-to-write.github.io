@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
     const category = url.searchParams.get("category");
 
     const allSubmissions = `
-    *[_type == "submission" && status == "Published" && category->title==$category]{
+    *[_type == "submission" && category->title==$category]{
       "id": _id,
       title,
       "slug": slug.current,
@@ -37,7 +37,7 @@ export async function GET(req: NextRequest) {
     const data = await client.fetch<Submission[]>(
         allSubmissions,
         { category },
-        {},
+        { perspective: "published" },
     );
 
     console.log(data);

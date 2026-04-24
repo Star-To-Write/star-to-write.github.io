@@ -7,7 +7,7 @@ import Tags from "./ui/Tags";
 
 export async function RecentPosts() {
     const newPublishedPiecesQuery = `
-*[_type == "submission" && status == "Published"]{
+*[_type == "submission"]{
   title,
   "slug": slug.current,
   excerpt,
@@ -35,7 +35,7 @@ author->{
     const newPublishedPiecesRes = await client.fetch<LatestSubmissions[]>(
         newPublishedPiecesQuery,
         {},
-        {},
+        { perspective: "published" },
     );
     // console.log(newPublishedPiecesRes);
 

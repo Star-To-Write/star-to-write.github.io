@@ -89,7 +89,7 @@ async function renderCategory(category: Category, categoryPath: Category[]) {
             { category: categoryTitle },
         ),
         client.fetch<Submission[]>(
-            `*[_type == "submission" && status == "Published" && category->title == $category]{
+            `*[_type == "submission" && category->title == $category]{
         _id,
         title,
         "slug": slug.current,
@@ -114,6 +114,7 @@ async function renderCategory(category: Category, categoryPath: Category[]) {
         }
       } | order(submittedDate desc)[0..10]`,
             { category: categoryTitle },
+            { perspective: "published" },
         ),
     ]);
 
@@ -186,7 +187,7 @@ async function renderSubmission(
     categoryPath: string,
 ) {
     const query = `
-  *[_type == "submission" && status == "Published" && slug.current == $slug && category._ref == $categoryId]{
+  *[_type == "submission" && slug.current == $slug && category._ref == $categoryId]{
     _id,
     author->{ name, bio, socials, anonymous },
     title,
@@ -201,10 +202,14 @@ async function renderSubmission(
   }[0]
   `;
 
-    const submission = await client.fetch<Submission>(query, {
-        slug: submissionSlug,
-        categoryId: category._id,
-    });
+    const submission = await client.fetch<Submission>(
+        query,
+        {
+            slug: submissionSlug,
+            categoryId: category._id,
+        },
+        { perspective: "published" },
+    );
 
     if (!submission) {
         return <div>Submission not found</div>;

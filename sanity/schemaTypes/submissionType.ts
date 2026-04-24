@@ -167,22 +167,6 @@ export const submissionType = defineType({
             initialValue: () => new Date().toISOString(),
         }),
 
-        // editorial status
-        defineField({
-            name: "status",
-            type: "string",
-            options: {
-                list: [
-                    "Submitted",
-                    "In Review",
-                    "Accepted",
-                    "Rejected",
-                    "Published",
-                ],
-            },
-            initialValue: "Submitted",
-        }),
-
         defineField({
             name: "featured",
             type: "boolean" as const,
