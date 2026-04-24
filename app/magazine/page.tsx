@@ -13,6 +13,7 @@ type Magazine = {
     tags: string[];
     status: string;
     link: string;
+    submissionsOpen?: boolean;
     coverImage: {
         asset: {
             url: string;
@@ -34,6 +35,7 @@ export default async function MagazinePage() {
             tags,
             status,
             link,
+            submissionsOpen,
             coverImage {
                 asset->{ url },
                 alt
@@ -52,6 +54,11 @@ export default async function MagazinePage() {
     // For new behavior: highlight the newest published issue (regular or mini)
     const featuredMagazine = publishedMagazines[0];
 
+    // Find magazine with submissions open (any status)
+    const submissionsOpenMagazine = magazines.find(
+        (mag) => mag.submissionsOpen === true,
+    );
+
     const remainingPublished = publishedMagazines.slice(1);
     const previousRegularIssues = remainingPublished.filter(
         (mag) => mag.issueType === "regular",
@@ -66,6 +73,7 @@ export default async function MagazinePage() {
             previousRegularIssues={previousRegularIssues}
             miniIssues={miniIssues}
             comingSoonMagazines={comingSoonMagazines}
+            submissionsOpenMagazine={submissionsOpenMagazine}
         />
     );
 }

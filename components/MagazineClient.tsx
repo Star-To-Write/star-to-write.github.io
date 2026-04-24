@@ -9,11 +9,13 @@ import {
     Clock,
     Sparkles,
     Eye,
+    Send,
 } from "lucide-react";
 import { DontGo } from "@/components/DontGo";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import Image from "next/image";
+import Link from "next/link";
 
 type Magazine = {
     _id: string;
@@ -25,6 +27,7 @@ type Magazine = {
     tags: string[];
     status: string;
     link: string;
+    submissionsOpen?: boolean;
     coverImage: {
         asset: {
             url: string;
@@ -38,6 +41,7 @@ type Props = {
     previousRegularIssues: Magazine[];
     miniIssues: Magazine[];
     comingSoonMagazines: Magazine[];
+    submissionsOpenMagazine?: Magazine;
 };
 
 export default function MagazineClient({
@@ -45,9 +49,11 @@ export default function MagazineClient({
     previousRegularIssues,
     miniIssues,
     comingSoonMagazines,
+    submissionsOpenMagazine,
 }: Props) {
     console.log(featuredMagazine);
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+    console.log(submissionsOpenMagazine);
 
     const handleShare = (magazine: Magazine) => {
         const issueTypeText =
@@ -100,6 +106,46 @@ export default function MagazineClient({
                             >
                                 🎉 Opening your magazine now...
                             </p>
+                        </div>
+                    </div>
+                )}
+
+                {/* Submissions Open Banner */}
+                {submissionsOpenMagazine && (
+                    <div className="mb-12 p-6 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 border-2 border-primary rounded-2xl text-center animate-in slide-in-from-top-4 duration-700 shadow-lg">
+                        <div className="flex flex-col items-center gap-4">
+                            <div className="flex items-center gap-3">
+                                <Send className="text-primary" size={28} />
+                                <h2 className="text-2xl font-bold text-primary font-georgia">
+                                    Submissions Now Open!
+                                </h2>
+                            </div>
+                            <p
+                                className="text-lg text-muted-foreground max-w-2xl"
+                                style={{ fontFamily: "Inter, sans-serif" }}
+                            >
+                                We&apos;re accepting submissions for{" "}
+                                <span className="font-semibold text-primary">
+                                    {submissionsOpenMagazine.title}
+                                </span>
+                                . Share your stories, insights, and perspectives
+                                with our community.
+                            </p>
+                            <Link
+                                href={submissionsOpenMagazine.link}
+                                rel="noreferrer noopener"
+                                target="_blank"
+                            >
+                                <Button
+                                    className="bg-primary text-primary-foreground hover:opacity-90 text-lg py-3 px-8 transform hover:scale-105 transition-all duration-200"
+                                    style={{
+                                        fontFamily: "Inter, sans-serif",
+                                    }}
+                                >
+                                    <Send size={20} className="mr-2" />
+                                    Submit Your Work
+                                </Button>
+                            </Link>
                         </div>
                     </div>
                 )}

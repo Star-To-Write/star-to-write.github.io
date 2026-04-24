@@ -124,10 +124,29 @@ export const magazineType = defineType({
             name: "link",
             type: "string",
             validation: (Rule) =>
-                Rule.custom((link, context) => {
+                Rule.custom(async (link, context) => {
                     const { document } = context;
                     if (document?.status === "Published" && !link) {
                         return "Link is required for published magazines";
+                    } else if (document?.submissionsOpen === true && !link) {
+                        return "Link is required if submissions are open";
+                    } else if (document) {
+                        // Check for uniqueness
+                        const { getClient } = context;
+                        if (!document) return "Unable to get document";
+                        const client = getClient({ apiVersion: "2024-01-01" });
+                        const id = document._id.replace(/^drafts\./, "");
+                        const query = `count(*[_type == $type && submissionsOpen == true && issueType == $issueType && !(_id in [$id, $draftId])])`;
+                        const params = {
+                            type: document._type,
+                            issueType: document.issueType,
+                            id,
+                            draftId: `drafts.${id}`,
+                        };
+                        const count = await client.fetch(query, params);
+                        return count === 0
+                            ? true
+                            : "There is already a magazine with submissions open! If it already has been released, are you sure you turned off 'Submissions Open'?";
                     }
                     return true;
                 }),
@@ -163,6 +182,16 @@ export const magazineType = defineType({
                 list: ["Coming Soon", "Published"],
             },
             initialValue: "Coming Soon",
+        }),
+
+        // submissions open flag
+        defineField({
+            name: "submissionsOpen",
+            type: "boolean",
+            title: "Submissions Open",
+            description:
+                "When enabled, displays a banner announcing submissions are open",
+            initialValue: false,
         }),
 
         // defineField({
