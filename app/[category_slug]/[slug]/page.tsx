@@ -66,7 +66,7 @@ export default async function Page({
             <TrackView subId={submission._id} />
             <article className="px-12 lg:px-48">
                 {/* Details */}
-                <div className="flex gap-2 text-gray-500">
+                <div className="flex flex-wrap gap-x-2 justify-between text-gray-500">
                     <Link
                         href={`/${submission.category.slug}`}
                         className="tracking-wide text-primary"

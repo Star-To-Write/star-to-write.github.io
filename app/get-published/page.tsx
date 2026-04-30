@@ -1,15 +1,9 @@
 "use client";
 
-import {
-    ExternalLink,
-    FileText,
-    Star,
-    Users,
-    Calendar,
-    Award,
-} from "lucide-react";
+import { ExternalLink, FileText, Star, Users, Award } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { DontGo } from "@/components/DontGo";
+import Link from "next/link";
 
 export default function GetPublishedPage() {
     // like we can add something but essentially this triggers if the mini issue is open or not!
@@ -138,19 +132,19 @@ export default function GetPublishedPage() {
                                     className="text-2xl text-primary"
                                     style={{ fontFamily: "Georgia, serif" }}
                                 >
-                                    Upcoming Mini Issue ✨
+                                    Upcoming Issue ✨
                                 </h3>
                                 <p
                                     className="text-muted-foreground"
                                     style={{ fontFamily: "Inter, sans-serif" }}
                                 >
-                                    Be featured in our exclusive magazine
+                                    Be featured in our newest exclusive magazine
                                     publication
                                 </p>
                             </div>
                         </div>
 
-                        <div className="bg-primary/20 border border-primary/40 rounded-lg p-6 mb-6">
+                        {/* <div className="bg-primary/20 border border-primary/40 rounded-lg p-6 mb-6">
                             <div className="flex items-center gap-3 mb-3">
                                 <Calendar className="w-5 h-5 text-primary" />
                                 <span
@@ -176,7 +170,7 @@ export default function GetPublishedPage() {
                                 publication alongside other exceptional young
                                 writers.
                             </p>
-                        </div>
+                        </div> */}
 
                         <p
                             className="text-muted-foreground leading-relaxed mb-6"
@@ -215,8 +209,10 @@ export default function GetPublishedPage() {
                                     className="text-sm text-muted-foreground"
                                     style={{ fontFamily: "Inter, sans-serif" }}
                                 >
-                                    Selected work will be featured in our
-                                    special mini magazine issue
+                                    Selected work will be featured in our newest
+                                    magazine issue, carefully edited and
+                                    designed by talented editors and graphic
+                                    designers.
                                 </p>
                             </div>
                             <div className="bg-primary/10 border border-primary/30 rounded-lg p-4">
@@ -236,25 +232,23 @@ export default function GetPublishedPage() {
                                     className="text-sm text-muted-foreground"
                                     style={{ fontFamily: "Inter, sans-serif" }}
                                 >
-                                    Even if not selected for the mini issue,
-                                    your work will be published regularly
+                                    Even if not selected for the issue, your
+                                    work will be published regularly through our
+                                    platforms.
                                 </p>
                             </div>
                         </div>
 
                         <div className="text-center">
                             <Button
-                                onClick={() =>
-                                    window.open(
-                                        "https://docs.google.com/forms/d/e/1FAIpQLSd66LoE-7yADjGkHnYlDk2fRlh18jJ9cUXBCytQLMEj30GuXA/viewform",
-                                        "_blank",
-                                    )
-                                }
                                 className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3"
                                 style={{ fontFamily: "Inter, sans-serif" }}
+                                asChild
                             >
-                                <Star className="w-4 h-4 mr-2" />
-                                Submit for Mini Issue
+                                <Link href="/magazine">
+                                    <Star className="w-4 h-4 mr-2" />
+                                    Learn More
+                                </Link>
                             </Button>
                         </div>
                     </div>
@@ -269,7 +263,7 @@ export default function GetPublishedPage() {
                                     className="text-2xl text-primary"
                                     style={{ fontFamily: "Georgia, serif" }}
                                 >
-                                    Upcoming Mini Issues ✨
+                                    Upcoming Issues ✨
                                 </h3>
                                 <p
                                     className="text-muted-foreground"
@@ -291,13 +285,13 @@ export default function GetPublishedPage() {
                         >
                             <strong className="text-primary">
                                 {" "}
-                                Mini Issue Submissions Are Currently Closed!
+                                Submissions Are Currently Closed!
                             </strong>{" "}
                             - Thank you to all writers for submitting to our
-                            mini issue. For those who did not get a chance to,
+                            newest issue. For those who did not get a chance to,
                             feel free to submit to regular publication or
                             subscribe to our mailing list in order to find out
-                            when the new mini issue submissions will be open!
+                            when the new magazine submissions will be open!
                         </p>
 
                         <div className="text-center">
@@ -318,53 +312,6 @@ export default function GetPublishedPage() {
                         </div>
                     </div>
                 )}
-
-                {/* Call to Action */}
-                <div className="text-center bg-card/30 border border-border rounded-xl p-8">
-                    <h3
-                        className="text-2xl mb-4 text-primary"
-                        style={{ fontFamily: "Georgia, serif" }}
-                    >
-                        Ready to Share Your Voice?
-                    </h3>
-                    <p
-                        className="text-muted-foreground mb-6 max-w-2xl mx-auto"
-                        style={{ fontFamily: "Inter, sans-serif" }}
-                    >
-                        Join hundreds of young writers who have found their
-                        platform with Star to Write. Your story matters, and
-                        we're here to help you tell it.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Button
-                            onClick={() =>
-                                window.open(
-                                    "https://docs.google.com/forms/d/e/1FAIpQLSeD014oOgdea-AwaF4W2LrIc7AbJXxcAqE4WWGwcGWwUr8WfA/viewform?usp=header",
-                                    "_blank",
-                                )
-                            }
-                            variant="outline"
-                            className="border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground"
-                            style={{ fontFamily: "Inter, sans-serif" }}
-                        >
-                            Regular Submission
-                        </Button>
-                        {isOpen && (
-                            <Button
-                                onClick={() =>
-                                    window.open(
-                                        "https://docs.google.com/forms/d/e/1FAIpQLSd66LoE-7yADjGkHnYlDk2fRlh18jJ9cUXBCytQLMEj30GuXA/viewform",
-                                        "_blank",
-                                    )
-                                }
-                                className="bg-primary text-primary-foreground hover:bg-primary/90"
-                                style={{ fontFamily: "Inter, sans-serif" }}
-                            >
-                                Mini Issue Submission
-                            </Button>
-                        )}
-                    </div>
-                </div>
             </div>
 
             <DontGo />
