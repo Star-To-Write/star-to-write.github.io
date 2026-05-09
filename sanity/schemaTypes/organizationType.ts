@@ -19,7 +19,7 @@ export const organizationType = defineType({
             name: "slug",
             title: "Slug",
             type: "slug" as const,
-            options: { source: "title" },
+            options: { source: "name" },
             validation: (Rule) => Rule.required(),
         }),
 
