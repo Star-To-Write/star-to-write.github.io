@@ -24,7 +24,7 @@ export type Author = {
 
 export type SocialMedia = {
     _key: string;
-    platform: "instagram" | "twitter" | "tiktok" | "youtube" | "linkedin";
+    platform: "instagram" | "twitter" | "tiktok" | "youtube" | "linkedin" | "website";
     username: string;
 };
 
