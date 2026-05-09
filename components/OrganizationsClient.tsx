@@ -236,10 +236,10 @@ export default function OrganizationsClient({
                     return (
                         <div
                             key={org.slug}
-                            className="bg-card/40 backdrop-blur-sm border border-border rounded-xl p-6 hover:bg-card/60 transition-all duration-300 group"
+                            className="bg-card/40 backdrop-blur-sm border border-border rounded-xl p-6 hover:bg-card/60 transition-all duration-300 group min-w-0"
                         >
-                            <div className="flex items-start justify-center items-center gap-4 mb-2">
-                                <div className="w-20 h-20 rounded-full mx-auto overflow-hidden border border-[#d4af37]/20">
+                            <div className="flex items-center gap-4 mb-2 min-w-0">
+                                <div className="w-20 h-20 flex-shrink-0 rounded-full overflow-hidden border border-[#d4af37]/20">
                                     <Image
                                         src={org.logo}
                                         alt={org.name}
@@ -248,22 +248,21 @@ export default function OrganizationsClient({
                                         className="w-full h-full object-cover"
                                     />
                                 </div>
-                                <div className="flex-1">
+                                <div className="flex-1 min-w-0">
                                     <h3
-                                        className="text-lg text-foreground group-hover:text-[#d4af37] transition-colors"
+                                        className="text-lg text-foreground group-hover:text-[#d4af37] transition-colors truncate"
                                         style={{ fontFamily: "Georgia, serif" }}
                                     >
                                         {org.name}
                                     </h3>
-                                    {org.subjects &&
-                                        org.subjects.length > 0 && (
-                                            <Badge
-                                                variant="outline"
-                                                className="border-[#d4af37]/30 text-[#d4af37]/80 mt-2"
-                                            >
-                                                {org.subjects[0]}
-                                            </Badge>
-                                        )}
+                                    <Badge
+                                        variant="outline"
+                                        className="border-[#d4af37]/30 text-[#d4af37]/80 mt-2 max-w-full overflow-hidden"
+                                    >
+                                        <span className="truncate">
+                                            {org.subjects[0]}
+                                        </span>
+                                    </Badge>
                                 </div>
                             </div>
 
@@ -344,7 +343,7 @@ export default function OrganizationsClient({
                                                         <Badge
                                                             key={subject}
                                                             variant="outline"
-                                                            className="border-[#d4af37]/30 text-[#d4af37]/80"
+                                                            className="border-[#d4af37]/30 text-[#d4af37]/80 mt-2 max-w-full truncate block"
                                                         >
                                                             {subject}
                                                         </Badge>
@@ -483,7 +482,8 @@ export default function OrganizationsClient({
                                                                 );
                                                                 break;
                                                             case "website":
-                                                                url = social.username;
+                                                                url =
+                                                                    social.username;
                                                                 break;
                                                         }
 

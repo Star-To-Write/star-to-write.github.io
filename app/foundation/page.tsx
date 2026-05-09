@@ -29,8 +29,6 @@ export default async function FoundationPage() {
         }`;
     const organizations: Organization[] = await client.fetch(submissionsQuery);
 
-    console.log(organizations);
-
     return (
         <div className="min-h-screen">
             {/* Hero Section */}
