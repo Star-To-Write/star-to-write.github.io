@@ -51,83 +51,98 @@ export const organizationType = defineType({
             hidden: ({ document }) => !document?.location, // 👈 hide until country selected
         }),
         defineField({
-            name: "subject",
-            title: "Subject Area",
-            type: "string",
-            options: {
-                list: [
-                    {
-                        title: "Business/Entrepreneurship",
-                        value: "business_entrepreneurship",
+            name: "subjects",
+            title: "Subject Areas",
+            type: "array" as const,
+            of: [
+                {
+                    type: "string",
+                    options: {
+                        list: [
+                            {
+                                title: "Business/Entrepreneurship",
+                                value: "Business/Entrepreneurship",
+                            },
+                            {
+                                title: "Economics/Finance",
+                                value: "Economics/Finance",
+                            },
+                            {
+                                title: "Science and STEM",
+                                value: "Science and STEM",
+                            },
+                            {
+                                title: "Public Speaking/Debate",
+                                value: "Public Speaking/Debate",
+                            },
+                            {
+                                title: "Environment/Sustainability",
+                                value: "Environment/Sustainability",
+                            },
+                            {
+                                title: "Community Service/Volunteering/Advocacy",
+                                value: "Community Service/Volunteering/Advocacy",
+                            },
+                            { title: "Literature", value: "Literature" },
+                            { title: "Psychology", value: "Psychology" },
+                            {
+                                title: "Law/Politics/Current Affairs",
+                                value: "Law/Politics/Current Affairs",
+                            },
+                            {
+                                title: "Journalism/Writing",
+                                value: "Journalism/Writing",
+                            },
+                            {
+                                title: "Graphic Design/Visual Arts",
+                                value: "Graphic Design/Visual Arts",
+                            },
+                            {
+                                title: "Music/Performing Arts",
+                                value: "Music/Performing Arts",
+                            },
+                            {
+                                title: "Content Creation/Digital Marketing",
+                                value: "Content Creation/Digital Marketing",
+                            },
+                            {
+                                title: "Education/Mentorship",
+                                value: "Education/Mentorship",
+                            },
+                            {
+                                title: "Mental Health/Well-being",
+                                value: "Mental Health/Well-being",
+                            },
+                            {
+                                title: "Coding/App Development",
+                                value: "Coding/App Development",
+                            },
+                            { title: "Robotics/AI", value: "Robotics/AI" },
+                            {
+                                title: "Public Health Awareness/Medical Research",
+                                value: "Public Health Awareness/Medical Research",
+                            },
+                            {
+                                title: "Model United Nations (MUN)",
+                                value: "Model United Nations (MUN)",
+                            },
+                            {
+                                title: "Visual Art, Writing & Photography",
+                                value: "Visual Art, Writing & Photography",
+                            },
+                            {
+                                title: "Research & Publication",
+                                value: "Research & Publication",
+                            },
+                        ],
                     },
-                    { title: "Economics/Finance", value: "economics_finance" },
-                    { title: "Science and STEM", value: "science_stem" },
-                    {
-                        title: "Public Speaking/Debate",
-                        value: "public_speaking_debate",
-                    },
-                    {
-                        title: "Environment/Sustainability",
-                        value: "environment_sustainability",
-                    },
-                    {
-                        title: "Community Service/Volunteering/Advocacy",
-                        value: "community_service_volunteering_advocacy",
-                    },
-                    { title: "Literature", value: "literature" },
-                    { title: "Psychology", value: "psychology" },
-                    {
-                        title: "Law/Politics/Current Affairs",
-                        value: "law_politics_current_affairs",
-                    },
-                    {
-                        title: "Journalism/Writing",
-                        value: "journalism_writing",
-                    },
-                    {
-                        title: "Graphic Design/Visual Arts",
-                        value: "graphic_design_visual_arts",
-                    },
-                    {
-                        title: "Music/Performing Arts",
-                        value: "music_performing_arts",
-                    },
-                    {
-                        title: "Content Creation/Digital Marketing",
-                        value: "content_creation_digital_marketing",
-                    },
-                    {
-                        title: "Education/Mentorship",
-                        value: "education_mentorship",
-                    },
-                    {
-                        title: "Mental Health/Well-being",
-                        value: "mental_health_well_being",
-                    },
-                    {
-                        title: "Coding/App Development",
-                        value: "coding_app_development",
-                    },
-                    { title: "Robotics/AI", value: "robotics_ai" },
-                    {
-                        title: "Public Health Awareness/Medical Research",
-                        value: "public_health_awareness_medical_research",
-                    },
-                    {
-                        title: "Model United Nations (MUN)",
-                        value: "model_united_nations_mun",
-                    },
-                    {
-                        title: "Visual Art, Writing & Photography",
-                        value: "visual_art_writing_photography",
-                    },
-                    {
-                        title: "Research & Publication",
-                        value: "research_publication",
-                    },
-                ],
-            },
-            validation: (Rule) => Rule.required(),
+                },
+            ],
+            validation: (Rule) =>
+                Rule.required()
+                    .min(1)
+                    .max(3)
+                    .error("Select at least 1 and up to 3 subject areas"),
         }),
         defineField({
             name: "description",

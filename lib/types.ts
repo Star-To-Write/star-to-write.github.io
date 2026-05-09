@@ -143,7 +143,7 @@ type Location = {
     state?: string;
 };
 
-type subjectArea =
+export type subjectArea =
     | "Business/Entrepreneurship"
     | "Economics/Finance"
     | "Science and STEM"
@@ -171,7 +171,7 @@ export interface Organization {
     slug: string;
     logo: string;
     location: Location;
-    subject: subjectArea;
+    subjects: subjectArea[];
     description: string;
     involvement?: string;
     goal?: string;

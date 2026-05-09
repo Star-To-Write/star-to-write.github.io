@@ -18,7 +18,7 @@ export default async function FoundationPage() {
           "slug": slug.current,
           "logo": logo.asset->url,
           "location": { "country": location, state },
-          subject,
+          subjects,
           description,
           involvement,
           goal,
