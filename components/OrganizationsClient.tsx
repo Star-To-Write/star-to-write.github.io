@@ -94,7 +94,7 @@ export default function OrganizationsClient({
         router.replace("/foundation");
     };
 
-    console.log(organizations);
+    // console.log(organizations);
 
     // // Sort filtered submissions
     // const sorted = [...filtered].sort((a, b) => {
@@ -481,6 +481,9 @@ export default function OrganizationsClient({
                                                                         {...iconProps}
                                                                     />
                                                                 );
+                                                                break;
+                                                            case "website":
+                                                                url = social.username;
                                                                 break;
                                                         }
 
