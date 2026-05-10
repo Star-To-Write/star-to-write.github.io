@@ -255,14 +255,17 @@ export default function OrganizationsClient({
                                     >
                                         {org.name}
                                     </h3>
-                                    <Badge
-                                        variant="outline"
-                                        className="border-[#d4af37]/30 text-[#d4af37]/80 mt-2 max-w-full overflow-hidden"
-                                    >
-                                        <span className="truncate">
-                                            {org.subjects[0]}
-                                        </span>
-                                    </Badge>
+                                    {org.subjects &&
+                                        org.subjects.length > 0 && (
+                                            <Badge
+                                                variant="outline"
+                                                className="border-[#d4af37]/30 text-[#d4af37]/80 mt-2 max-w-full overflow-hidden"
+                                            >
+                                                <span className="truncate">
+                                                    {org.subjects[0]}
+                                                </span>
+                                            </Badge>
+                                        )}
                                 </div>
                             </div>
 
