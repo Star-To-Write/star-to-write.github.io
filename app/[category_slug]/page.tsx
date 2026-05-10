@@ -13,7 +13,7 @@ export default async function Page({
     params: Promise<{ category_slug: string }>;
 }) {
     const { category_slug } = await params;
-
+    console.log("params:", params);
     // 🔹 Fetch category info by slug
     const category = await client.fetch<{
         title: string;
