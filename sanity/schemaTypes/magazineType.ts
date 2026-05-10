@@ -70,7 +70,11 @@ export const magazineType = defineType({
                         draftId: `drafts.${id}`,
                     };
 
-                    const count = await client.fetch(query, params);
+                    const count = await client.fetch(query, params, {
+                        next: {
+                            tags: ["magazine"],
+                        },
+                    });
 
                     return count === 0
                         ? true
@@ -143,7 +147,11 @@ export const magazineType = defineType({
                             id,
                             draftId: `drafts.${id}`,
                         };
-                        const count = await client.fetch(query, params);
+                        const count = await client.fetch(query, params, {
+                            next: {
+                                tags: ["magazine"],
+                            },
+                        });
                         return count === 0
                             ? true
                             : "There is already a magazine with submissions open! If it already has been released, are you sure you turned off 'Submissions Open'?";

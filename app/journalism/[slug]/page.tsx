@@ -37,7 +37,12 @@ export default async function Page({
         {
             slug: slug,
         },
-        { perspective: "published" },
+        {
+            perspective: "published",
+            next: {
+                tags: ["submission", "category", "author", "tag"],
+            },
+        },
     );
     const commentQuery = `
     *[_type == "comment" && submission._ref == $submissionId]{
@@ -50,9 +55,17 @@ export default async function Page({
     createdAt
     }`;
 
-    const submissionComments = await client.fetch<Comment[]>(commentQuery, {
-        submissionId: submission._id,
-    });
+    const submissionComments = await client.fetch<Comment[]>(
+        commentQuery,
+        {
+            submissionId: submission._id,
+        },
+        {
+            next: {
+                tags: ["comment", "submission"],
+            },
+        },
+    );
 
     console.log(submissionComments);
     console.log(submission.author);

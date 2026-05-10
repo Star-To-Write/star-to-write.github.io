@@ -24,7 +24,8 @@ type Magazine = {
 
 export default async function MagazinePage() {
     // Fetch all magazines
-    const magazines: Magazine[] = await client.fetch(`
+    const magazines: Magazine[] = await client.fetch(
+        `
         *[_type == "magazine"] | order(issue desc) {
             _id,
             title,
@@ -41,7 +42,14 @@ export default async function MagazinePage() {
                 alt
             }
         }
-    `);
+    `,
+        {},
+        {
+            next: {
+                tags: ["magazine"],
+            },
+        },
+    );
 
     // Separate published and coming soon magazines
     const publishedMagazines = magazines.filter(

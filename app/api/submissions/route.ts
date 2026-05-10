@@ -37,7 +37,12 @@ export async function GET(req: NextRequest) {
     const data = await client.fetch<Submission[]>(
         allSubmissions,
         { category },
-        { perspective: "published" },
+        {
+            perspective: "published",
+            next: {
+                tags: ["submission", "category", "author", "tag"],
+            },
+        },
     );
 
     console.log(data);

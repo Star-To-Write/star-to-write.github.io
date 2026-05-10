@@ -11,7 +11,15 @@ export default async function SubmissionsPage() {
       title,
       "slug": slug.current
     }`;
-    const categories: Category[] = await client.fetch(categoriesQuery);
+    const categories: Category[] = await client.fetch(
+        categoriesQuery,
+        {},
+        {
+            next: {
+                tags: ["category"],
+            },
+        },
+    );
 
     // Fetch submissions
     const submissionsQuery = `
@@ -39,7 +47,15 @@ export default async function SubmissionsPage() {
         name
       }
     }`;
-    const submissions: Submission[] = await client.fetch(submissionsQuery);
+    const submissions: Submission[] = await client.fetch(
+        submissionsQuery,
+        {},
+        {
+            next: {
+                tags: ["submission", "category", "author", "tag"],
+            },
+        },
+    );
 
     const ids = submissions.map((s) => s._id);
     const statsRows =
@@ -57,7 +73,17 @@ export default async function SubmissionsPage() {
       "submissionId": submission._ref
     }`;
     const commentRows =
-        ids.length > 0 ? await client.fetch(commentCountsQuery, { ids }) : [];
+        ids.length > 0
+            ? await client.fetch(
+                  commentCountsQuery,
+                  { ids },
+                  {
+                      next: {
+                          tags: ["comment", "submission"],
+                      },
+                  },
+              )
+            : [];
     const commentMap = new Map<string, number>();
     for (const c of commentRows) {
         commentMap.set(

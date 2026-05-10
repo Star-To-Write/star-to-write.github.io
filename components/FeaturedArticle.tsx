@@ -19,7 +19,12 @@ export async function FeaturedArticle() {
     const featuredSubmission = await client.fetch<FeaturedSubmission>(
         featuredArticleQuery,
         {},
-        { perspective: "published" },
+        {
+            perspective: "published",
+            next: {
+                tags: ["submission", "category", "author", "tag"],
+            },
+        },
     );
 
     console.log(featuredSubmission);

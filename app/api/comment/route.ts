@@ -26,9 +26,17 @@ export async function GET(req: Request) {
         createdAt
     }`;
 
-    const comments = await client.fetch(query, {
-        id: submissionId ?? galleryId,
-    });
+    const comments = await client.fetch(
+        query,
+        {
+            id: submissionId ?? galleryId,
+        },
+        {
+            next: {
+                tags: ["comment"],
+            },
+        },
+    );
 
     return NextResponse.json({ success: true, comments });
 }

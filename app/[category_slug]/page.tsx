@@ -20,6 +20,11 @@ export default async function Page({
     }>(
         '*[_type == "category" && slug.current == $slug][0]{title, description}',
         { slug: category_slug },
+        {
+            next: {
+                tags: ["category"],
+            },
+        },
     );
 
     if (!category) {
@@ -31,6 +36,11 @@ export default async function Page({
         client.fetch<string[]>(
             '*[_type == "tag" && category->title == $category].name',
             { category: category.title },
+            {
+                next: {
+                    tags: ["category", "tag"],
+                },
+            },
         ),
         client.fetch<Submission[]>(
             `*[_type == "submission" && category->title == $category]{
@@ -58,7 +68,12 @@ export default async function Page({
         }
       } | order(submittedDate desc)[0..10]`,
             { category: category.title },
-            { perspective: "published" },
+            {
+                perspective: "published",
+                next: {
+                    tags: ["submission", "category", "author", "tag"],
+                },
+            },
         ),
     ]);
 
@@ -81,7 +96,17 @@ export default async function Page({
       "submissionId": submission._ref
     }`;
     const commentRows =
-        ids.length > 0 ? await client.fetch(commentCountsQuery, { ids }) : [];
+        ids.length > 0
+            ? await client.fetch(
+                  commentCountsQuery,
+                  { ids },
+                  {
+                      next: {
+                          tags: ["comment"],
+                      },
+                  },
+              )
+            : [];
     const commentMap = new Map<string, number>();
     for (const c of commentRows) {
         commentMap.set(

@@ -27,7 +27,15 @@ export default async function OrganizationPage({
           socials
         }`;
 
-    const organizations: Organization[] = await client.fetch(submissionsQuery);
+    const organizations: Organization[] = await client.fetch(
+        submissionsQuery,
+        {},
+        {
+            next: {
+                tags: ["organization"],
+            },
+        },
+    );
 
     return (
         <div className="min-h-screen p-12">

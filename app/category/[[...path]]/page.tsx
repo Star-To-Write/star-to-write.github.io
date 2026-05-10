@@ -49,10 +49,18 @@ export default async function Page({
             ? `*[_type == "category" && slug.current == $slug && parent._ref == $parentId][0]{_id, title, "slug": slug.current, description, parent}`
             : `*[_type == "category" && slug.current == $slug && !defined(parent)][0]{_id, title, "slug": slug.current, description, parent}`;
 
-        const category: Category | null = await client.fetch(categoryQuery, {
-            slug: segment,
-            parentId,
-        });
+        const category: Category | null = await client.fetch(
+            categoryQuery,
+            {
+                slug: segment,
+                parentId,
+            },
+            {
+                next: {
+                    tags: ["comment"],
+                },
+            },
+        );
 
         if (!category) {
             // This segment is not a category, so it might be a submission
@@ -87,6 +95,11 @@ async function renderCategory(category: Category, categoryPath: Category[]) {
         client.fetch<string[]>(
             '*[_type == "tag" && category->title == $category].name',
             { category: categoryTitle },
+            {
+                next: {
+                    tags: ["category", "tag"],
+                },
+            },
         ),
         client.fetch<Submission[]>(
             `*[_type == "submission" && category->title == $category]{
@@ -114,7 +127,12 @@ async function renderCategory(category: Category, categoryPath: Category[]) {
         }
       } | order(submittedDate desc)[0..10]`,
             { category: categoryTitle },
-            { perspective: "published" },
+            {
+                perspective: "published",
+                next: {
+                    tags: ["submission", "category", "author", "tag"],
+                },
+            },
         ),
     ]);
 
@@ -137,7 +155,17 @@ async function renderCategory(category: Category, categoryPath: Category[]) {
       "submissionId": submission._ref
     }`;
     const commentRows =
-        ids.length > 0 ? await client.fetch(commentCountsQuery, { ids }) : [];
+        ids.length > 0
+            ? await client.fetch(
+                  commentCountsQuery,
+                  { ids },
+                  {
+                      next: {
+                          tags: ["comment"],
+                      },
+                  },
+              )
+            : [];
     const commentMap = new Map<string, number>();
     for (const c of commentRows) {
         commentMap.set(
@@ -208,7 +236,12 @@ async function renderSubmission(
             slug: submissionSlug,
             categoryId: category._id,
         },
-        { perspective: "published" },
+        {
+            perspective: "published",
+            next: {
+                tags: ["submission", "category", "author", "tag"],
+            },
+        },
     );
 
     if (!submission) {
@@ -226,9 +259,13 @@ async function renderSubmission(
     createdAt
     }`;
 
-    const submissionComments = await client.fetch<Comment[]>(commentQuery, {
-        submissionId: submission._id,
-    });
+    const submissionComments = await client.fetch<Comment[]>(
+        commentQuery,
+        {
+            submissionId: submission._id,
+        },
+        { next: { tags: ["comment"] } },
+    );
 
     return (
         <div className="text-foreground">

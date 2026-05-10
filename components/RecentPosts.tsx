@@ -35,7 +35,12 @@ author->{
     const newPublishedPiecesRes = await client.fetch<LatestSubmissions[]>(
         newPublishedPiecesQuery,
         {},
-        { perspective: "published" },
+        {
+            perspective: "published",
+            next: {
+                tags: ["submission", "category", "author", "tag"],
+            },
+        },
     );
     // console.log(newPublishedPiecesRes);
 

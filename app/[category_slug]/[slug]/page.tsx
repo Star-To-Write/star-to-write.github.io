@@ -39,7 +39,12 @@ export default async function Page({
             slug: slug,
             categorySlug: category_slug,
         },
-        { perspective: "published" },
+        {
+            perspective: "published",
+            next: {
+                tags: ["submission", "category", "author", "tag"],
+            },
+        },
     );
 
     if (!submission) {
@@ -57,9 +62,17 @@ export default async function Page({
     createdAt
     }`;
 
-    const submissionComments = await client.fetch<Comment[]>(commentQuery, {
-        submissionId: submission._id,
-    });
+    const submissionComments = await client.fetch<Comment[]>(
+        commentQuery,
+        {
+            submissionId: submission._id,
+        },
+        {
+            next: {
+                tags: ["comment"],
+            },
+        },
+    );
 
     return (
         <div className="text-foreground">

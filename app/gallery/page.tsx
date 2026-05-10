@@ -50,8 +50,15 @@ export default async function GalleryPage() {
         }
     `;
 
-    const galleryResults: GalleryQueryResult[] =
-        await client.fetch(galleryQuery);
+    const galleryResults: GalleryQueryResult[] = await client.fetch(
+        galleryQuery,
+        {},
+        {
+            next: {
+                tags: ["gallery", "author"],
+            },
+        },
+    );
     const ids = galleryResults.map((item) => item._id);
 
     const statsRows =
@@ -72,6 +79,11 @@ export default async function GalleryPage() {
                         gallery->{ _id },
                   }`,
                   { ids },
+                  {
+                      next: {
+                          tags: ["gallery", "comment"],
+                      },
+                  },
               )
             : [];
 

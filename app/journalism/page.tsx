@@ -14,15 +14,28 @@ export default async function Page() {
     const category = await client.fetch<{
         title: string;
         description?: string;
-    }>('*[_type == "category" && title == $title][0]{title, description}', {
-        title: categoryTitle,
-    });
+    }>(
+        '*[_type == "category" && title == $title][0]{title, description}',
+        {
+            title: categoryTitle,
+        },
+        {
+            next: {
+                tags: ["category"],
+            },
+        },
+    );
 
     // 🔹 Fetch Sanity data in parallel
     const [tags, articles] = await Promise.all([
         client.fetch<string[]>(
             '*[_type == "tag" && category->title == $category].name',
             { category: categoryTitle },
+            {
+                next: {
+                    tags: ["category", "tag"],
+                },
+            },
         ),
         client.fetch<Submission[]>(
             `*[_type == "submission" && category->title == $category]{
@@ -50,7 +63,12 @@ export default async function Page() {
         }
       } | order(submittedDate desc)[0..10]`,
             { category: categoryTitle },
-            { perspective: "published" },
+            {
+                perspective: "published",
+                next: {
+                    tags: ["submission", "category", "author", "tag"],
+                },
+            },
         ),
     ]);
 

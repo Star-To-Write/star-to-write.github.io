@@ -9,6 +9,11 @@ export async function GET(req: NextRequest) {
     const data = await client.fetch<string[]>(
         '*[_type == "tag" && category->title == $category].name',
         { category },
+        {
+            next: {
+                tags: ["category", "tag"],
+            },
+        },
     );
     data.unshift("All");
 

@@ -27,7 +27,15 @@ export default async function FoundationPage() {
           "applicationLink": link,
           socials
         }`;
-    const organizations: Organization[] = await client.fetch(submissionsQuery);
+    const organizations: Organization[] = await client.fetch(
+        submissionsQuery,
+        {},
+        {
+            next: {
+                tags: ["organization"],
+            },
+        },
+    );
 
     return (
         <div className="min-h-screen">
