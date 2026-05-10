@@ -5,6 +5,7 @@ import { Submission } from "@/lib/types";
 import { client } from "@/sanity/lib/client";
 
 export const revalidate = 60; // ⏱ cache for 1 min
+export const dynamic = "force-dynamic";
 
 export default async function Page({
     params,
