@@ -129,16 +129,18 @@ author->{
                             </Button>
                         </div>
 
-                        <div className="relative">
-                            <div className="aspect-[4/5] rounded-lg overflow-hidden bg-gradient-to-br from-[#d4af37]/10 to-transparent">
-                                <Image
-                                    src={submission.images[0].asset.url}
-                                    alt={submission.title}
-                                    fill
-                                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300"
-                                />
+                        {submission.images && (
+                            <div className="relative">
+                                <div className="aspect-[4/5] rounded-lg overflow-hidden bg-gradient-to-br from-[#d4af37]/10 to-transparent">
+                                    <Image
+                                        src={submission.images[0].asset.url}
+                                        alt={submission.title}
+                                        fill
+                                        className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+                                    />
+                                </div>
                             </div>
-                        </div>
+                        )}
                     </div>
                 ))}
                 {/* {archiveItems.map((item) => (
