@@ -13,7 +13,7 @@ export default function Navbar() {
         { name: "All Submissions", href: "/submissions" },
         { name: "Get Published", href: "/get-published" },
         { name: "Magazine", href: "/magazine" },
-        // { name: "Gallery", href: "/gallery" },
+        { name: "Gallery", href: "/gallery" },
         { name: "Journalism", href: "/journalism" },
         { name: "Foundation", href: "/foundation" },
         { name: "About", href: "/about" },
