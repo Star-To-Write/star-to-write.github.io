@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Heart } from "lucide-react";
+import { getFingerPrint } from "@/lib/utils";
 
 interface SubmissionLikeProps {
     submissionId: string;
@@ -11,11 +12,22 @@ export default function SubmissionLike({ submissionId }: SubmissionLikeProps) {
     const [likes, setLikes] = useState(0);
     const [isLiked, setIsLiked] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [userHash, setUserHash] = useState<string | null>(null);
 
     useEffect(() => {
+        let active = true;
+
         const fetchState = async () => {
             try {
-                const res = await fetch(`/api/like?subId=${submissionId}`);
+                const hash = await getFingerPrint();
+                if (!active) return;
+                setUserHash(hash);
+
+                const res = await fetch(
+                    `/api/like?subId=${submissionId}&userHash=${encodeURIComponent(
+                        hash,
+                    )}`,
+                );
                 if (!res.ok) return;
                 const json = await res.json();
                 if (json.success) {
@@ -28,6 +40,10 @@ export default function SubmissionLike({ submissionId }: SubmissionLikeProps) {
         };
 
         fetchState();
+
+        return () => {
+            active = false;
+        };
     }, [submissionId]);
 
     const handleLike = async () => {
@@ -37,10 +53,21 @@ export default function SubmissionLike({ submissionId }: SubmissionLikeProps) {
         const action = isLiked ? "unlike" : "like";
 
         try {
+            const hash =
+                userHash ??
+                (await getFingerPrint().then((value) => {
+                    setUserHash(value);
+                    return value;
+                }));
+
             const res = await fetch("/api/like", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ subId: submissionId, action }),
+                body: JSON.stringify({
+                    subId: submissionId,
+                    action,
+                    userHash: hash,
+                }),
             });
             const json = await res.json();
             if (res.ok && json.success) {

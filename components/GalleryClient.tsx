@@ -10,7 +10,7 @@ import SubmissionCarousel from "@/components/SubmissionCarousel";
 import SubmissionComments from "@/components/submission/SubmissionComments";
 import LeaveAComment from "@/components/LeaveAComment";
 import { DontGo } from "@/components/DontGo";
-import { buildNestedComments } from "@/lib/utils";
+import { buildNestedComments, getFingerPrint } from "@/lib/utils";
 import type { Comment, GalleryItem } from "@/lib/types";
 
 const categories = [
@@ -38,6 +38,7 @@ export default function GalleryClient({
     const [commentsError, setCommentsError] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("all");
+    const [userHash, setUserHash] = useState<string | null>(null);
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
@@ -89,6 +90,27 @@ export default function GalleryClient({
         };
     }, [selectedPiece, isCommentsModalOpen]);
 
+    useEffect(() => {
+        let active = true;
+
+        const loadFingerprint = async () => {
+            try {
+                const hash = await getFingerPrint();
+                if (active) {
+                    setUserHash(hash);
+                }
+            } catch (error) {
+                console.error("Failed to load fingerprint", error);
+            }
+        };
+
+        loadFingerprint();
+
+        return () => {
+            active = false;
+        };
+    }, []);
+
     const handleLike = async (pieceId: string) => {
         const currentPiece = pieces.find((piece) => piece.id === pieceId);
         if (!currentPiece) return;
@@ -96,10 +118,21 @@ export default function GalleryClient({
         const action = currentPiece.isLiked ? "unlike" : "like";
 
         try {
+            const hash =
+                userHash ??
+                (await getFingerPrint().then((value) => {
+                    setUserHash(value);
+                    return value;
+                }));
+
             const res = await fetch("/api/like", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ subId: pieceId, action }),
+                body: JSON.stringify({
+                    subId: pieceId,
+                    action,
+                    userHash: hash,
+                }),
             });
             const json = await res.json();
 

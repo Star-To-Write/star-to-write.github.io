@@ -7,10 +7,12 @@ import { AboutUs } from "@/components/AboutUs";
 import { CategoryShowcase } from "@/components/CategoryShowcase";
 import { DontGo } from "@/components/DontGo";
 import { FeaturedArticle } from "@/components/FeaturedArticle";
+import { FingerMe } from "@/components/Fingers";
 import { RecentPosts } from "@/components/RecentPosts";
 import { SubscribeCard } from "@/components/SubscribeCard";
+import { FingeringProvider } from "@/components/ui/FingerContext";
 
-export default async function Home() {
+export default function Home() {
     return (
         <div>
             <SubscribeCard />
@@ -19,6 +21,10 @@ export default async function Home() {
             <AboutUs />
             <RecentPosts />
             <DontGo />
+
+            <FingeringProvider>
+                <FingerMe />
+            </FingeringProvider>
         </div>
     );
 }
