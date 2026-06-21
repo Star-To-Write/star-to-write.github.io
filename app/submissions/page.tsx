@@ -61,9 +61,9 @@ export default async function SubmissionsPage() {
     const statsRows =
         ids.length > 0
             ? await sql`
-    SELECT sub_id, likes, views, shares
-    FROM sub_stats
-    WHERE sub_id = ANY(${ids})
+    SELECT post_id, likes, views, shares
+    FROM post_stats
+    WHERE post_id = ANY(${ids})
   `
             : [];
 
@@ -93,7 +93,7 @@ export default async function SubmissionsPage() {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const statsMap = new Map(statsRows.map((row: any) => [row.sub_id, row]));
+    const statsMap = new Map(statsRows.map((row: any) => [row.post_id, row]));
     const enrichedSubmissions = submissions.map((s) => ({
         ...s,
         stats: {

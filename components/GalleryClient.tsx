@@ -271,6 +271,8 @@ export default function GalleryClient({
         return matchesSearch && matchesCategory;
     });
 
+    console.log(selectedPiece);
+
     return (
         <>
             <div className="text-center my-6">

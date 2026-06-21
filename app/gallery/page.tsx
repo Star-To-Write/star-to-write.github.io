@@ -25,7 +25,7 @@ type GalleryQueryResult = {
 };
 
 type GalleryStatsRow = {
-    sub_id: string;
+    post_id: string;
     likes: number;
     views: number;
 };
@@ -63,13 +63,13 @@ export default async function GalleryPage() {
 
     const statsRows =
         ids.length > 0
-            ? await sql`SELECT sub_id, likes, views FROM sub_stats
-        WHERE sub_id = ANY(${ids})
+            ? await sql`SELECT post_id, likes, views FROM post_stats
+        WHERE post_id = ANY(${ids})
     `
             : [];
 
     const statsMap = new Map(
-        (statsRows as GalleryStatsRow[]).map((row) => [row.sub_id, row]),
+        (statsRows as GalleryStatsRow[]).map((row) => [row.post_id, row]),
     );
 
     const comments =

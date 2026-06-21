@@ -143,9 +143,9 @@ async function renderCategory(category: Category, categoryPath: Category[]) {
     const statsRows =
         ids.length > 0
             ? await sql`
-    SELECT sub_id, likes, views, shares
-    FROM sub_stats
-    WHERE sub_id = ANY(${ids})
+    SELECT post_id, likes, views, shares
+    FROM post_stats
+    WHERE post_id = ANY(${ids})
   `
             : [];
 
@@ -176,7 +176,7 @@ async function renderCategory(category: Category, categoryPath: Category[]) {
 
     // 🔹 Create lookup map
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const statsMap = new Map(statsRows.map((row: any) => [row.sub_id, row]));
+    const statsMap = new Map(statsRows.map((row: any) => [row.post_id, row]));
 
     // Build breadcrumb path
     const breadcrumbPath = categoryPath.map((cat) => cat.slug).join("/");

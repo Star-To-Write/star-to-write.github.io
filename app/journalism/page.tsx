@@ -77,13 +77,13 @@ export default async function Page() {
 
     // 🔹 Fetch ALL stats in one query (FAST 🚀)
     const statsRows = await sql`
-    SELECT sub_id, likes, views, shares
-    FROM sub_stats
-    WHERE sub_id = ANY(${ids})
+    SELECT post_id, likes, views, shares
+    FROM post_stats
+    WHERE post_id = ANY(${ids})
   `;
 
     // 🔹 Create lookup map
-    const statsMap = new Map(statsRows.map((row) => [row.sub_id, row]));
+    const statsMap = new Map(statsRows.map((row) => [row.post_id, row]));
 
     // 🔹 Merge stats into articles
     const enrichedArticles = articles.map((article) => {

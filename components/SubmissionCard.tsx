@@ -25,32 +25,35 @@ export function SubmissionCard({
         // You could add a toast notification here
         // NOTE: also you can add google and facebook and stuff like that, personally not a fan of it.
     };
+    const imageUrl = images?.[0]?.asset?.url ?? null;
 
     return (
-        <div className="group bg-card/40 backdrop-blur-sm border border-border rounded-xl overflow-hidden hover:border-[#d4af37]/50 transition-all duration-300">
+        <div className="group bg-card/40 backdrop-blur-sm border border-border rounded-xl overflow-hidden hover:border-[#d4af37]/50 transition-all duration-300 flex flex-col h-full">
             {/* Image */}
-            <div className="aspect-[16/10] relative overflow-hidden">
-                <Image
-                    src={images[0].asset.url}
-                    alt={title}
-                    fill
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0b132b]/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            {imageUrl && (
+                <div className="aspect-[16/10] relative overflow-hidden">
+                    <Image
+                        src={imageUrl}
+                        alt={title}
+                        fill
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0b132b]/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                {/* Category Badge */}
-                <div className="absolute top-3 left-3">
-                    <span
-                        className="bg-[#d4af37]/90 text-primary-foreground px-3 py-1 rounded-full text-xs uppercase tracking-wider"
-                        style={{ fontFamily: "Inter, sans-serif" }}
-                    >
-                        {category.title}
-                    </span>
+                    {/* Category Badge */}
+                    <div className="absolute top-3 left-3">
+                        <span
+                            className="bg-[#d4af37]/90 text-primary-foreground px-3 py-1 rounded-full text-xs uppercase tracking-wider"
+                            style={{ fontFamily: "Inter, sans-serif" }}
+                        >
+                            {category.title}
+                        </span>
+                    </div>
                 </div>
-            </div>
+            )}
 
             {/* Content */}
-            <div className="p-6">
+            <div className="p-6 flex flex-col flex-1">
                 <div className="flex items-center justify-between mb-3">
                     <span
                         className="text-xs text-muted-foreground"
@@ -92,7 +95,7 @@ export function SubmissionCard({
                 </p>
 
                 {/* Actions */}
-                <div className="flex items-center justify-between pt-4 border-t border-border">
+                <div className="flex items-center justify-between pt-4 border-t border-border mt-auto">
                     <div className="flex items-center gap-4">
                         {/* <button
                             onClick={handleLike}
