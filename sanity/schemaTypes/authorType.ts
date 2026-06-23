@@ -27,6 +27,15 @@ export const authorType = defineType({
         }),
 
         defineField({
+            name: "image",
+            type: "image",
+            title: "Author Image",
+            options: {
+                hotspot: true,
+            },
+        }),
+
+        defineField({
             name: "socials",
             title: "Social Media",
             type: "array" as const,

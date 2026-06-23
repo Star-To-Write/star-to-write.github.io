@@ -9,6 +9,7 @@ import LeaveAComment from "@/components/LeaveAComment";
 import SubmissionLike from "@/components/submission/SubmissionLike";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 
 export const dynamic = "force-dynamic";
 
@@ -20,9 +21,9 @@ export default async function Page({
     const { category_slug, slug } = await params;
 
     const query = `
-  *[_type == "submission" && slug.current == $slug && category->slug.current == $categorySlug]{
+    *[_type == "submission" && slug.current == $slug && category->slug.current == $categorySlug]{
     _id,
-    author->{ name, bio, socials, anonymous },
+    author->{ name, bio, "image": image.asset->url, socials, anonymous },
     title,
     content,
     category->{ title, "slug": slug.current },
@@ -77,6 +78,7 @@ export default async function Page({
             },
         },
     );
+    console.log(submission);
 
     return (
         <div className="text-foreground">
@@ -120,6 +122,15 @@ export default async function Page({
                 <p className="text-xl text-primary font-bold">
                     ABOUT THE AUTHOR
                 </p>
+                <div>
+                    <Image
+                        src={submission.author.image}
+                        alt={`A picture of ${submission.author.name}, author(s).`}
+                        width={128}
+                        height={0}
+                        className="h-auto"
+                    />
+                </div>
                 <p className="text-md">
                     {submission.author.bio ?? "No bio provided."}
                 </p>

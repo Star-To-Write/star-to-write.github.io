@@ -1,11 +1,24 @@
 import { NextResponse } from "next/server";
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function normalizeEmail(value: unknown): string | undefined {
+    if (typeof value !== "string") return undefined;
+
+    const email = value.trim().toLowerCase();
+    return email.length > 0 ? email : undefined;
+}
+
+function isValidEmail(email: string): boolean {
+    return EMAIL_REGEX.test(email);
+}
+
 export async function POST(req: Request) {
     try {
         const body = await req.json();
-        const email: string = body.email;
+        const email = normalizeEmail((body as { email?: unknown }).email);
 
-        if (!email || !email.includes("@")) {
+        if (!email || !isValidEmail(email)) {
             return NextResponse.json(
                 { error: "Invalid email" },
                 { status: 400 },
@@ -24,6 +37,7 @@ export async function POST(req: Request) {
             },
         );
 
+        console.log("here");
         // if there is a record
         if (brevoCheck.ok) {
             return NextResponse.json({ success: true });
@@ -42,18 +56,38 @@ export async function POST(req: Request) {
             }),
         });
 
+        console.log("here ok");
         if (!brevoRes.ok) {
             const errorText = await brevoRes.text();
-            console.error(errorText);
+            console.error("BREVO", errorText);
 
             return NextResponse.json(
                 { error: "Subscription failed" },
                 { status: 400 },
             );
         }
+        console.error("hello");
+
+        // send discord webhook alerting
+        const webhookPayload = {
+            content: `:bellhop: :pen_fountain: **${email}** just subscribed to our mailing list!`,
+            embeds: null,
+            attachments: [],
+        };
+
+        await fetch(process.env.WEBHOOK_URL as string, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(webhookPayload),
+        });
 
         return NextResponse.json({ success: true });
     } catch (error) {
-        return NextResponse.json({ error: `Server error: ${error}` }, { status: 500 });
+        return NextResponse.json(
+            { error: `Server error: ${error}` },
+            { status: 500 },
+        );
     }
 }

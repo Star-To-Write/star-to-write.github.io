@@ -18,13 +18,20 @@ export type Category = {
 export type Author = {
     name?: string;
     bio: string;
+    image: string;
     socials: SocialMedia[];
     anonymous: boolean;
 };
 
 export type SocialMedia = {
     _key: string;
-    platform: "instagram" | "twitter" | "tiktok" | "youtube" | "linkedin" | "website";
+    platform:
+        | "instagram"
+        | "twitter"
+        | "tiktok"
+        | "youtube"
+        | "linkedin"
+        | "website";
     username: string;
 };
 
