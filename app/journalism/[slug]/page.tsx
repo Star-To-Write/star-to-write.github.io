@@ -67,7 +67,6 @@ export default async function Page({
         },
     );
 
-    // BUG: add like some utility class adding the line.
     return (
         <div className="text-foreground">
             <TrackView subId={submission._id} />
@@ -101,32 +100,36 @@ export default async function Page({
                 {/* add some small line here */}
                 <hr className="h-px w-full bg-foreground opacity-40 border-0 my-2" />
             </article>
-            {/* BUG: IF images. */}
-            <SubmissionCarousel images={submission.images} />
+            {submission.images && (
+                <SubmissionCarousel images={submission.images} />
+            )}
             <article className="font-georgia px-12">
                 <div className="text-foreground">
                     <RichTextRenderer value={submission.content} />
                 </div>
             </article>
             {/* author + comments part */}
-            {/* NOTE: only show if not anonymous */}
+            {!submission.author.anonymous && (
+                <div className="px-12">
+                    <hr className="h-px w-full bg-foreground opacity-40 border-0 my-2 pr-12" />
+                    <p className="text-xl text-primary font-bold">
+                        ABOUT THE AUTHOR
+                    </p>
+                    <p className="text-md">
+                        {submission.author.bio ?? "No bio provided."}
+                    </p>
+                    <br />
+                    {submission.author.socials &&
+                        submission.author.socials.map((social) => (
+                            <p key={social._key}>
+                                {social.platform.charAt(0).toUpperCase() +
+                                    social.platform.slice(1)}
+                                : {social.username}
+                            </p>
+                        ))}
+                </div>
+            )}
             <div className="px-12">
-                <hr className="h-px w-full bg-foreground opacity-40 border-0 my-2 pr-12" />
-                <p className="text-xl text-primary font-bold">
-                    ABOUT THE AUTHOR
-                </p>
-                <p className="text-md">
-                    {submission.author.bio ?? "No bio provided."}
-                </p>
-                <br />
-                {submission.author.socials &&
-                    submission.author.socials.map((social) => (
-                        <p key={social._key}>
-                            {social.platform.charAt(0).toUpperCase() +
-                                social.platform.slice(1)}
-                            : {social.username}
-                        </p>
-                    ))}
                 <hr className="h-px w-full bg-foreground opacity-40 border-0 my-2 pr-12" />
                 <p className="text-xl font-inter text-primary font-bold">
                     COMMENTS

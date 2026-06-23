@@ -48,7 +48,6 @@ export async function FeaturedArticle() {
                 >
                     UNLOCKED:
                 </div>
-                {/* BUG: This card does not show the image on mobile or tablet. */}
                 <div className="grid lg:grid-cols-2 gap-12 items-stretch">
                     <div className="h-full flex flex-col">
                         {featuredSubmission.tags && (
