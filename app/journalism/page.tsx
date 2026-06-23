@@ -89,8 +89,6 @@ export default async function Page() {
     const enrichedArticles = articles.map((article) => {
         const stats = statsMap.get(article._id);
 
-        console.log(article._id, stats);
-
         return {
             ...article,
             stats: {

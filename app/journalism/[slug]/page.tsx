@@ -67,8 +67,6 @@ export default async function Page({
         },
     );
 
-    console.log(submissionComments);
-    console.log(submission.author);
     // BUG: add like some utility class adding the line.
     return (
         <div className="text-foreground">

@@ -37,7 +37,6 @@ export async function POST(req: Request) {
             },
         );
 
-        console.log("here");
         // if there is a record
         if (brevoCheck.ok) {
             return NextResponse.json({ success: true });
@@ -56,17 +55,14 @@ export async function POST(req: Request) {
             }),
         });
 
-        console.log("here ok");
         if (!brevoRes.ok) {
             const errorText = await brevoRes.text();
-            console.error("BREVO", errorText);
 
             return NextResponse.json(
                 { error: "Subscription failed" },
                 { status: 400 },
             );
         }
-        console.error("hello");
 
         // send discord webhook alerting
         const webhookPayload = {

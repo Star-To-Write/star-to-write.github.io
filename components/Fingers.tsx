@@ -25,8 +25,6 @@ export function FingerMe() {
         };
     }, [fingerPromise]);
 
-    console.log(fingerprint);
-
     return (
         <div>
             {fingerprint

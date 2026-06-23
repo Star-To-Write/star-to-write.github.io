@@ -1,16 +1,24 @@
 "use client";
 
-import { createContext, useContext, useMemo } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { getFingerPrint } from "@/lib/utils";
 
 interface FingeringProps {
     children: React.ReactNode;
 }
 
-export const FingerContext = createContext<Promise<string> | null>(null);
+export const FingerContext = createContext<Promise<string>>(
+    Promise.resolve("fingerprint-loading"),
+);
 
 export const FingeringProvider = ({ children }: FingeringProps) => {
-    const fingerPromise = useMemo(() => getFingerPrint(), []);
+    const [fingerPromise, setFingerPromise] = useState<Promise<string>>(() =>
+        Promise.resolve("fingerprint-loading"),
+    );
+
+    useEffect(() => {
+        setFingerPromise(getFingerPrint());
+    }, []);
 
     return (
         <FingerContext.Provider value={fingerPromise}>

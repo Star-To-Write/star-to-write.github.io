@@ -27,8 +27,6 @@ export async function FeaturedArticle() {
         },
     );
 
-    console.log(featuredSubmission);
-
     // SAFETY: if nothing is returned, render fallback
     if (!featuredSubmission) {
         return (
@@ -107,7 +105,7 @@ export async function FeaturedArticle() {
                         </div>
                     </div>
                     <div className="h-full relative">
-                        <div className="aspect-[4/5] rounded-[40px] overflow-hidden">
+                        <div className="relative aspect-[4/5] rounded-[40px] overflow-hidden">
                             {imageUrl && (
                                 <Image
                                     src={imageUrl}

@@ -17,7 +17,5 @@ export async function GET(req: NextRequest) {
     );
     data.unshift("All");
 
-    console.log(data);
-
     return Response.json(data);
 }

@@ -42,7 +42,6 @@ author->{
             },
         },
     );
-    // console.log(newPublishedPiecesRes);
 
     return (
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16">
@@ -131,11 +130,12 @@ author->{
 
                         {submission.images && (
                             <div className="relative">
-                                <div className="aspect-[4/5] rounded-lg overflow-hidden bg-gradient-to-br from-[#d4af37]/10 to-transparent">
+                                <div className="relative aspect-[4/5] rounded-lg overflow-hidden bg-gradient-to-br from-[#d4af37]/10 to-transparent">
                                     <Image
                                         src={submission.images[0].asset.url}
                                         alt={submission.title}
                                         fill
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                         className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300"
                                     />
                                 </div>

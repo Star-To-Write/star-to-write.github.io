@@ -51,9 +51,7 @@ export default function MagazineClient({
     comingSoonMagazines,
     submissionsOpenMagazine,
 }: Props) {
-    console.log(featuredMagazine);
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-    console.log(submissionsOpenMagazine);
 
     const handleShare = (magazine: Magazine) => {
         const issueTypeText =

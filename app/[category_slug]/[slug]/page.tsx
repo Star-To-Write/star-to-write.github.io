@@ -50,8 +50,6 @@ export default async function Page({
         },
     );
 
-    // console.log(submission);
-
     if (!submission) {
         notFound();
     }
@@ -78,7 +76,6 @@ export default async function Page({
             },
         },
     );
-    console.log(submission);
 
     return (
         <div className="text-foreground">
@@ -122,15 +119,17 @@ export default async function Page({
                 <p className="text-xl text-primary font-bold">
                     ABOUT THE AUTHOR
                 </p>
-                <div>
-                    <Image
-                        src={submission.author.image}
-                        alt={`A picture of ${submission.author.name}, author(s).`}
-                        width={128}
-                        height={0}
-                        className="h-auto"
-                    />
-                </div>
+                {submission.author.image && (
+                    <div>
+                        <Image
+                            src={submission.author.image}
+                            alt={`A picture of ${submission.author.name}, author(s).`}
+                            width={128}
+                            height={0}
+                            className="h-auto"
+                        />
+                    </div>
+                )}
                 <p className="text-md">
                     {submission.author.bio ?? "No bio provided."}
                 </p>

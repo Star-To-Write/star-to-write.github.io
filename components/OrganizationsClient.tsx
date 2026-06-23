@@ -94,8 +94,6 @@ export default function OrganizationsClient({
         router.replace("/foundation");
     };
 
-    // console.log(organizations);
-
     // // Sort filtered submissions
     // const sorted = [...filtered].sort((a, b) => {
     //     switch (sortBy) {
@@ -232,7 +230,6 @@ export default function OrganizationsClient({
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {sorted.map((org) => {
-                    // console.log(org);
                     return (
                         <div
                             key={org.slug}
