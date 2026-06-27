@@ -12,6 +12,7 @@ import LeaveAComment from "@/components/LeaveAComment";
 import { DontGo } from "@/components/DontGo";
 import { buildNestedComments, getFingerPrint } from "@/lib/utils";
 import type { Comment, GalleryItem } from "@/lib/types";
+import TrackView from "./TrackView";
 
 const categories = [
     { id: "all", name: "All Artwork" },
@@ -168,12 +169,7 @@ export default function GalleryClient({
     };
 
     const handleView = async (piece: GalleryItem) => {
-        const updatedPiece = { ...piece, views: piece.views + 1 };
-
-        setPieces((prev) =>
-            prev.map((p) => (p.id === piece.id ? updatedPiece : p)),
-        );
-        setSelectedPiece(updatedPiece);
+        setSelectedPiece(piece);
 
         try {
             await fetch("/api/view", {
@@ -541,6 +537,7 @@ export default function GalleryClient({
             {selectedPiece && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-[#0b132b]/90 p-4 backdrop-blur-sm">
                     <div className="w-full max-w-6xl max-h-[90vh] overflow-hidden rounded-xl border border-border bg-card">
+                        <TrackView subId={selectedPiece.id} />
                         <div className="flex items-center justify-between p-6 border-b border-border">
                             <div>
                                 <h3
