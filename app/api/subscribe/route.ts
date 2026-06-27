@@ -62,6 +62,7 @@ export async function POST(req: Request) {
                 { error: "Subscription failed" },
                 { status: 400 },
             );
+            console.error("Brevo Error: ", errorText);
         }
 
         // send discord webhook alerting

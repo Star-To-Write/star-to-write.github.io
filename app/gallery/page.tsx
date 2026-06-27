@@ -30,6 +30,16 @@ type GalleryStatsRow = {
     views: number;
 };
 
+const buildGalleryAuthor = (
+    author: GalleryQueryResult["author"],
+): GalleryItem["author"] => ({
+    name: author?.name ?? "Unknown",
+    bio: "",
+    image: "",
+    socials: [],
+    anonymous: author?.anonymous ?? false,
+});
+
 export default async function GalleryPage() {
     const galleryQuery = `
         *[_type == "gallery"] | order(_createdAt desc) {
@@ -99,12 +109,7 @@ export default async function GalleryPage() {
         id: item._id,
         slug: item.slug,
         title: item.title,
-        author: {
-            name: item.author?.name ?? "Unknown",
-            anonymous: item.author?.anonymous ?? false,
-            bio: "",
-            socials: [],
-        },
+        author: buildGalleryAuthor(item.author),
         description: item.description,
         category: item.category,
         featured: item.featured ?? false,

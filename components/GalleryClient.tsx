@@ -539,8 +539,8 @@ export default function GalleryClient({
             )}
 
             {selectedPiece && (
-                <div className="fixed inset-0 bg-[#0b132b]/90 backdrop-blur-sm z-50 overflow-y-auto">
-                    <div className="max-w-6xl max-h-[90vh] my-6 bg-card border border-border rounded-xl mx-4">
+                <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-[#0b132b]/90 p-4 backdrop-blur-sm">
+                    <div className="w-full max-w-6xl max-h-[90vh] overflow-hidden rounded-xl border border-border bg-card">
                         <div className="flex items-center justify-between p-6 border-b border-border">
                             <div>
                                 <h3
@@ -606,14 +606,16 @@ export default function GalleryClient({
                                         ></span>
                                     </div>
 
-                                    <p
-                                        className="text-muted-foreground leading-relaxed"
-                                        style={{
-                                            fontFamily: "Inter, sans-serif",
-                                        }}
-                                    >
-                                        {selectedPiece.description}
-                                    </p>
+                                    {selectedPiece.description && (
+                                        <p
+                                            className="text-muted-foreground leading-relaxed"
+                                            style={{
+                                                fontFamily: "Inter, sans-serif",
+                                            }}
+                                        >
+                                            {selectedPiece.description}
+                                        </p>
+                                    )}
                                 </div>
 
                                 <div className="flex items-center justify-between mb-6">
