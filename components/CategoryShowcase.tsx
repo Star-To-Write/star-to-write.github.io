@@ -7,21 +7,21 @@ const categories = [
         title: "GET PUBLISHED NOW",
         description:
             "Submit your writing for free publication and reach a global audience",
-        image: "https://images.unsplash.com/photo-1559312171-dd6390da4fa8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMHdyaXRpbmclMjBwZW4lMjBwYXBlcnxlbnwxfHx8fDE3NTU3Mjc5OTd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+        image: "/getpublished-banner.png",
     },
     {
         id: "/journalism",
         title: "JOURNALISM",
         description:
             "Investigative pieces, cultural commentary, and youth perspectives",
-        image: "https://images.unsplash.com/photo-1579308343343-6557a756d515?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxqb3VybmFsaXNtJTIwbmV3c3BhcGVyJTIwd3JpdGluZ3xlbnwxfHx8fDE3NTU3MjgwMDB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+        image: "/journalism-banner.png",
     },
     {
         id: "/gallery",
         title: "GALLERY",
         description:
             "Visual storytelling, digital art, and creative multimedia projects",
-        image: "https://images.unsplash.com/photo-1613563967994-faa3a4e08455?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcnQlMjBkZXNpZ24lMjBjcmVhdGl2ZSUyMHN0dWRpb3xlbnwxfHx8fDE3NTU2OTIyNDl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+        image: "/gallery-banner.png",
     },
 ];
 
