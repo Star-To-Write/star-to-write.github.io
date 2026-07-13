@@ -8,6 +8,7 @@ import { tagType } from "./tagType";
 import { magazineType } from "./magazineType";
 import { galleryType } from "./galleryType";
 import { organizationType } from "./organizationType";
+import { bookType } from "./bookType";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
     types: [
@@ -20,5 +21,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         magazineType,
         galleryType,
         organizationType,
+        bookType
     ],
 };
