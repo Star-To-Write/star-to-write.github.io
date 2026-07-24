@@ -63,6 +63,26 @@ export interface Submission {
     };
 }
 
+export interface Book {
+    _id: string;
+    title: string;
+    slug: string;
+    synopsis?: string;
+    price: number;
+    link: string;
+    type?: string | string[];
+    author?: {
+        name?: string;
+        anonymous?: boolean;
+    };
+    cover?: {
+        asset?: {
+            url: string;
+        };
+        alt?: string;
+    };
+}
+
 export interface GalleryItem {
     id: string;
     slug: string;
