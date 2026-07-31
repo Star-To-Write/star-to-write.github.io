@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import Image from "next/image";
 import { Heart, MessageCircle, Share2, Eye, X, Search } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -12,6 +12,7 @@ import LeaveAComment from "@/components/LeaveAComment";
 import { DontGo } from "@/components/DontGo";
 import { buildNestedComments, getFingerPrint } from "@/lib/utils";
 import type { Comment, GalleryItem } from "@/lib/types";
+import { Pagination } from "@/components/ui/Pagination";
 import TrackView from "./TrackView";
 
 const categories = [
@@ -40,6 +41,8 @@ export default function GalleryClient({
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("all");
     const [userHash, setUserHash] = useState<string | null>(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
@@ -234,38 +237,63 @@ export default function GalleryClient({
         loadComments();
     }, [selectedPiece, loadComments]);
 
-    const filteredPieces = pieces.filter((piece) => {
-        const authorName = piece.author.anonymous
-            ? "anonymous"
-            : piece.author.name?.toLowerCase() || "";
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [searchQuery, selectedCategory]);
 
-        const matchesSearch =
-            piece.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            authorName.includes(searchQuery.toLowerCase()) ||
-            piece.description
-                .toLowerCase()
-                .includes(searchQuery.toLowerCase()) ||
-            piece.category.toLowerCase().includes(searchQuery.toLowerCase());
+    const filteredPieces = useMemo(() => {
+        return pieces.filter((piece) => {
+            const authorName = piece.author.anonymous
+                ? "anonymous"
+                : piece.author.name?.toLowerCase() || "";
 
-        const matchesCategory =
-            selectedCategory === "all" ||
-            (selectedCategory === "art-photography" &&
-                piece.category === "Art and/or Photography") ||
-            (selectedCategory === "digital-art" &&
-                piece.category === "Digital Art") ||
-            (selectedCategory === "painting" &&
-                piece.category === "Painting") ||
-            (selectedCategory === "illustration" &&
-                piece.category === "Illustration") ||
-            (selectedCategory === "abstract" &&
-                piece.category === "Abstract") ||
-            (selectedCategory === "photography" &&
-                piece.category === "Photography") ||
-            (selectedCategory === "sculpture" &&
-                piece.category === "Sculpture");
+            const matchesSearch =
+                piece.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                authorName.includes(searchQuery.toLowerCase()) ||
+                piece.description
+                    .toLowerCase()
+                    .includes(searchQuery.toLowerCase()) ||
+                piece.category
+                    .toLowerCase()
+                    .includes(searchQuery.toLowerCase());
 
-        return matchesSearch && matchesCategory;
-    });
+            const matchesCategory =
+                selectedCategory === "all" ||
+                (selectedCategory === "art-photography" &&
+                    piece.category === "Art and/or Photography") ||
+                (selectedCategory === "digital-art" &&
+                    piece.category === "Digital Art") ||
+                (selectedCategory === "painting" &&
+                    piece.category === "Painting") ||
+                (selectedCategory === "illustration" &&
+                    piece.category === "Illustration") ||
+                (selectedCategory === "abstract" &&
+                    piece.category === "Abstract") ||
+                (selectedCategory === "photography" &&
+                    piece.category === "Photography") ||
+                (selectedCategory === "sculpture" &&
+                    piece.category === "Sculpture");
+
+            return matchesSearch && matchesCategory;
+        });
+    }, [pieces, searchQuery, selectedCategory]);
+
+    const totalPages = Math.max(
+        1,
+        Math.ceil(filteredPieces.length / itemsPerPage),
+    );
+    const startIndex =
+        filteredPieces.length === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1;
+    const endIndex = Math.min(
+        currentPage * itemsPerPage,
+        filteredPieces.length,
+    );
+    const pagedPieces = useMemo(() => {
+        return filteredPieces.slice(
+            (currentPage - 1) * itemsPerPage,
+            currentPage * itemsPerPage,
+        );
+    }, [currentPage, filteredPieces]);
 
     return (
         <>
@@ -329,7 +357,7 @@ export default function GalleryClient({
                         className="text-muted-foreground"
                         style={{ fontFamily: "Inter, sans-serif" }}
                     >
-                        Showing {filteredPieces.length} of {pieces.length}{" "}
+                        Showing ${startIndex}-${endIndex} of {pieces.length}{" "}
                         pieces
                         {searchQuery && <span> for "{searchQuery}"</span>}
                         {selectedCategory !== "all" && (
@@ -386,6 +414,7 @@ export default function GalleryClient({
                             onClick={() => {
                                 setSearchQuery("");
                                 setSelectedCategory("all");
+                                setCurrentPage(1);
                             }}
                             variant="outline"
                             className="border-[#d4af37]/30 text-primary hover:bg-primary hover:text-primary-foreground"
@@ -397,7 +426,7 @@ export default function GalleryClient({
                 </div>
             ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 mb-6">
-                    {filteredPieces.map((piece) => (
+                    {pagedPieces.map((piece) => (
                         <div
                             key={piece.id}
                             className="group bg-card/40 backdrop-blur-sm border border-border rounded-xl overflow-hidden hover:border-[#d4af37]/50 transition-all duration-300"
@@ -533,6 +562,12 @@ export default function GalleryClient({
                     ))}
                 </div>
             )}
+
+            <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+            />
 
             {selectedPiece && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-[#0b132b]/90 p-4 backdrop-blur-sm">
