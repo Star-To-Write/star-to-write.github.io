@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import { ArticleCard } from "@/components/ArticleCard";
 import { SubscribeNews } from "@/components/SubscribeNews";
 import { DontGo } from "@/components/DontGo";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
+import { Pagination } from "@/components/ui/Pagination";
 import Link from "next/link";
 import type { Submission } from "@/lib/types";
 
@@ -35,21 +36,48 @@ export default function JournalismClient({
 }: Props) {
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("All");
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
 
-    const filteredArticles = articles.filter((article) => {
-        const search = searchTerm.toLowerCase();
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [searchTerm, selectedCategory]);
 
-        const matchesSearch =
-            article.title?.toLowerCase().includes(search) ||
-            article.author?.name?.toLowerCase().includes(search) ||
-            article.excerpt?.toLowerCase().includes(search);
+    const filteredArticles = useMemo(() => {
+        return articles.filter((article) => {
+            const search = searchTerm.toLowerCase();
 
-        const matchesCategory =
-            selectedCategory === "All" ||
-            article.tags?.some((tag) => tag.name === selectedCategory);
+            const matchesSearch =
+                article.title?.toLowerCase().includes(search) ||
+                article.author?.name?.toLowerCase().includes(search) ||
+                article.excerpt?.toLowerCase().includes(search);
 
-        return matchesSearch && matchesCategory;
-    });
+            const matchesCategory =
+                selectedCategory === "All" ||
+                article.tags?.some((tag) => tag.name === selectedCategory);
+
+            return matchesSearch && matchesCategory;
+        });
+    }, [articles, searchTerm, selectedCategory]);
+
+    const totalPages = Math.max(
+        1,
+        Math.ceil(filteredArticles.length / itemsPerPage),
+    );
+    const startIndex =
+        filteredArticles.length === 0
+            ? 0
+            : (currentPage - 1) * itemsPerPage + 1;
+    const endIndex = Math.min(
+        currentPage * itemsPerPage,
+        filteredArticles.length,
+    );
+    const pagedArticles = useMemo(() => {
+        return filteredArticles.slice(
+            (currentPage - 1) * itemsPerPage,
+            currentPage * itemsPerPage,
+        );
+    }, [currentPage, filteredArticles]);
 
     return (
         <>
@@ -152,12 +180,16 @@ export default function JournalismClient({
                     {selectedCategory === "All"
                         ? "All Articles"
                         : selectedCategory}{" "}
-                    • {filteredArticles.length} articles found
+                    •{" "}
+                    {filteredArticles.length === 0
+                        ? 0
+                        : `${startIndex}-${endIndex}`}{" "}
+                    of {filteredArticles.length} articles found
                 </div>
 
                 {/* Articles */}
                 <div className="grid md:grid-cols-2 gap-8">
-                    {filteredArticles.map((article) => (
+                    {pagedArticles.map((article) => (
                         <ArticleCard
                             key={article._id}
                             title={article.title}
@@ -174,6 +206,12 @@ export default function JournalismClient({
                     ))}
                 </div>
 
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={setCurrentPage}
+                />
+
                 {/* No results */}
                 {filteredArticles.length === 0 && (
                     <div className="text-center py-12">
@@ -184,6 +222,7 @@ export default function JournalismClient({
                             onClick={() => {
                                 setSearchTerm("");
                                 setSelectedCategory("All");
+                                setCurrentPage(1);
                             }}
                             variant="outline"
                         >

@@ -31,8 +31,7 @@ export const bookType = defineType({
         defineField({
             name: "type",
             title: "Book Type",
-            type: "array" as const,
-            of: [{ type: "string" }],
+            type: "string" as const,
             options: {
                 list: [
                     { title: "Children's Book", value: "Children's Book" },

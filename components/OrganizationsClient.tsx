@@ -1,7 +1,7 @@
 // app/submissions/SubmissionsClient.tsx
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/Input";
 import {
@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
 import { Search, Filter, ExternalLink, X, Music, Youtube } from "lucide-react";
+import { Pagination } from "@/components/ui/Pagination";
 import countries from "@/lib/countryData.json";
 // import { SubmissionCard } from "./SubmissionCard";
 import type { Organization, subjectArea } from "@/lib/types";
@@ -39,6 +40,8 @@ export default function OrganizationsClient({
     const [countrySearch, setCountrySearch] = useState("");
     const [selectedOrganization, setSelectedOrganization] =
         useState<Organization | null>(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
 
     const filteredCategories = categories.filter((c) =>
         c.title.toLowerCase().includes(subjectSearch.toLowerCase()),
@@ -50,23 +53,50 @@ export default function OrganizationsClient({
         country.name.toLowerCase().includes(countrySearch.toLowerCase()),
     );
 
-    // Filter by search term and category
-    const sorted = organizations.filter((s) => {
-        const matchesSearch =
-            s.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            s.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            s.scope.toLowerCase().includes(searchTerm.toLowerCase());
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [searchTerm, selectedSubject, selectedCountry]);
 
-        const matchesCategory =
-            selectedSubject === "All Subject Areas" ||
-            (s.subjects && s.subjects.includes(selectedSubject as subjectArea));
+    const filteredOrganizations = useMemo(() => {
+        return organizations.filter((s) => {
+            const matchesSearch =
+                s.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                s.description
+                    .toLowerCase()
+                    .includes(searchTerm.toLowerCase()) ||
+                s.scope.toLowerCase().includes(searchTerm.toLowerCase());
 
-        const matchesCountry =
-            selectedCountry === "All Countries" ||
-            s.location.country === selectedCountry;
+            const matchesCategory =
+                selectedSubject === "All Subject Areas" ||
+                (s.subjects &&
+                    s.subjects.includes(selectedSubject as subjectArea));
 
-        return matchesSearch && matchesCategory && matchesCountry;
-    });
+            const matchesCountry =
+                selectedCountry === "All Countries" ||
+                s.location.country === selectedCountry;
+
+            return matchesSearch && matchesCategory && matchesCountry;
+        });
+    }, [organizations, searchTerm, selectedSubject, selectedCountry]);
+
+    const totalPages = Math.max(
+        1,
+        Math.ceil(filteredOrganizations.length / itemsPerPage),
+    );
+    const startIndex =
+        filteredOrganizations.length === 0
+            ? 0
+            : (currentPage - 1) * itemsPerPage + 1;
+    const endIndex = Math.min(
+        currentPage * itemsPerPage,
+        filteredOrganizations.length,
+    );
+    const pagedOrganizations = useMemo(() => {
+        return filteredOrganizations.slice(
+            (currentPage - 1) * itemsPerPage,
+            currentPage * itemsPerPage,
+        );
+    }, [currentPage, filteredOrganizations]);
 
     useEffect(() => {
         if (!selectedSlug) {
@@ -226,10 +256,14 @@ export default function OrganizationsClient({
                 className="text-sm text-muted-foreground mb-6 text-center"
                 style={{ fontFamily: "Inter, sans-serif" }}
             >
-                Showing {sorted.length} of {organizations.length} organizations
+                Showing{" "}
+                {filteredOrganizations.length === 0
+                    ? 0
+                    : `${startIndex}-${endIndex}`}{" "}
+                of {filteredOrganizations.length} organizations
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {sorted.map((org) => {
+                {pagedOrganizations.map((org) => {
                     return (
                         <div
                             key={org.slug}
@@ -288,20 +322,28 @@ export default function OrganizationsClient({
                     );
                 })}
             </div>
+
+            <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+            />
             {/* No Results */}
-            {sorted.length === 0 && (
+            {filteredOrganizations.length === 0 && (
                 <div className="text-center py-12">
                     <p
                         className="text-muted-foreground mb-4"
                         style={{ fontFamily: "Inter, sans-serif" }}
                     >
-                        No submissions found matching your criteria.
+                        No organizations found matching your criteria.
                     </p>
                     <Button
                         onClick={() => {
                             setSearchTerm("");
                             setSubjectSearch("");
                             setSelectedSubject("All Subject Areas");
+                            setSelectedCountry("All Countries");
+                            setCurrentPage(1);
                         }}
                         variant="outline"
                         className="border-[#d4af37]/50 text-[#d4af37] hover:bg-[#d4af37] hover:text-[#d4af37]-foreground"

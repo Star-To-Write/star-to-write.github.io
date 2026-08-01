@@ -1,7 +1,7 @@
 // app/submissions/SubmissionsClient.tsx
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Input } from "@/components/ui/Input";
 import {
     Select,
@@ -13,6 +13,7 @@ import {
 import { Button } from "@/components/ui/Button";
 import { Search, Filter, SortAsc } from "lucide-react";
 import { SubmissionCard } from "./SubmissionCard";
+import { Pagination } from "@/components/ui/Pagination";
 import type { Submission, Category } from "@/lib/types";
 
 interface SubmissionsClientProps {
@@ -27,42 +28,59 @@ export default function SubmissionsClient({
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("All Categories");
     const [sortBy, setSortBy] = useState("newest");
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
 
-    // Filter by search term and category
-    const filtered = submissions.filter((s) => {
-        const matchesSearch =
-            s.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            s.author.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            s.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [searchTerm, selectedCategory, sortBy]);
 
-        const matchesCategory =
-            selectedCategory === "All Categories" ||
-            s.category.title === selectedCategory;
+    const filtered = useMemo(() => {
+        return submissions.filter((s) => {
+            const matchesSearch =
+                s.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                s.author.name
+                    ?.toLowerCase()
+                    .includes(searchTerm.toLowerCase()) ||
+                s.excerpt?.toLowerCase().includes(searchTerm.toLowerCase());
 
-        return matchesSearch && matchesCategory;
-    });
+            const matchesCategory =
+                selectedCategory === "All Categories" ||
+                s.category.title === selectedCategory;
 
-    // Sort filtered submissions
-    const sorted = [...filtered].sort((a, b) => {
-        switch (sortBy) {
-            case "newest":
-                return (
-                    new Date(b.submittedDate).getTime() -
-                    new Date(a.submittedDate).getTime()
-                );
-            case "oldest":
-                return (
-                    new Date(a.submittedDate).getTime() -
-                    new Date(b.submittedDate).getTime()
-                );
-            // case "popular":
-            //     return (b.likes || 0) - (a.likes || 0);
-            // case "views":
-            //     return (b.views || 0) - (a.views || 0);
-            default:
-                return 0;
-        }
-    });
+            return matchesSearch && matchesCategory;
+        });
+    }, [searchTerm, selectedCategory, submissions]);
+
+    const sorted = useMemo(() => {
+        return [...filtered].sort((a, b) => {
+            switch (sortBy) {
+                case "newest":
+                    return (
+                        new Date(b.submittedDate).getTime() -
+                        new Date(a.submittedDate).getTime()
+                    );
+                case "oldest":
+                    return (
+                        new Date(a.submittedDate).getTime() -
+                        new Date(b.submittedDate).getTime()
+                    );
+                default:
+                    return 0;
+            }
+        });
+    }, [filtered, sortBy]);
+
+    const totalPages = Math.max(1, Math.ceil(sorted.length / itemsPerPage));
+    const startIndex =
+        sorted.length === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1;
+    const endIndex = Math.min(currentPage * itemsPerPage, sorted.length);
+    const pagedSubmissions = useMemo(() => {
+        return sorted.slice(
+            (currentPage - 1) * itemsPerPage,
+            currentPage * itemsPerPage,
+        );
+    }, [currentPage, sorted]);
 
     return (
         <>
@@ -136,15 +154,22 @@ export default function SubmissionsClient({
                 className="text-sm text-muted-foreground mb-6"
                 style={{ fontFamily: "Inter, sans-serif" }}
             >
-                Showing {sorted.length} of {submissions.length} submissions
+                Showing {sorted.length === 0 ? 0 : `${startIndex}-${endIndex}`}{" "}
+                of {sorted.length} submissions
             </p>
 
             {/* Submissions Grid */}
             <div className="grid md:grid-cols-2 gap-8">
-                {sorted.map((s) => (
-                    <SubmissionCard key={s.title} {...s} />
+                {pagedSubmissions.map((s) => (
+                    <SubmissionCard key={s._id} {...s} />
                 ))}
             </div>
+
+            <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+            />
 
             {/* No Results */}
             {sorted.length === 0 && (
@@ -159,6 +184,8 @@ export default function SubmissionsClient({
                         onClick={() => {
                             setSearchTerm("");
                             setSelectedCategory("All Categories");
+                            setSortBy("newest");
+                            setCurrentPage(1);
                         }}
                         variant="outline"
                         className="border-[#d4af37]/50 text-primary hover:bg-primary hover:text-primary-foreground"
