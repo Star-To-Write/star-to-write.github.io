@@ -135,7 +135,7 @@ author->{
                                         src={submission.images[0].asset.url}
                                         alt={submission.title}
                                         fill
-                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                        sizes="(max-width: 768px) 100vw, 33vw"
                                         className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300"
                                     />
                                 </div>

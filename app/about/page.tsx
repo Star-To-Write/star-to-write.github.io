@@ -112,9 +112,7 @@ export default function AboutUs() {
                                         <Image
                                             src={team.founder.image_url}
                                             fill
-                                            alt={`${team.founder.name}, ${team.founder.role} of Star To Write`}
-                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                                        />
+                                        sizes="(max-width: 768px) 100vw, 320px"
 
                                         {/* Cute sparkle overlay */}
                                         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
