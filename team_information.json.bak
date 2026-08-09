@@ -17,6 +17,18 @@
           "image_url": "/staff/ace.jpeg"
         },
         {
+          "name": "Lynn",
+          "role": "Head of Art Department",
+          "description": "Hallo!! Call me Lynn! I’m a current senior in high school and I draw and sing during my freetime! I’m VERY normal about Japanese music projects.. (totally…) as I love yapping about those for hours.",
+          "image_url": "/staff/lynn.jpeg"
+        },
+        {
+          "name": "Eli",
+          "role": "Head of Journalism",
+          "description": "Hello, I’m head of journalism and a content creator. I have 16 years on this earth and I love my friends and exploring new things. ",
+          "image_url": "/staff/staff.jpeg"
+        },
+        {
           "name": "Ayesha",
           "role": "Manager of Operations",
           "description": "Obsessed with a singer, Benson Boone, Ayesha Toor is the manager of operations for Startowrite. She makes sure everyone is on track and that YOUR writing is shared with the world.​",
@@ -33,12 +45,6 @@
           "role": "Head of Website Management",
           "description": "i like cheese",
           "image_url": "/staff/staff.jpeg"
-        },
-        {
-          "name": "Aadya Verna",
-          "role": "Manager of Operations & Head of Journalism",
-          "description": "Hi! I'm Aadya, and I'm a student and writer with a deep love for literature and storytelling. I hope to persue psychology in the future. Beyond writing, you'll usually find me listening to K-pop or lost in C-dramas. I can't wait to discover your writing, and we look forward to featuring your voice at Star to Write!",
-          "image_url": "/staff/aadya.jpg"
         }
       ]
     }

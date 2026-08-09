@@ -11,9 +11,15 @@ const nextConfig: NextConfig = {
             },
             {
                 protocol: "https",
+                hostname: "startowrite.sanity.studio",
+                port: "",
+                pathname: "/**",
+            },
+            {
+                protocol: "https",
                 hostname: "cdn.sanity.io",
                 port: "",
-                pathname: "/images/0oal6j98/production/**",
+                pathname: "/images/**",
             },
         ],
     },

@@ -78,7 +78,7 @@ export default function BooksClient({ books }: { books: Book[] }) {
                     Book Collection
                 </h1>
                 <div className="w-24 h-1 bg-primary mx-auto"></div>
-                <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+                <p className="text-muted-foreground text-lg max-w-3xl mx-auto text-center">
                     Discover a new world through the words of young poets and
                     authors.
                 </p>
@@ -87,7 +87,6 @@ export default function BooksClient({ books }: { books: Book[] }) {
             <section className="rounded-2xl bg-card/40 backdrop-blur-sm p-5 lg:p-6">
                 <div className="mb-4 flex items-center justify-between gap-4">
                     <div className="flex items-center gap-2 text-primary">
-                        <Sparkles size={18} />
                         <span
                             className="text-2xl"
                             style={{ fontFamily: "Inter, sans-serif" }}
@@ -133,7 +132,7 @@ export default function BooksClient({ books }: { books: Book[] }) {
                                                 previousBook.title
                                             }
                                             fill
-                                            className="object-cover"
+                                            className="object-contain"
                                             sizes="80px"
                                         />
                                     ) : (
@@ -160,8 +159,8 @@ export default function BooksClient({ books }: { books: Book[] }) {
                                                 nextBook.title
                                             }
                                             fill
-                                            className="object-cover"
-                                            sizes="80px"
+                                            className="object-contain"
+                                            // sizes="80px"
                                         />
                                     ) : (
                                         <div className="flex h-full items-center justify-center bg-muted text-muted-foreground">
@@ -182,7 +181,7 @@ export default function BooksClient({ books }: { books: Book[] }) {
                                             featuredBook.title
                                         }
                                         fill
-                                        className="object-cover"
+                                        className="object-contain"
                                         sizes="320px"
                                     />
                                 ) : (
@@ -260,7 +259,6 @@ export default function BooksClient({ books }: { books: Book[] }) {
 
             <section className="space-y-4">
                 <div className="flex items-center gap-3 text-primary">
-                    <Sparkles size={18} />
                     <h2
                         className="text-2xl"
                         style={{ fontFamily: "Georgia, serif" }}
@@ -281,7 +279,7 @@ export default function BooksClient({ books }: { books: Book[] }) {
                                         src={book.cover.asset.url}
                                         alt={book.cover.alt || book.title}
                                         fill
-                                        className="object-cover"
+                                        className="object-contain"
                                         sizes="(max-width: 1280px) 50vw, 33vw"
                                     />
                                 ) : (
@@ -332,7 +330,7 @@ export default function BooksClient({ books }: { books: Book[] }) {
                                             }
                                             width={80}
                                             height={80}
-                                            className="w-full h-full object-cover"
+                                            className="w-full h-full object-contain"
                                         />
                                     ) : (
                                         <div className="w-full h-full flex items-center justify-center text-muted-foreground">

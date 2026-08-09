@@ -449,6 +449,7 @@ export default function GalleryClient({
                                     src={piece.images[0]?.asset.url || ""}
                                     alt={piece.images[0]?.alt || piece.title}
                                     fill
+                                    sizes="(max-width: 768px) 100vw, 40vw"
                                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 cursor-pointer"
                                     onClick={() => handleView(piece)}
                                 />
@@ -613,6 +614,7 @@ export default function GalleryClient({
                                         src={selectedPiece.images[0].asset.url}
                                         alt={selectedPiece.title}
                                         fill
+                                        sizes="100vw"
                                         className="object-contain min-h-[150px] w-auto"
                                     />
                                 )}

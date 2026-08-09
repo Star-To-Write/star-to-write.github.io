@@ -142,7 +142,8 @@
         Name: <input value="${founder.name || ""}" onchange="data.founder.name=this.value">
         Role: <input value="${founder.role || ""}" onchange="data.founder.role=this.value">
         Image URL: <input value="${founder.image_url || ""}" 
-onchange="data.founder.image_url=this.value; renderEditor();"        Caption: <input value="${founder.caption || ""}" onchange="data.founder.caption=this.value">
+onchange="data.founder.image_url=this.value; renderEditor();">
+        Caption: <input value="${founder.caption || ""}" onchange="data.founder.caption=this.value">
         Intro: <textarea onchange="data.founder.intro=this.value">${founder.intro || ""}</textarea>
     `;
                 editor.appendChild(founderDiv);
@@ -156,9 +157,14 @@ onchange="data.founder.image_url=this.value; renderEditor();"        Caption: <i
                     const deptDiv = document.createElement("div");
                     deptDiv.className = "department";
 
+                    const isFirstDept = dIndex === 0;
+                    const isLastDept = dIndex === data.departments.length - 1;
+
                     deptDiv.innerHTML = `
             <strong>Department Name:</strong>
             <input value="${dept.name}" onchange="data.departments[${dIndex}].name=this.value">
+            <button onclick="moveDepartment(${dIndex}, -1)" ${isFirstDept ? "disabled" : ""}>Move Up ⬆</button>
+            <button onclick="moveDepartment(${dIndex}, 1)" ${isLastDept ? "disabled" : ""}>Move Down ⬇</button>
             <button onclick="removeDepartment(${dIndex})">Delete Department</button>
         `;
 
@@ -170,6 +176,9 @@ onchange="data.founder.image_url=this.value; renderEditor();"        Caption: <i
                         const img = createImagePreview(member.image_url);
                         memDiv.appendChild(img);
 
+                        const isFirstMember = mIndex === 0;
+                        const isLastMember = mIndex === dept.members.length - 1;
+
                         const content = document.createElement("div");
                         content.innerHTML = `
                 <strong>Member</strong><br>
@@ -178,6 +187,8 @@ onchange="data.founder.image_url=this.value; renderEditor();"        Caption: <i
                 Description: <textarea onchange="data.departments[${dIndex}].members[${mIndex}].description=this.value">${member.description}</textarea>
                 Image URL: <input value="${member.image_url}" 
                     onchange="data.departments[${dIndex}].members[${mIndex}].image_url=this.value; renderEditor();">
+                <button onclick="moveMember(${dIndex}, ${mIndex}, -1)" ${isFirstMember ? "disabled" : ""}>Move Up ⬆</button>
+                <button onclick="moveMember(${dIndex}, ${mIndex}, 1)" ${isLastMember ? "disabled" : ""}>Move Down ⬇</button>
                 <button onclick="removeMember(${dIndex}, ${mIndex})">Delete Member</button>
             `;
 
@@ -212,6 +223,15 @@ onchange="data.founder.image_url=this.value; renderEditor();"        Caption: <i
                 renderEditor();
             }
 
+            function moveDepartment(index, direction) {
+                const newIndex = index + direction;
+                if (newIndex < 0 || newIndex >= data.departments.length) return;
+
+                const [dept] = data.departments.splice(index, 1);
+                data.departments.splice(newIndex, 0, dept);
+                renderEditor();
+            }
+
             function addMember(dIndex) {
                 data.departments[dIndex].members.push({
                     name: "",
@@ -224,6 +244,16 @@ onchange="data.founder.image_url=this.value; renderEditor();"        Caption: <i
 
             function removeMember(dIndex, mIndex) {
                 data.departments[dIndex].members.splice(mIndex, 1);
+                renderEditor();
+            }
+
+            function moveMember(dIndex, mIndex, direction) {
+                const members = data.departments[dIndex].members;
+                const newIndex = mIndex + direction;
+                if (newIndex < 0 || newIndex >= members.length) return;
+
+                const [member] = members.splice(mIndex, 1);
+                members.splice(newIndex, 0, member);
                 renderEditor();
             }
 

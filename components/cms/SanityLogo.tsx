@@ -1,13 +1,15 @@
-// what even is the point of this man
+import Image from "next/image";
 
-// components/MyCustomLogo.tsx
 export function SanityLogo() {
     return (
-        /* eslint-disable-next-line @next/next/no-img-element */
-        <img
-            src="https://startowrite.sanity.studio/logo.png"
-            alt="Star to Write's Logo"
-            style={{ width: "100%", height: "100%" }}
-        />
+        <div className="relative w-full h-14">
+            <Image
+                src="https://startowrite.sanity.studio/logo.png"
+                alt="Star to Write's Logo"
+                fill
+                sizes="120px"
+                className="object-contain"
+            />
+        </div>
     );
 }
