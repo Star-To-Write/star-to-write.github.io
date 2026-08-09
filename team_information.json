@@ -17,6 +17,12 @@
           "image_url": "/staff/ace.jpeg"
         },
         {
+          "name": "Aadya Verna",
+          "role": "Manager of Operations & Head of Journalism",
+          "description": "Hi! I'm Aadya, and I'm a student and writer with a deep love for literature and storytelling. I hope to persue psychology in the future. Beyond writing, you'll usually find me listening to K-pop or lost in C-dramas. I can't wait to discover your writing, and we look forward to featuring your voice at Star to Write!",
+          "image_url": "/staff/aadya.jpg"
+        },
+        {
           "name": "Ayesha",
           "role": "Manager of Operations",
           "description": "Obsessed with a singer, Benson Boone, Ayesha Toor is the manager of operations for Startowrite. She makes sure everyone is on track and that YOUR writing is shared with the world.​",
@@ -33,12 +39,6 @@
           "role": "Head of Website Management",
           "description": "i like cheese",
           "image_url": "/staff/staff.jpeg"
-        },
-        {
-          "name": "Aadya Verna",
-          "role": "Manager of Operations & Head of Journalism",
-          "description": "Hi! I'm Aadya, and I'm a student and writer with a deep love for literature and storytelling. I hope to persue psychology in the future. Beyond writing, you'll usually find me listening to K-pop or lost in C-dramas. I can't wait to discover your writing, and we look forward to featuring your voice at Star to Write!",
-          "image_url": "/staff/aadya.jpg"
         }
       ]
     }
