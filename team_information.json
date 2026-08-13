@@ -17,10 +17,16 @@
           "image_url": "/staff/ace.jpeg"
         },
         {
-          "name": "Aadya Verna",
+          "name": "Aadya Verma",
           "role": "Manager of Operations & Head of Journalism",
           "description": "Hi! I'm Aadya, and I'm a student and writer with a deep love for literature and storytelling. I hope to persue psychology in the future. Beyond writing, you'll usually find me listening to K-pop or lost in C-dramas. I can't wait to discover your writing, and we look forward to featuring your voice at Star to Write!",
           "image_url": "/staff/aadya.jpg"
+        },
+        {
+          "name": "Mads Kaisner",
+          "role": "Manager of Operations",
+          "description": "Hi! I’m Mads, Manager and Marketing Head in Star to Write! I’m so happy your reading this! Submit and publish to Star to Write today!\n",
+          "image_url": "/staff/mads-kaisner.jpeg"
         },
         {
           "name": "Ayesha",
@@ -29,10 +35,10 @@
           "image_url": "/staff/ayesha.jpeg"
         },
         {
-          "name": "Mads Kaisner",
-          "role": "Manager of Operations",
-          "description": "Hi! I’m Mads, Manager and Marketing Head in Star to Write! I’m so happy your reading this! Submit and publish to Star to Write today!\n",
-          "image_url": "/staff/mads-kaisner.jpeg"
+          "name": "Krysha Santiaguel",
+          "role": "Managerial Graphic Designer",
+          "description": "Helloo!! My name is Krysha, I am the Managerial Graphic Designer for Star to Write and member of the Art Team — I create promotional graphics for our social media, as well as general designs for submissions. I am super passionate about writing; you can find my work published in places such as The Words Faire, Blue Marble Review, and the Scholastic Art and Writing Awards! I love Star to Write and everything that we stand for, and I am so grateful to be apart of this team. ❤",
+          "image_url": "/staff/krysha.jpg"
         },
         {
           "name": "Karin",
