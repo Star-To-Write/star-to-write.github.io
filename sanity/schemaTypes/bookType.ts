@@ -36,6 +36,7 @@ export const bookType = defineType({
                 list: [
                     { title: "Children's Book", value: "Children's Book" },
                     { title: "Short Novel", value: "Short Novel" },
+                    { title: "Poetry Book", value: "Poetry Book" },
                 ],
             },
             validation: (Rule) => Rule.required(),

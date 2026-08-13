@@ -68,7 +68,7 @@ export default function GetPublishedClient({
                     }}
                 >
                     Share your creative writing, poetry, short stories, essays,
-                    research papers, or any other written work with our
+                    research papers, books, or any other written work with our
                     community. Our team reviews all submissions and publishes
                     exceptional pieces on our website, giving you the platform
                     to reach readers worldwide.
@@ -108,7 +108,7 @@ export default function GetPublishedClient({
                     <Button
                         onClick={() =>
                             window.open(
-                                "https://docs.google.com/forms/d/e/1FAIpQLSeD014oOgdea-AwaF4W2LrIc7AbJXxcAqE4WWGwcGWwUr8WfA/viewform?usp=header",
+                                "https://docs.google.com/forms/d/e/1FAIpQLSeD014oOgdea-AwaF4W2LrIc7AbJXxcAqE4WWGwcGWwUr8WfA/viewform",
                                 "_blank",
                             )
                         }
@@ -117,6 +117,21 @@ export default function GetPublishedClient({
                     >
                         <ExternalLink className="w-4 h-4 mr-2" />
                         Submit for Regular Publication
+                    </Button>
+                </div>
+                <div className="text-center mt-3">
+                    <Button
+                        onClick={() =>
+                            window.open(
+                                "https://docs.google.com/forms/d/e/1FAIpQLSdmm_sPPTOGnJI5QDbNQerpL6Xg7YG2wpKgdsRszqw2FnplLA/viewform",
+                                "_blank",
+                            )
+                        }
+                        className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3"
+                        style={{ fontFamily: "Inter, sans-serif" }}
+                    >
+                        <ExternalLink className="w-4 h-4 mr-2" />
+                        Submit for Book Publication
                     </Button>
                 </div>
             </div>
