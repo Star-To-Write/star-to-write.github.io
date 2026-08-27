@@ -82,6 +82,17 @@ export const submissionType = defineType({
             validation: (Rule) => Rule.required(),
         }),
 
+        // allow attach as pdf
+        defineField({
+            title: "PDF instead of text",
+            name: "pdf",
+            type: "boolean" as const,
+            initialValue: true,
+            hidden: ({ document }) =>
+                (document?.category as { _ref?: string })?._ref !==
+                "fe04b481-c857-4892-8d50-4d786e72e799",
+        }),
+
         // image posted on ig essentially
         defineField({
             name: "images",
@@ -131,7 +142,34 @@ export const submissionType = defineType({
                     ],
                 },
             ],
-            validation: (Rule) => Rule.required(),
+            validation: (Rule) =>
+                Rule.custom((value, context) => {
+                    if (context.document?.pdf) return true;
+
+                    return Array.isArray(value) && value.length > 0
+                        ? true
+                        : "Content is required unless PDF instead of text is enabled";
+                }),
+            hidden: ({ document }) => (document?.pdf ? true : false),
+        }),
+
+        // research articles/academic writing only
+        defineField({
+            name: "paperFile",
+            title: "Upload PDF",
+            type: "file",
+            options: {
+                accept: ".pdf",
+            },
+            validation: (Rule) =>
+                Rule.custom((value, context) => {
+                    if (!context.document?.pdf) return true;
+
+                    return value
+                        ? true
+                        : "A PDF is required when PDF instead of text is enabled";
+                }),
+            hidden: ({ document }) => (!document?.pdf ? true : false),
         }),
 
         // tags (replaces article_tags table)
@@ -165,12 +203,12 @@ export const submissionType = defineType({
                 },
             ],
         }),
-        // submission date
-        defineField({
-            name: "submittedDate",
-            type: "datetime" as const,
-            initialValue: () => new Date().toISOString(),
-        }),
+        // submission date - removed for redundancy
+        // defineField({
+        //     name: "_createdAt",
+        //     type: "datetime" as const,
+        //     initialValue: () => new Date().toISOString(),
+        // }),
 
         defineField({
             name: "featured",

@@ -13,7 +13,7 @@ export function SubmissionCard({
     slug,
     excerpt,
     images,
-    submittedDate,
+    _createdAt,
     stats,
     tags,
 }: Submission) {
@@ -60,7 +60,7 @@ export function SubmissionCard({
                         className="text-xs text-muted-foreground"
                         style={{ fontFamily: "Inter, sans-serif" }}
                     >
-                        {new Date(submittedDate).toLocaleDateString()}
+                        {new Date(_createdAt).toLocaleDateString()}
                     </span>
                     <div className="flex items-center gap-1 text-xs text-muted-foreground">
                         <Eye size={12} />

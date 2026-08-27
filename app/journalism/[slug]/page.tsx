@@ -25,7 +25,7 @@ export default async function Page({
     category->{ title, "slug": slug.current },
     tags->{ name },
     featured,
-    submittedDate,
+    _createdAt,
     images[]{
       asset->{ url }
     }
@@ -80,9 +80,7 @@ export default async function Page({
                         {submission.category.title.toUpperCase()}
                     </Link>
                     <p>
-                        {new Date(
-                            submission.submittedDate,
-                        ).toLocaleDateString()}
+                        {new Date(submission._createdAt).toLocaleDateString()}
                     </p>
                     <p>{submissionComments.length} COMMENTS</p>
                     <SubmissionLike submissionId={submission._id} />

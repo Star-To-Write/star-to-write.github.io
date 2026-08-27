@@ -129,13 +129,13 @@ export default function OrganizationsClient({
     //     switch (sortBy) {
     //         case "newest":
     //             return (
-    //                 new Date(b.submittedDate).getTime() -
-    //                 new Date(a.submittedDate).getTime()
+    //                 new Date(b._createdAt).getTime() -
+    //                 new Date(a._createdAt).getTime()
     //             );
     //         case "oldest":
     //             return (
-    //                 new Date(a.submittedDate).getTime() -
-    //                 new Date(b.submittedDate).getTime()
+    //                 new Date(a._createdAt).getTime() -
+    //                 new Date(b._createdAt).getTime()
     //             );
     //         // case "popular":
     //         //     return (b.likes || 0) - (a.likes || 0);

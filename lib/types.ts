@@ -26,12 +26,7 @@ export type Author = {
 export type SocialMedia = {
     _key: string;
     platform:
-        | "instagram"
-        | "twitter"
-        | "tiktok"
-        | "youtube"
-        | "linkedin"
-        | "website";
+        "instagram" | "twitter" | "tiktok" | "youtube" | "linkedin" | "website";
     username: string;
 };
 
@@ -50,7 +45,8 @@ export interface Submission {
     slug: string;
     excerpt: string;
     content: RichText;
-    submittedDate: string;
+    paperFile?: string;
+    _createdAt: string;
     author: Author;
     images: SanityImage[];
     tags?: Tag[];
@@ -138,7 +134,7 @@ export type LatestSubmissions = Pick<
     | "images"
     | "author"
     | "category"
-    | "submittedDate"
+    | "_createdAt"
     | "tags"
 >;
 

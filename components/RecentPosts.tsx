@@ -11,7 +11,7 @@ export async function RecentPosts() {
   title,
   "slug": slug.current,
   excerpt,
-  submittedDate,
+  _createdAt,
   images[]{
     asset->{
       url
@@ -29,7 +29,7 @@ author->{
     title,
     "slug": slug.current
   }
-} | order(submittedDate desc)[0..3]
+} | order(_createdAt desc)[0..3]
 
 `;
     const newPublishedPiecesRes = await client.fetch<LatestSubmissions[]>(
@@ -80,7 +80,7 @@ author->{
                                     style={{ fontFamily: "Inter, sans-serif" }}
                                 >
                                     {new Date(
-                                        submission.submittedDate,
+                                        submission._createdAt,
                                     ).toLocaleDateString()}
                                 </span>
                             </div>

@@ -14,7 +14,7 @@ export async function FeaturedArticle() {
     author->{ name, anonymous },
     tags[]->{ name },
     category->{ "slug": slug.current, title }
-  } | order(submittedDate asc)[0]`;
+  } | order(_createdAt asc)[0]`;
 
     const featuredSubmission = await client.fetch<FeaturedSubmission>(
         featuredArticleQuery,

@@ -107,7 +107,7 @@ async function renderCategory(category: Category, categoryPath: Category[]) {
         title,
         "slug": slug.current,
         excerpt,
-        submittedDate,
+        _createdAt,
         images[]{
           asset->{ url },
           alt
@@ -125,7 +125,7 @@ async function renderCategory(category: Category, categoryPath: Category[]) {
           title,
           "slug": slug.current
         }
-      } | order(submittedDate desc)[0..10]`,
+      } | order(_createdAt desc)[0..10]`,
             { category: categoryTitle },
             {
                 perspective: "published",
@@ -223,7 +223,7 @@ async function renderSubmission(
     category->{ title, "slug": slug.current },
     tags->{ name },
     featured,
-    submittedDate,
+    _createdAt,
     images[]{
       asset->{ url }
     }
@@ -280,9 +280,7 @@ async function renderSubmission(
                         {category.title.toUpperCase()}
                     </Link>
                     <p>
-                        {new Date(
-                            submission.submittedDate,
-                        ).toLocaleDateString()}
+                        {new Date(submission._createdAt).toLocaleDateString()}
                     </p>
                     <p>{submissionComments.length} COMMENTS</p>
                     <SubmissionLike submissionId={submission._id} />
