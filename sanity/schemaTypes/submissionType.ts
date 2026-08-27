@@ -87,7 +87,7 @@ export const submissionType = defineType({
             title: "PDF instead of text",
             name: "pdf",
             type: "boolean" as const,
-            initialValue: true,
+            initialValue: false,
             hidden: ({ document }) =>
                 (document?.category as { _ref?: string })?._ref !==
                 "fe04b481-c857-4892-8d50-4d786e72e799",
@@ -144,13 +144,22 @@ export const submissionType = defineType({
             ],
             validation: (Rule) =>
                 Rule.custom((value, context) => {
-                    if (context.document?.pdf) return true;
+                    console.log(document);
+
+                    const isPdfCategory =
+                        (context.document?.category as { _ref?: string })
+                            ?._ref === "fe04b481-c857-4892-8d50-4d786e72e799";
+
+                    if (isPdfCategory && context.document?.pdf) return true;
 
                     return Array.isArray(value) && value.length > 0
                         ? true
                         : "Content is required unless PDF instead of text is enabled";
                 }),
-            hidden: ({ document }) => (document?.pdf ? true : false),
+            hidden: ({ document }) =>
+                (document?.category as { _ref?: string })?._ref ===
+                    "fe04b481-c857-4892-8d50-4d786e72e799" &&
+                document?.pdf === true,
         }),
 
         // research articles/academic writing only
@@ -163,13 +172,21 @@ export const submissionType = defineType({
             },
             validation: (Rule) =>
                 Rule.custom((value, context) => {
-                    if (!context.document?.pdf) return true;
+                    console.log(context.document);
+                    const isPdfCategory =
+                        (context.document?.category as { _ref?: string })
+                            ?._ref === "fe04b481-c857-4892-8d50-4d786e72e799";
+
+                    if (!isPdfCategory || !context.document?.pdf) return true;
 
                     return value
                         ? true
                         : "A PDF is required when PDF instead of text is enabled";
                 }),
-            hidden: ({ document }) => (!document?.pdf ? true : false),
+            hidden: ({ document }) =>
+                (document?.category as { _ref?: string })?._ref !==
+                    "fe04b481-c857-4892-8d50-4d786e72e799" ||
+                document?.pdf !== true,
         }),
 
         // tags (replaces article_tags table)
