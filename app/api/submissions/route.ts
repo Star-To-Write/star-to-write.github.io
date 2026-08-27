@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
       title,
       "slug": slug.current,
       excerpt,
-      submittedDate,
+      _createdAt,
       images[]{
         asset->{
           url
@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
         title,
         "slug": slug.current
       }
-    } | order(submittedDate desc)[0..3]
+    } | order(_createdAt desc)[0..3]
     
     `;
     const data = await client.fetch<Submission[]>(

@@ -198,7 +198,7 @@ export default function JournalismClient({
                             category={article.category?.title}
                             excerpt={article.excerpt}
                             image={article.images?.[0]?.asset?.url || ""}
-                            date={article.submittedDate}
+                            date={article._createdAt}
                             likes={article.stats.likes}
                             views={article.stats.views}
                             comments={0} // 👈 placeholder (until you add comments)

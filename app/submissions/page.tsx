@@ -28,7 +28,7 @@ export default async function SubmissionsPage() {
       title,
       "slug": slug.current,
       excerpt,
-      submittedDate,
+      _createdAt,
       images[]{
         asset->{
           url

@@ -11,7 +11,41 @@ export const galleryType = defineType({
             name: "title",
             title: "Title",
             type: "string",
-            validation: (Rule) => Rule.required(),
+            validation: (Rule) =>
+                Rule.custom(async (title, context) => {
+                    if (!title) return true;
+
+                    const { document, getClient } = context;
+
+                    if (!document?._id || !document?._type) {
+                        return true;
+                    }
+
+                    const client = getClient({
+                        apiVersion: "2024-01-01",
+                    });
+
+                    const id = document._id.replace(/^drafts\./, "");
+
+                    const query = `count(*[
+                _type == $type &&
+                title == $title &&
+                !(_id in [$id, $draftId])
+            ])`;
+
+                    const params = {
+                        type: document._type,
+                        title: title,
+                        id,
+                        draftId: `drafts.${id}`,
+                    };
+
+                    const count = await client.fetch(query, params);
+
+                    return count === 0 ? true : "This title is already in use";
+                }).warning(
+                    "There is a submission with the same name. Are they different? If so, proceed.",
+                ),
         }),
         defineField({
             name: "slug",

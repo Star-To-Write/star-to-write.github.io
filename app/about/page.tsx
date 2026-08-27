@@ -28,7 +28,7 @@ export default function AboutUs() {
                                 lineHeight: "1.7",
                             }}
                         >
-                            Star to Write is a youth-led nonprofit organization
+                            Star to Write is a youth-led organization
                             committed to empowering young voices through
                             writing, art, and creative expression. Our goal is
                             to give everybody a voice by providing accessible

@@ -49,7 +49,7 @@ export default async function Page({
         title,
         "slug": slug.current,
         excerpt,
-        submittedDate,
+        _createdAt,
         images[]{
           asset->{ url },
           alt
@@ -67,7 +67,7 @@ export default async function Page({
           title,
           "slug": slug.current
         }
-      } | order(submittedDate desc)[0..10]`,
+      } | order(_createdAt desc)[0..10]`,
             { category: category.title },
             {
                 perspective: "published",

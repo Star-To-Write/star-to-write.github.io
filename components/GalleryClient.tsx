@@ -357,7 +357,7 @@ export default function GalleryClient({
                         className="text-muted-foreground"
                         style={{ fontFamily: "Inter, sans-serif" }}
                     >
-                        Showing ${startIndex}-${endIndex} of {pieces.length}{" "}
+                        Showing {startIndex}-{endIndex} of {pieces.length}{" "}
                         pieces
                         {searchQuery && <span> for "{searchQuery}"</span>}
                         {selectedCategory !== "all" && (

@@ -12,39 +12,44 @@ export const submissionType = defineType({
         defineField({
             name: "title",
             type: "string",
-            validation: (Rule) => Rule.required(),
+            validation: (Rule) =>
+                Rule.custom(async (title, context) => {
+                    if (!title) return true;
+
+                    const { document, getClient } = context;
+
+                    if (!document?._id || !document?._type) {
+                        return true;
+                    }
+
+                    const client = getClient({
+                        apiVersion: "2024-01-01",
+                    });
+
+                    const id = document._id.replace(/^drafts\./, "");
+
+                    const query = `count(*[
+                _type == $type &&
+                title == $title &&
+                !(_id in [$id, $draftId])
+            ])`;
+
+                    const params = {
+                        type: document._type,
+                        title: title,
+                        id,
+                        draftId: `drafts.${id}`,
+                    };
+
+                    const count = await client.fetch(query, params);
+
+                    return count === 0 ? true : "This title is already in use";
+                })
+                    .warning(
+                        "There is a submission with the same name. Are they different? If so, proceed.",
+                    )
+                    .required(),
         }),
-
-        //     name: "coverImage",
-        //     title: "Cover Image",
-        //     type: "image" as const,
-        //     options: {
-        //         hotspot: true, // enables smart cropping
-        //     },
-        //     fields: [
-        //         defineField({
-        //             name: "alt",
-        //             title: "Alt text",
-        //             type: "string",
-        //             validation: (Rule) =>
-        //                 Rule.required().error(
-        //                     "Alt text is required for accessibility",
-        //                 ),
-        //         }),
-
-        //         defineField({
-        //             name: "caption",
-        //             title: "Caption",
-        //             type: "string",
-        //         }),
-
-        //         defineField({
-        //             name: "credit",
-        //             title: "Image credit",
-        //             type: "string",
-        //         }),
-        //     ],
-        // }),
 
         // slug
         defineField({
@@ -75,6 +80,17 @@ export const submissionType = defineType({
             type: "reference" as const,
             to: [{ type: "category" as const }],
             validation: (Rule) => Rule.required(),
+        }),
+
+        // allow attach as pdf
+        defineField({
+            title: "PDF instead of text",
+            name: "pdf",
+            type: "boolean" as const,
+            initialValue: true,
+            hidden: ({ document }) =>
+                (document?.category as { _ref?: string })?._ref !==
+                "fe04b481-c857-4892-8d50-4d786e72e799",
         }),
 
         // image posted on ig essentially
@@ -126,7 +142,34 @@ export const submissionType = defineType({
                     ],
                 },
             ],
-            validation: (Rule) => Rule.required(),
+            validation: (Rule) =>
+                Rule.custom((value, context) => {
+                    if (context.document?.pdf) return true;
+
+                    return Array.isArray(value) && value.length > 0
+                        ? true
+                        : "Content is required unless PDF instead of text is enabled";
+                }),
+            hidden: ({ document }) => (document?.pdf ? true : false),
+        }),
+
+        // research articles/academic writing only
+        defineField({
+            name: "paperFile",
+            title: "Upload PDF",
+            type: "file",
+            options: {
+                accept: ".pdf",
+            },
+            validation: (Rule) =>
+                Rule.custom((value, context) => {
+                    if (!context.document?.pdf) return true;
+
+                    return value
+                        ? true
+                        : "A PDF is required when PDF instead of text is enabled";
+                }),
+            hidden: ({ document }) => (!document?.pdf ? true : false),
         }),
 
         // tags (replaces article_tags table)
@@ -160,18 +203,53 @@ export const submissionType = defineType({
                 },
             ],
         }),
-        // submission date
-        defineField({
-            name: "submittedDate",
-            type: "datetime" as const,
-            initialValue: () => new Date().toISOString(),
-        }),
+        // submission date - removed for redundancy
+        // defineField({
+        //     name: "_createdAt",
+        //     type: "datetime" as const,
+        //     initialValue: () => new Date().toISOString(),
+        // }),
 
         defineField({
             name: "featured",
             type: "boolean" as const,
             title: "Feature on homepage",
             initialValue: false,
+            validation: (Rule) =>
+                Rule.custom(async (featured, context) => {
+                    if (!featured) return true;
+
+                    const { document, getClient } = context;
+
+                    if (!document?._id || !document?._type) {
+                        return true;
+                    }
+
+                    const client = getClient({
+                        apiVersion: "2024-01-01",
+                    });
+
+                    const id = document._id.replace(/^drafts\./, "");
+
+                    const query = `*[
+                _type == $type &&
+                featured == $featured &&
+                !(_id in [$id, $draftId])
+            ]`;
+
+                    const params = {
+                        type: document._type,
+                        featured: featured,
+                        id,
+                        draftId: `drafts.${id}`,
+                    };
+
+                    const dupe = await client.fetch(query, params);
+
+                    return dupe.length === 0
+                        ? true
+                        : `The submission '${dupe[0].title} is already featured. Toggle this option off there before toggling this on!'`;
+                }).error(),
         }),
     ],
 });

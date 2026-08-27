@@ -26,10 +26,11 @@ export default async function Page({
     author->{ name, bio, "image": image.asset->url, socials, anonymous },
     title,
     content,
+    "paperFile": paperFile.asset->url,
     category->{ title, "slug": slug.current },
     tags->{ name },
     featured,
-    submittedDate,
+    _createdAt,
     images[]{
       asset->{ url }
     }
@@ -49,6 +50,8 @@ export default async function Page({
             },
         },
     );
+
+    console.log(submission);
 
     if (!submission) {
         notFound();
@@ -90,9 +93,7 @@ export default async function Page({
                         {submission.category.title.toUpperCase()}
                     </Link>
                     <p>
-                        {new Date(
-                            submission.submittedDate,
-                        ).toLocaleDateString()}
+                        {new Date(submission._createdAt).toLocaleDateString()}
                     </p>
                     <p>{submissionComments.length} COMMENTS</p>
                     <SubmissionLike submissionId={submission._id} />
@@ -109,9 +110,17 @@ export default async function Page({
                 <hr className="h-px w-full bg-foreground opacity-40 border-0 my-2" />
             </article>
             <SubmissionCarousel images={submission.images} />
-            <article className="font-georgia px-12">
+            <article className="font-georgia px-12 lg:px-48">
                 <div className="text-foreground">
-                    <RichTextRenderer value={submission.content} />
+                    {submission.paperFile ? (
+                        <iframe
+                            src={submission.paperFile}
+                            title={`PDF of ${submission.title}`}
+                            className="block h-[64vh] min-h-[600px] w-full max-h-[900px] border-0" // i stole this from stack overflow sorry
+                        />
+                    ) : (
+                        <RichTextRenderer value={submission.content} />
+                    )}
                 </div>
             </article>
             <div className="px-12">
