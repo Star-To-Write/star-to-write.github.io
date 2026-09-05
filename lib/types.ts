@@ -200,6 +200,6 @@ export interface Organization {
     goal?: string;
     scope: "city" | "country" | "worldwide";
     openRoles: string;
-    applicationLink: string;
+    applicationLink?: string | null;
     socials: SocialMedia[];
 }

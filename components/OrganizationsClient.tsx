@@ -617,24 +617,30 @@ export default function OrganizationsClient({
                 )}
 
                 {/* CTA Button */}
-                <div className="flex gap-3 pt-4 border-t border-border">
-                  <Button
-                    className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90"
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                    }}
-                    asChild
-                  >
-                    <Link
-                      href={selectedOrganization.applicationLink || `https://instagram.com/${selectedOrganization.socials[0].username}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                {(selectedOrganization.applicationLink ||
+                  selectedOrganization.socials?.[0]?.username) && (
+                  <div className="flex gap-3 pt-4 border-t border-border">
+                    <Button
+                      className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90"
+                      style={{
+                        fontFamily: "Inter, sans-serif",
+                      }}
+                      asChild
                     >
-                      <ExternalLink size={16} className="mr-2" />
-                      Apply
-                    </Link>
-                  </Button>
-                </div>
+                      <Link
+                        href={
+                          selectedOrganization.applicationLink ||
+                          `https://instagram.com/${selectedOrganization.socials[0].username}`
+                        }
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <ExternalLink size={16} className="mr-2" />
+                        Apply
+                      </Link>
+                    </Button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
