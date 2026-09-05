@@ -13,7 +13,7 @@ export function SubmissionCard({
     slug,
     excerpt,
     images,
-    submittedDate,
+    _createdAt,
     stats,
     tags,
 }: Submission) {
@@ -36,6 +36,7 @@ export function SubmissionCard({
                         src={imageUrl}
                         alt={title}
                         fill
+                        sizes="(max-width: 768px) 100vw, 40vw"
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0b132b]/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -59,7 +60,7 @@ export function SubmissionCard({
                         className="text-xs text-muted-foreground"
                         style={{ fontFamily: "Inter, sans-serif" }}
                     >
-                        {new Date(submittedDate).toLocaleDateString()}
+                        {new Date(_createdAt).toLocaleDateString()}
                     </span>
                     <div className="flex items-center gap-1 text-xs text-muted-foreground">
                         <Eye size={12} />

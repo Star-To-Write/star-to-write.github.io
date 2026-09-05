@@ -79,6 +79,7 @@ export default function SubmissionCarousel({
                         src={images[current].asset.url}
                         alt="Submission image"
                         fill
+                        sizes="100vw"
                         className="object-contain"
                     />
                 </div>
@@ -135,6 +136,7 @@ export default function SubmissionCarousel({
                                 src={images[current].asset.url}
                                 alt="Submission image fullscreen"
                                 fill
+                                sizes="100vw"
                                 className="object-contain"
                             />
                         </div>

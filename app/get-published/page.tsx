@@ -10,7 +10,7 @@ export default async function GetPublishedPage() {
         const result = await client.fetch(query);
 
         if (result && result.slug) {
-            isOpen = true;
+            isOpen = false;
         }
     } catch (error) {
         console.error("Error fetching magazine data:", error);

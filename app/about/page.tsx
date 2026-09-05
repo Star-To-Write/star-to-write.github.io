@@ -28,7 +28,7 @@ export default function AboutUs() {
                                 lineHeight: "1.7",
                             }}
                         >
-                            Star to Write is a youth-led nonprofit organization
+                            Star to Write is a youth-led organization
                             committed to empowering young voices through
                             writing, art, and creative expression. Our goal is
                             to give everybody a voice by providing accessible
@@ -111,9 +111,9 @@ export default function AboutUs() {
                                     <div className="relative w-64 h-64 mx-auto lg:mx-0 rounded-full overflow-hidden shadow-2xl ring-4 ring-[#d4af37]/20 hover:ring-[#d4af37]/40 transition-all duration-500 hover:scale-105 group">
                                         <Image
                                             src={team.founder.image_url}
+                                            alt="Julia Philip, founder of Star to Write"
                                             fill
-                                            alt={`${team.founder.name}, ${team.founder.role} of Star To Write`}
-                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                            sizes="(max-width: 768px) 100vw, 320px"
                                         />
 
                                         {/* Cute sparkle overlay */}

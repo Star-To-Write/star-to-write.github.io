@@ -26,12 +26,7 @@ export type Author = {
 export type SocialMedia = {
     _key: string;
     platform:
-        | "instagram"
-        | "twitter"
-        | "tiktok"
-        | "youtube"
-        | "linkedin"
-        | "website";
+        "instagram" | "twitter" | "tiktok" | "youtube" | "linkedin" | "website";
     username: string;
 };
 
@@ -50,7 +45,8 @@ export interface Submission {
     slug: string;
     excerpt: string;
     content: RichText;
-    submittedDate: string;
+    paperFile?: string;
+    _createdAt: string;
     author: Author;
     images: SanityImage[];
     tags?: Tag[];
@@ -60,6 +56,26 @@ export interface Submission {
         views?: number;
         shares?: number;
         comments?: number;
+    };
+}
+
+export interface Book {
+    _id: string;
+    title: string;
+    slug: string;
+    synopsis?: string;
+    price: number;
+    link: string;
+    type?: string | string[];
+    author?: {
+        name?: string;
+        anonymous?: boolean;
+    };
+    cover?: {
+        asset?: {
+            url: string;
+        };
+        alt?: string;
     };
 }
 
@@ -118,7 +134,7 @@ export type LatestSubmissions = Pick<
     | "images"
     | "author"
     | "category"
-    | "submittedDate"
+    | "_createdAt"
     | "tags"
 >;
 
@@ -184,6 +200,6 @@ export interface Organization {
     goal?: string;
     scope: "city" | "country" | "worldwide";
     openRoles: string;
-    applicationLink: string;
+    applicationLink?: string | null;
     socials: SocialMedia[];
 }

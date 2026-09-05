@@ -41,6 +41,7 @@ export function ArticleCard({
                     src={image}
                     alt={title}
                     fill
+                    sizes="(max-width: 768px) 100vw, 40vw"
                     className="object-cover group-hover:scale-110 transition-transform duration-300"
                 />
 

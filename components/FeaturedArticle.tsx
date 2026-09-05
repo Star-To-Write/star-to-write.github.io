@@ -14,7 +14,7 @@ export async function FeaturedArticle() {
     author->{ name, anonymous },
     tags[]->{ name },
     category->{ "slug": slug.current, title }
-  } | order(submittedDate asc)[0]`;
+  } | order(_createdAt asc)[0]`;
 
     const featuredSubmission = await client.fetch<FeaturedSubmission>(
         featuredArticleQuery,
@@ -31,7 +31,7 @@ export async function FeaturedArticle() {
     if (!featuredSubmission) {
         return (
             <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12 text-center text-muted-foreground">
-                No featured submission available
+                No featured submission available! Come back in a bit!
             </div>
         );
     }

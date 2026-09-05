@@ -176,6 +176,7 @@ export default function MagazineClient({
                                                 "/starless-sky.png"
                                             }
                                             fill
+                                            sizes="(max-width: 768px) 100vw, 480px"
                                             alt={
                                                 featuredMagazine.coverImage
                                                     ?.alt ||
@@ -379,6 +380,7 @@ export default function MagazineClient({
                                                     ?.url || "/starless-sky.png"
                                             }
                                             fill
+                                            sizes="(max-width: 768px) 100vw, 320px"
                                             alt={
                                                 magazine.coverImage?.alt ||
                                                 magazine.title

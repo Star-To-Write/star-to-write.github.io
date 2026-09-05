@@ -28,6 +28,7 @@ export function FounderCard({ founder }: { founder: Founder }) {
                             <Image
                                 src={founder.image_url}
                                 fill
+                                sizes="256px"
                                 alt={`${founder.name}, ${founder.role}`}
                                 className="object-cover group-hover:scale-110 transition-transform duration-700"
                             />

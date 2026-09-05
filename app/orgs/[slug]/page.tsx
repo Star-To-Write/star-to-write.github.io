@@ -3,13 +3,12 @@ import { type Organization } from "@/lib/types";
 import { organizationSubjects } from "@/lib/organizationSubjects";
 import OrganizationsClient from "@/components/OrganizationsClient";
 
-interface OrganizationPageProps {
-    params: { slug: string };
-}
-
 export default async function OrganizationPage({
     params,
-}: OrganizationPageProps) {
+}: {
+    params: Promise<{ slug: string }>;
+}) {
+    const { slug } = await params;
     const submissionsQuery = `
         *[_type == "organization"]{
           _id,
@@ -42,7 +41,7 @@ export default async function OrganizationPage({
             <OrganizationsClient
                 organizations={organizations}
                 categories={organizationSubjects}
-                selectedSlug={params.slug}
+                selectedSlug={slug}
             />
         </div>
     );
