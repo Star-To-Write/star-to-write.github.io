@@ -1,6 +1,14 @@
 import { DocumentTextIcon } from "@sanity/icons";
 import { defineType, defineField } from "sanity";
 
+const pdfCategoryIds = [
+    "fe04b481-c857-4892-8d50-4d786e72e799", // academic writing
+    "85368fa0-3589-4059-8aae-b3163c9d42b9", // short stories
+] as const;
+
+const isPdfCategory = (categoryRef?: string) =>
+    pdfCategoryIds.includes(categoryRef as (typeof pdfCategoryIds)[number]);
+
 export const submissionType = defineType({
     name: "submission",
     title: "Submission",
@@ -87,10 +95,9 @@ export const submissionType = defineType({
             title: "PDF instead of text",
             name: "pdf",
             type: "boolean" as const,
-            initialValue: true,
+            initialValue: false,
             hidden: ({ document }) =>
-                (document?.category as { _ref?: string })?._ref !==
-                "fe04b481-c857-4892-8d50-4d786e72e799",
+                !isPdfCategory((document?.category as { _ref?: string })?._ref),
         }),
 
         // image posted on ig essentially
@@ -144,13 +151,22 @@ export const submissionType = defineType({
             ],
             validation: (Rule) =>
                 Rule.custom((value, context) => {
-                    if (context.document?.pdf) return true;
+                    console.log(document);
+
+                    const categoryIsPdf = isPdfCategory(
+                        (context.document?.category as { _ref?: string })?._ref,
+                    );
+
+                    if (categoryIsPdf && context.document?.pdf) return true;
 
                     return Array.isArray(value) && value.length > 0
                         ? true
                         : "Content is required unless PDF instead of text is enabled";
                 }),
-            hidden: ({ document }) => (document?.pdf ? true : false),
+            hidden: ({ document }) =>
+                isPdfCategory(
+                    (document?.category as { _ref?: string })?._ref,
+                ) && document?.pdf === true,
         }),
 
         // research articles/academic writing only
@@ -163,13 +179,21 @@ export const submissionType = defineType({
             },
             validation: (Rule) =>
                 Rule.custom((value, context) => {
-                    if (!context.document?.pdf) return true;
+                    console.log(context.document);
+                    const categoryIsPdf = isPdfCategory(
+                        (context.document?.category as { _ref?: string })?._ref,
+                    );
+
+                    if (!categoryIsPdf || !context.document?.pdf) return true;
 
                     return value
                         ? true
                         : "A PDF is required when PDF instead of text is enabled";
                 }),
-            hidden: ({ document }) => (!document?.pdf ? true : false),
+            hidden: ({ document }) =>
+                !isPdfCategory(
+                    (document?.category as { _ref?: string })?._ref,
+                ) || document?.pdf !== true,
         }),
 
         // tags (replaces article_tags table)
