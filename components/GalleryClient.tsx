@@ -250,8 +250,7 @@ export default function GalleryClient({
             const matchesSearch =
                 piece.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                 authorName.includes(searchQuery.toLowerCase()) ||
-                piece.description
-                    .toLowerCase()
+                piece.description?.toLowerCase()
                     .includes(searchQuery.toLowerCase()) ||
                 piece.category
                     .toLowerCase()

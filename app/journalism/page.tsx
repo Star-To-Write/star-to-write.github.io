@@ -26,7 +26,6 @@ export default async function Page() {
         },
     );
 
-    // 🔹 Fetch Sanity data in parallel
     const [tags, articles] = await Promise.all([
         client.fetch<string[]>(
             '*[_type == "tag" && category->title == $category].name',
@@ -71,6 +70,7 @@ export default async function Page() {
             },
         ),
     ]);
+    
 
     // 🔹 Get all article IDs
     const ids = articles.map((a) => a._id);
