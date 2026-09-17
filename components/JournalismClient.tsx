@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { Search } from "lucide-react";
-import { ArticleCard } from "@/components/ArticleCard";
 import { SubscribeNews } from "@/components/SubscribeNews";
 import { DontGo } from "@/components/DontGo";
 import { Input } from "@/components/ui/Input";
@@ -10,6 +9,7 @@ import { Button } from "@/components/ui/Button";
 import { Pagination } from "@/components/ui/Pagination";
 import Link from "next/link";
 import type { Submission } from "@/lib/types";
+import { SubmissionCard } from "./SubmissionCard";
 
 type SubmissionWithStats = Submission & {
     stats: {
@@ -190,19 +190,7 @@ export default function JournalismClient({
                 {/* Articles */}
                 <div className="grid md:grid-cols-2 gap-8">
                     {pagedArticles.map((article) => (
-                        <ArticleCard
-                            key={article._id}
-                            title={article.title}
-                            slug={`${article.category.slug}/${article.slug}`}
-                            author={article.author?.name || "Anonymous"}
-                            category={article.category?.title}
-                            excerpt={article.excerpt}
-                            image={article.images?.[0]?.asset?.url || ""}
-                            date={article._createdAt}
-                            likes={article.stats.likes}
-                            views={article.stats.views}
-                            comments={0} // 👈 placeholder (until you add comments)
-                        />
+                        <SubmissionCard key={article._id} {...article} />
                     ))}
                 </div>
 
